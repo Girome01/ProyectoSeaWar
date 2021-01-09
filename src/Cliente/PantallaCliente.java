@@ -27,7 +27,7 @@ public class PantallaCliente extends javax.swing.JFrame {
     
     public void setNombreTurno(String nombreTurno) {
         this.nombreTurno = nombreTurno;
-        lblTurno.setText(nombreTurno);
+        lblTurno.setText("Turno: "+nombreTurno);
     }
     
     public void addMensaje(String msj){
@@ -107,8 +107,9 @@ public class PantallaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            refCliente.hiloCliente.writer.writeInt(2);
+            refCliente.hiloCliente.writer.writeUTF("MENSAJE");
             refCliente.hiloCliente.writer.writeUTF(txfMensaje.getText());
+            txfMensaje.setText("");
         } catch (IOException ex) {
             
         }

@@ -5,6 +5,7 @@
  */
 package Server;
 
+import Clases.CommandManager;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -22,6 +23,8 @@ public class HiloServidor extends Thread{
     private boolean running = true;
     Server server;
     
+    enum instruccion{INICIAR,COMMAND,MENSAJE};
+    
     public HiloServidor(Socket socketRef, Server server) throws IOException {
         this.socketRef = socketRef;
         reader = new DataInputStream(socketRef.getInputStream());
@@ -30,39 +33,47 @@ public class HiloServidor extends Thread{
     }
     
     public void enviarTurnoInicial() throws IOException{
-        writer.writeInt(1);
+        writer.writeUTF("SETNAME");
         writer.writeUTF(server.getTurno());
     }
     
     public void run (){
         
-        int instruccionId = 1;
+        String instruccionId = "";
         while (running){
             try {
-                instruccionId = reader.readInt(); // esperar hasta que reciba un entero
+                instruccionId = reader.readUTF(); // esperar hasta que reciba un entero
                 
-                switch (instruccionId){
-                    case 1: // pasan el nombre del usuario
-                        nombre = reader.readUTF();
-                        enviarTurnoInicial();                    
-                    break;
-                    case 2: // pasan un mensaje por el chat
-                        String mensaje = reader.readUTF();
-                        
-                        for (int i = 0; i < server.conexiones.size(); i++) {
-                            HiloServidor current = server.conexiones.get(i);
-                            current.writer.writeInt(2);
-                            current.writer.writeUTF(nombre);
-                            current.writer.writeUTF(mensaje);
-                        }
-                    break;
-                }
+                instrucciones(instruccionId);
+                
             } catch (IOException ex) {
                 
             }
         }
     }
     
+    private void instrucciones(String _instruccion) throws IOException{
+        
+        switch (instruccion.valueOf(_instruccion.toUpperCase())){
+            case INICIAR: // pasan el nombre del usuario
+                nombre = reader.readUTF();
+                enviarTurnoInicial();                    
+                break;
+            case MENSAJE: // pasan un mensaje por el chat
+                String mensaje = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                    current.writer.writeUTF("MENSAJE");
+                    current.writer.writeUTF(nombre);
+                    current.writer.writeUTF(mensaje);
+                }
+                break;
+            case COMMAND: // pasan un mensaje por el chat
+                CommandManager manager = CommandManager.getIntance();
+                break;
+            default:
+        }
+    }
     
     
 }

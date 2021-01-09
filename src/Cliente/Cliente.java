@@ -31,7 +31,7 @@ public class Cliente {
             hiloCliente.start();
             String nombre = JOptionPane.showInputDialog("Introduzca un Nick:");
             refPantalla.setTitle(nombre);
-            hiloCliente.writer.writeInt(1); //instruccion para el switch del thraed servidor
+            hiloCliente.writer.writeUTF("INICIAR"); //instruccion para el switch del thraed servidor
             hiloCliente.writer.writeUTF(nombre); //instruccion para el switch del thraed servidor
         }
         catch(Exception e){
