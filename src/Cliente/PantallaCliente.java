@@ -5,6 +5,7 @@
  */
 package Cliente;
 
+import Clases.Casillas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,6 +20,9 @@ import javax.swing.JLabel;
 public class PantallaCliente extends javax.swing.JFrame {
     Cliente refCliente;
     private String nombreTurno = "";
+    String [][]matrix;
+    JButton [][]label = new JButton[20][30];
+    Casillas[][]casillas;
     /**
      * Creates new form PantallaCliente
      */
@@ -41,14 +45,16 @@ public class PantallaCliente extends javax.swing.JFrame {
     }
     
     public void generarMatriz(){
-        String [][]matrix = new String[100][100];
-        JButton [][]label = new JButton[100][100];
-        panelJuego.setLayout(new GridLayout(100, 100));
-        for(int r=0; r<100; r++){
-            for(int c=0; c<100;){
+        matrix = new String[20][30];
+        casillas = new Casillas[20][30];
+        panelJuego.setLayout(new GridLayout(20, 30));
+        for(int r=0; r<20; r++){
+            for(int c=0; c<30;){
                 label[r][c] = new JButton(matrix[r][c]);
+                //casillas[r][c] = new Casillas(label[r][c]);
                 label[r][c].setPreferredSize(new Dimension(5, 5));
-                label[r][c].setBackground(Color.RED);
+                label[r][c].setBackground(Color.GREEN);
+                label[r][c].setEnabled(false);
                 panelJuego.add(label[r][c]);
                 c++;
                 }                   
