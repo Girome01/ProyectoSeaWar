@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class Cliente {
     Socket socketRef;
-    PantallaCliente refPantalla;
+    public PantallaCliente refPantalla;
     public HiloCliente hiloCliente;
     
     public Cliente(PantallaCliente refPantalla) {

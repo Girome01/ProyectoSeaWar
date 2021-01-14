@@ -18,11 +18,11 @@ import javax.swing.JLabel;
  * @author Gilberth
  */
 public class PantallaCliente extends javax.swing.JFrame {
-    Cliente refCliente;
+    public Cliente refCliente;
     private String nombreTurno = "";
-    String [][]matrix;
-    JButton [][]label = new JButton[20][30];
-    Casillas[][]casillas;
+    private String [][]matrix;
+    private JButton [][]label = new JButton[20][30]; // lbel[1][4]
+    public Casillas[][]casillas;
     /**
      * Creates new form PantallaCliente
      */
@@ -51,14 +51,15 @@ public class PantallaCliente extends javax.swing.JFrame {
         for(int r=0; r<20; r++){
             for(int c=0; c<30;){
                 label[r][c] = new JButton(matrix[r][c]);
-                //casillas[r][c] = new Casillas(label[r][c]);
+                casillas[r][c] = new Casillas(label[r][c]);
                 label[r][c].setPreferredSize(new Dimension(5, 5));
                 label[r][c].setBackground(Color.GREEN);
-                label[r][c].setEnabled(false);
+                //label[r][c].setEnabled(false);
+                label[r][c].setVisible(true);
                 panelJuego.add(label[r][c]);
                 c++;
-                }                   
-            }
+            }                   
+        }
     }
     
     /**

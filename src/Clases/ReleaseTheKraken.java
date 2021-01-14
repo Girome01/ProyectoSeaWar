@@ -13,27 +13,25 @@ import java.util.Random;
  */
 public class ReleaseTheKraken extends Habilidades{
 
-    public ReleaseTheKraken() {
-        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN");
+    public ReleaseTheKraken(Casillas[][] casillas) {
+        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",casillas);
     }
 
     @Override
     void attack1() {
         Random random = new Random();
-        for(int i =0; i< 3; i++){
+        for(int i =0; i < 3; i++){
             int x = random.nextInt(100); // Saca la posicion x de la casilla del tablero
             int y = random.nextInt(100); // saca la posicion y de la casilla en el tablero
-            /*
-            OCUPAMOS VER COMO SE DESTRUYEN LAS CASILLAS Y COMO SE LES HACE DANO
-            destruir ( x+10, y+10 )
-            destruir ( x, y+10 )
-            destruir ( x-10, y+10 )
-            destruir ( x-10, y )
-            destruir ( x-10, y-10)
-            destruir ( x, y-10)
-            destruir ( x+10, y-10)
-            destruir ( x+10,y)
-            */
+            casillas[x+1][y+1].danarCasilla(100);
+            casillas[x][y+1].danarCasilla(100);
+            casillas[x-1][y+1].danarCasilla(100);
+            casillas[x-1][y].danarCasilla(100);
+            casillas[x-1][y-1].danarCasilla(100);
+            casillas[x][y-1].danarCasilla(100);
+            casillas[x+1][y-1].danarCasilla(100);
+            casillas[x+1][y].danarCasilla(100);
+            casillas[x][y].danarCasilla(100);
         }
     }
 
@@ -46,34 +44,26 @@ public class ReleaseTheKraken extends Habilidades{
        switch(lado){
            case 0: // arriba
                for(int i = 0; i < cantidad; i++){
-                   /*
-                   y -= 10
-                   destruir (x,y) 
-                   */
+                   y -= 1;
+                   casillas[x][y].danarCasilla(100);
                }
                break;
            case 1: // Abajo
                for(int i = 0; i < cantidad; i++){
-                   /*
-                   y += 10
-                   destruir (x,y) 
-                   */
+                   y += 1;
+                   casillas[x][y].danarCasilla(100);
                }
                break;
            case 2: //Derecha
                for(int i = 0; i < cantidad; i++){
-                   /*
-                   x += 10
-                   destruir (x,y) 
-                   */
+                   x += 10;
+                   casillas[x][y].danarCasilla(100);
                }
                break;
            case 3://Izquierda
                for(int i = 0; i < cantidad; i++){
-                   /*
-                   x -= 10
-                   destruir (x,y) 
-                   */
+                   x -= 10;
+                   casillas[x][y].danarCasilla(100);
                }
                break;
            default:
@@ -89,19 +79,19 @@ public class ReleaseTheKraken extends Habilidades{
         int x1 = x,x2 = x,y1,y2;
         int cant = random.nextInt(7)+1;
         for(int i = 1; i <=cant;i++){
-            x1 += 10;
-            x2 -= 10;
+            x1 += 1;
+            x2 -= 1;
             y1 = y;
             y2 = y;
-            //destruir (x1,y)
-            //destruir (x2,y)
+            casillas[x1][y].danarCasilla(100);
+            casillas[x2][y].danarCasilla(100);
             for(int j = 1; j <= cant;j++){
-                y1 -= 10;
-                //destruir (x1,y1)
-                y2 += 10;
-                //destruir (x1,y2)
-                //destruir (x,y1)
-                //destruir (x,y2)
+                y1 -= 1;
+                casillas[x][y1].danarCasilla(100);
+                y2 += 1;
+                casillas[x1][y2].danarCasilla(100);
+                casillas[x][y1].danarCasilla(100);
+                casillas[x][y2].danarCasilla(100);
             }
         }
     }

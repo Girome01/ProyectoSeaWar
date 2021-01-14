@@ -6,7 +6,7 @@
 package Clases;
 
 import java.awt.Color;
-import javax.swing.JLabel;
+import javax.swing.JButton;
 
 /**
  *
@@ -16,13 +16,13 @@ public class Casillas {
     private int vida;
     private boolean tieneVolcan;
     private boolean basuraRadioactiva;
-    private JLabel lblImagen;
+    private JButton btnImagen;
 
-    public Casillas(JLabel ref) {
+    public Casillas(JButton ref) {
         this.vida = 100;
         this.tieneVolcan = false;
         this.basuraRadioactiva = false;
-        this.lblImagen = ref;
+        this.btnImagen = ref;
     }
     
     public void danarCasilla(int dano){
@@ -30,7 +30,6 @@ public class Casillas {
             vida -= dano;
         }else
             vida = 0;
-        colorLabel();
     }
     
     public void colocarVolcan(){
@@ -41,13 +40,16 @@ public class Casillas {
         basuraRadioactiva = true;
     }
     
-    private void colorLabel(){
-        if(vida <= 60 && vida > 30)
-            lblImagen.setBackground(Color.yellow);
-        else if(vida <= 30 && vida > 0)
-            lblImagen.setBackground(Color.red);
-        else if(vida == 0)
-            lblImagen.setBackground(Color.BLACK);
+    public void verVolcan(){
+        if(tieneVolcan){
+            btnImagen.setBackground(Color.red);
+        }
+    }
+    
+    public void verBasura(){
+        if(basuraRadioactiva){
+            btnImagen.setBackground(Color.cyan);
+        }
     }
 
     public int getVida() {
