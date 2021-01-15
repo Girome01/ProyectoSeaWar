@@ -49,10 +49,12 @@ public class FishTelepathy extends Habilidades{
                     for(int j = 1; j <=cant;i++){
                         x1 += 1;
                         y1 = y;
-                        casillas[x1][y].danarCasilla(100);
+                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                            casillas[x1][y].danarCasilla(100);
                         for(int k = 1; k <= cant;j++){
                             y1 += 1;
-                            casillas[x1][y1].danarCasilla(100);
+                            if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                                casillas[x1][y1].danarCasilla(100);
                             
                         }
                     }
@@ -66,10 +68,12 @@ public class FishTelepathy extends Habilidades{
                     for(int j = 1; j <=cant;i++){
                         x1 += 1;
                         y1 = y;
-                        casillas[x1][y].danarCasilla(100);
+                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                            casillas[x1][y].danarCasilla(100);
                         for(int k = 1; k <= cant;j++){
                             y1 -= 1;
-                            casillas[x1][y1].danarCasilla(100);
+                            if( x1 > 0|| x1 < 20 && y1 > 0|| y1 < 30)
+                                casillas[x1][y1].danarCasilla(100);
                         }
                     }
                     break;
@@ -82,10 +86,12 @@ public class FishTelepathy extends Habilidades{
                     for(int j = 1; j <=cant;i++){
                         x1 -= 10;
                         y1 = y;
-                        casillas[x1][y].danarCasilla(100);
+                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                            casillas[x1][y].danarCasilla(100);
                         for(int k = 1; k <= cant;j++){
                             y1 -= 10;
-                            casillas[x1][y1].danarCasilla(100);
+                            if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                                casillas[x1][y1].danarCasilla(100);
                         }
                     }
                     break; 
@@ -98,10 +104,12 @@ public class FishTelepathy extends Habilidades{
                     for(int j = 1; j <=cant;i++){
                         x1 -= 10;
                         y1 = y;
-                        casillas[x1][y].danarCasilla(100);
+                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                            casillas[x1][y].danarCasilla(100);
                         for(int k = 1; k <= cant;j++){
                             y1 += 10;
-                            casillas[x1][y1].danarCasilla(100);
+                            if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                                casillas[x1][y1].danarCasilla(100);
                         }
                     }
                     break;

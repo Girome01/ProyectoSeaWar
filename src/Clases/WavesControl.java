@@ -27,20 +27,30 @@ public class WavesControl extends Habilidades{
         int x = -1, y = -1; //Como agregar las posiciones que escoje el usuario
         int cant = random.nextInt(8)+2;
         int x1 = x, x2 = x, y1, y2;
-        for(int i = 1; i <= cant;i++){
-            x1 += 10;
-            x2 -= 10;
+        for(int i = 1; i <=cant;i++){
+            x1 += 1;
+            x2 -= 1;
             y1 = y;
             y2 = y;
-            casillas[x1][y].danarCasilla(100);
-            casillas[x2][y].danarCasilla(100);
+            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                casillas[x1][y].danarCasilla(100);
+            if( x2 > 0|| x2 < 20 && y > 0 || y < 30)
+                casillas[x2][y].danarCasilla(100);
             for(int j = 1; j <= cant;j++){
-                y1 -= 10;
-                casillas[x1][y1].danarCasilla(100);
-                y2 += 10;
-                casillas[x1][y2].danarCasilla(100);
-                casillas[x][y1].danarCasilla(100);
-                casillas[x][y2].danarCasilla(100);
+                y1 -= 1;
+                if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
+                    casillas[x][y1].danarCasilla(100);
+                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                    casillas[x1][y1].danarCasilla(100);
+                if( x2 > 0|| x2 < 20 && y1 > 0 || y1 < 30)
+                    casillas[x2][y1].danarCasilla(100);
+                y2 += 1;
+                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
+                    casillas[x1][y2].danarCasilla(100);
+                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
+                    casillas[x][y2].danarCasilla(100);
+                if( x2 > 0|| x2 < 20 && y2 > 0 || y2 < 30)
+                    casillas[x2][y2].danarCasilla(100);
             }
         }
         remolinos.add(new Point(x,y));
@@ -67,48 +77,82 @@ public class WavesControl extends Habilidades{
                         // danar los con 25%
                         rand = random.nextInt(2);
                         if( rand == 0){
-                            casillas[x1][y].colocarBasuraRadio();
-                            casillas[x1][y].danarCasilla(100); 
+                            if( x1 > 0|| x1 < 20 && y > 0 || y < 30){
+                                casillas[x1][y].colocarBasuraRadio();
+                                casillas[x1][y].danarCasilla(100); 
+                            }
                         }else{
-                            casillas[x1][y].danarCasilla(100);
+                            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                                casillas[x1][y].danarCasilla(100);
                         }
                         rand = random.nextInt(2);
                         if( rand == 0){
-                            casillas[x2][y].colocarBasuraRadio();
-                            casillas[x2][y].danarCasilla(100);
+                            if( x2 > 0|| x2 < 20 && y > 0 || y < 30){
+                                casillas[x2][y].colocarBasuraRadio();
+                                casillas[x2][y].danarCasilla(100);
+                            }
                         }else{
-                            casillas[x2][y].danarCasilla(100);
+                            if( x2 > 0|| x2 < 20 && y > 0 || y < 30)
+                                casillas[x2][y].danarCasilla(100);
                         }
                         for(int k = 1; k <= cant;k++){
                             y1 -= 1;
                             rand = random.nextInt(2);
                             if( rand == 0){
-                                casillas[x1][y1].colocarBasuraRadio();
-                                casillas[x1][y1].danarCasilla(100);
+                                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30){
+                                    casillas[x1][y1].colocarBasuraRadio();
+                                    casillas[x1][y1].danarCasilla(100);
+                                }
                             }else{
-                                casillas[x1][y1].danarCasilla(100);
+                                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                                    casillas[x1][y1].danarCasilla(100);
                             }
+                            rand = random.nextInt(2);
+                            if( rand == 0){
+                                if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
+                                    casillas[x][y1].colocarBasuraRadio();
+                                    casillas[x][y1].danarCasilla(100);
+                            }else
+                                if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
+                                    casillas[x][y1].danarCasilla(100);
+                            rand = random.nextInt(2);
+                            if( rand == 0){
+                                if( x2 > 0|| x2 < 20 && y1 > 0 || y1 < 30)
+                                    casillas[x2][y1].colocarBasuraRadio();
+                                    casillas[x2][y1].danarCasilla(100);
+                            }else
+                                if( x2 > 0|| x2 < 20 && y1 > 0 || y1 < 30)
+                                    casillas[x2][y1].danarCasilla(100);
                             y2 += 1;
                             rand = random.nextInt(2);
                             if( rand == 0){
-                                casillas[x1][y2].colocarBasuraRadio();
-                                casillas[x1][y2].danarCasilla(100);
+                                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30){
+                                    casillas[x1][y2].colocarBasuraRadio();
+                                    casillas[x1][y2].danarCasilla(100);
+                                }
                             }else{
-                                casillas[x1][y2].danarCasilla(100);
+                                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
+                                    casillas[x1][y2].danarCasilla(100);
                             }
                             rand = random.nextInt(2);
                             if( rand == 0){
-                                casillas[x][y1].colocarBasuraRadio();
-                                casillas[x][y1].danarCasilla(100);
+                                if( x > 0|| x < 20 && y1 > 0 || y1 < 30){
+                                    casillas[x][y1].colocarBasuraRadio();
+                                    casillas[x][y1].danarCasilla(100);
+                                }
                             }else{
-                                casillas[x][y1].danarCasilla(100);
+                                if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
+                                    casillas[x][y1].danarCasilla(100);
                             }
                             rand = random.nextInt(2);
                             if( rand == 0){
-                                casillas[x1][y].colocarBasuraRadio();
-                                casillas[x][y2].danarCasilla(100);
+                                if( x > 0|| x < 20 && y2 > 0 || y2 < 30){
+                                    casillas[x][y2].colocarBasuraRadio();
+                                    casillas[x][y2].danarCasilla(100);
+                                }
                             }else{
-                                casillas[x][y2].danarCasilla(100);
+                                if( x > 0|| x < 20 && y2 > 0 || y2 < 30)
+                                    casillas[x][y2].danarCasilla(100);
                             }
                         }
                     }
@@ -123,7 +167,8 @@ public class WavesControl extends Habilidades{
         for(int r = 0; r < 20; r++){
             for(int c = 0; c < 30;){
                 if( casillas[r][c].isBasuraRadioactiva()){
-                    casillas[r][c].danarCasilla(10);
+                    if( r > 0|| r < 20 && c > 0 || c < 30)
+                        casillas[r][c].danarCasilla(10);
                 }
                 c++;
             }                   
