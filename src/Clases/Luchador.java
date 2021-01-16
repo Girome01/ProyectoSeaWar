@@ -17,10 +17,7 @@ public class Luchador {
     int Poder;
     int Resistencia;
     int Sanidad;
-    int TipoAtaque = 0;
     int Vida;
-    int TipoResistencia = 0;
-    int ResistenciaActiva = 0;
     
     Luchador(){
         
@@ -34,52 +31,38 @@ public class Luchador {
         Resistencia = _Resistencia;
         Sanidad = _Sanidad;
     }
-    
-    private int PosicionArray(String Comando){
-        
-        /*for (int i = 0; i < Ataques.leght; i++) {
-            if(Ataques.get(i).nombre.equals(Comando)){
-                return i;
-            }
-        }*/
-        return 100;
-    }
-    
-    public void Atacar(String Comando){
-        int PosicionAtaque = PosicionArray(Comando);
-        int PoderAtaque = 0;
-        if(PosicionAtaque != 100){
-            if(TipoAtaque == 0){
-                //PoderAtaque = Ataques[PosicionAtaque]
-                //funcion AtacarAux
-            }
-            else if(TipoAtaque == 1){
-                //PoderAtaque = Ataques[PosicionAtaque] + Poder;
-                //funcionAtacarAux
-            } 
+
+    public Double getPoder() {
+        Double PoderReturn = 0.0;
+        if(Poder == 50){
+            PoderReturn = 1.5;
         }
-        else{
-            System.out.println("El comando no existe ");
+        else if(Poder == 75){
+            PoderReturn = 1.75;
         }
+        else if(Poder == 100){
+            PoderReturn = 2.0;
+        }
+        return PoderReturn;
+    }
+
+    public Double getResistencia() {
+        Double ResistenciaReturn = 0.0;
+        if(Resistencia == 50){
+            ResistenciaReturn = 1.5;
+        }
+        else if(Resistencia == 75){
+            ResistenciaReturn = 1.75;
+        }
+        else if(Resistencia == 100){
+            ResistenciaReturn = 2.0;
+        }
+        return ResistenciaReturn;
         
     }
-    
+
     public void Sanidad(){
         Vida = Sanidad;
-    }
-    
-    public void Resistencia(){
-        ResistenciaActiva = Resistencia;
-    }
-    
-    public void RecibirAtaque(int Daño){
-        ResistenciaActiva = ResistenciaActiva - Daño;
-        
-        if(ResistenciaActiva < 0){
-            Vida = Vida - ResistenciaActiva;
-        }
-        
-        ResistenciaActiva = 0;
     }
     
 }
