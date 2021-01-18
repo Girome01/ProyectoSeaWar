@@ -17,6 +17,7 @@ public class Luchador {
     int Poder;
     int Resistencia;
     int Sanidad;
+    int Vida;
     
     Luchador(){
         
@@ -30,4 +31,38 @@ public class Luchador {
         Resistencia = _Resistencia;
         Sanidad = _Sanidad;
     }
+
+    public Double getPoder() {
+        Double PoderReturn = 0.0;
+        if(Poder == 50){
+            PoderReturn = 1.5;
+        }
+        else if(Poder == 75){
+            PoderReturn = 1.75;
+        }
+        else if(Poder == 100){
+            PoderReturn = 2.0;
+        }
+        return PoderReturn;
+    }
+
+    public Double getResistencia() {
+        Double ResistenciaReturn = 0.0;
+        if(Resistencia == 50){
+            ResistenciaReturn = 1.5;
+        }
+        else if(Resistencia == 75){
+            ResistenciaReturn = 1.75;
+        }
+        else if(Resistencia == 100){
+            ResistenciaReturn = 2.0;
+        }
+        return ResistenciaReturn;
+        
+    }
+
+    public void Sanidad(){
+        Vida = Sanidad;
+    }
+    
 }
