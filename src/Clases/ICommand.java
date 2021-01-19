@@ -11,6 +11,5 @@ package Clases;
  */
 public interface ICommand {
     public String getCommandName();
-    public void execute(); //Agregar parametros si se ocupan
-    
+    public void execute(String[] args); //Agregar parametros si se ocupan
 }

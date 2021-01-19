@@ -5,20 +5,36 @@
  */
 package Cliente;
 
+import Clases.Casillas;
+import Clases.CommandManager;
+import Clases.CommandUtil;
+import Clases.ICommand;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.Arrays;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Gilberth
  */
 public class PantallaCliente extends javax.swing.JFrame {
-    Cliente refCliente;
+    public Cliente refCliente;
     private String nombreTurno = "";
+    private String [][]matrix;
+    private JButton [][]label = new JButton[20][30]; // lbel[1][4]
+    public Casillas[][]casillas;
+    private CommandUtil obtenerCommand = new CommandUtil();
+    CommandManager manager = CommandManager.getIntance();  
     /**
      * Creates new form PantallaCliente
      */
     public PantallaCliente() {
         initComponents();
+        generarMatriz();
     }
 
     public void setRefCliente(Cliente refCliente) {
@@ -33,6 +49,25 @@ public class PantallaCliente extends javax.swing.JFrame {
     public void addMensaje(String msj){
         txaMensajes.append(msj + "\n");
     }
+    
+    public void generarMatriz(){
+        matrix = new String[20][30];
+        casillas = new Casillas[20][30];
+        panelJuego.setLayout(new GridLayout(20, 30));
+        for(int r=0; r<20; r++){
+            for(int c=0; c<30;){
+                label[r][c] = new JButton(matrix[r][c]);
+                casillas[r][c] = new Casillas(label[r][c]);
+                label[r][c].setPreferredSize(new Dimension(5, 5));
+                label[r][c].setBackground(Color.GREEN);
+                //label[r][c].setEnabled(false);
+                label[r][c].setVisible(true);
+                panelJuego.add(label[r][c]);
+                c++;
+            }                   
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +82,20 @@ public class PantallaCliente extends javax.swing.JFrame {
         txfMensaje = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
         lblTurno = new javax.swing.JLabel();
+        lblBitacora = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtABitacora = new javax.swing.JTextArea();
+        lblResultadoDelAtaque = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        panelPersonajes = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        lblVida = new javax.swing.JLabel();
+        txtInfoAquaman = new javax.swing.JTextField();
+        txtMantaNegra = new javax.swing.JTextField();
+        txtPoseidon = new javax.swing.JTextField();
+        lblCasillasDestruidas = new javax.swing.JLabel();
+        panelJuego = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +118,102 @@ public class PantallaCliente extends javax.swing.JFrame {
 
         lblTurno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTurno.setText("Turno:");
+        lblTurno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblBitacora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblBitacora.setText("Bitacora");
+        lblBitacora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtABitacora.setColumns(20);
+        txtABitacora.setRows(5);
+        jScrollPane2.setViewportView(txtABitacora);
+
+        lblResultadoDelAtaque.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblResultadoDelAtaque.setText("Resultado del ataque");
+        lblResultadoDelAtaque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        panelPersonajes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+
+        javax.swing.GroupLayout panelPersonajesLayout = new javax.swing.GroupLayout(panelPersonajes);
+        panelPersonajes.setLayout(panelPersonajesLayout);
+        panelPersonajesLayout.setHorizontalGroup(
+            panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 235, Short.MAX_VALUE)
+        );
+        panelPersonajesLayout.setVerticalGroup(
+            panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        lblVida.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblVida.setText("Vida: ");
+        lblVida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtMantaNegra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMantaNegraActionPerformed(evt);
+            }
+        });
+
+        lblCasillasDestruidas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblCasillasDestruidas.setText("Casillas destruidas:");
+        lblCasillasDestruidas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblVida, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(txtInfoAquaman))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(txtMantaNegra, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(txtPoseidon, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(lblCasillasDestruidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblVida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCasillasDestruidas, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtInfoAquaman)
+                    .addComponent(txtPoseidon, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMantaNegra))
+                .addContainerGap())
+        );
+
+        panelJuego.setBackground(new java.awt.Color(153, 153, 153));
+        panelJuego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
+        panelJuego.setLayout(panelJuegoLayout);
+        panelJuegoLayout.setHorizontalGroup(
+            panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelJuegoLayout.setVerticalGroup(
+            panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,21 +222,50 @@ public class PantallaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(txfMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addComponent(txfMensaje)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEnviar))
-                    .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(347, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblResultadoDelAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblBitacora, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(10, 10, 10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)))
+                        .addComponent(panelPersonajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblBitacora, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblResultadoDelAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelPersonajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panelJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -105,19 +279,28 @@ public class PantallaCliente extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            refCliente.hiloCliente.writer.writeUTF("MENSAJE");
-            refCliente.hiloCliente.writer.writeUTF(txfMensaje.getText());
-            txfMensaje.setText("");
-        } catch (IOException ex) {
-            
+        String line = txfMensaje.getText();               
+        if (line.trim().length() != 0) {                     
+            String[] commands = CommandUtil.tokenizerArgs(line);               
+            String commandName = commands[0];               
+            String[] commandArgs = null;               
+
+            if (commands.length > 1) {                   
+                commandArgs = Arrays.copyOfRange(commands, 1, commands.length);   
+            }   
+
+            ICommand command = manager.getCommand(commandName);   
+            command.execute(commandArgs); 
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void txfMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfMensajeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfMensajeActionPerformed
+
+    private void txtMantaNegraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMantaNegraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMantaNegraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,9 +344,23 @@ public class PantallaCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblBitacora;
+    private javax.swing.JLabel lblCasillasDestruidas;
+    private javax.swing.JLabel lblResultadoDelAtaque;
     private javax.swing.JLabel lblTurno;
+    private javax.swing.JLabel lblVida;
+    private javax.swing.JPanel panelJuego;
+    private javax.swing.JPanel panelPersonajes;
     private javax.swing.JTextArea txaMensajes;
     private javax.swing.JTextField txfMensaje;
+    private javax.swing.JTextArea txtABitacora;
+    private javax.swing.JTextField txtInfoAquaman;
+    private javax.swing.JTextField txtMantaNegra;
+    private javax.swing.JTextField txtPoseidon;
     // End of variables declaration//GEN-END:variables
 }
