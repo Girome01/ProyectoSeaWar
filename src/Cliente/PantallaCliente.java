@@ -6,10 +6,14 @@
 package Cliente;
 
 import Clases.Casillas;
+import Clases.CommandManager;
+import Clases.CommandUtil;
+import Clases.ICommand;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -23,6 +27,8 @@ public class PantallaCliente extends javax.swing.JFrame {
     private String [][]matrix;
     private JButton [][]label = new JButton[20][30]; // lbel[1][4]
     public Casillas[][]casillas;
+    private CommandUtil obtenerCommand = new CommandUtil();
+    CommandManager manager = CommandManager.getIntance();  
     /**
      * Creates new form PantallaCliente
      */
@@ -273,13 +279,18 @@ public class PantallaCliente extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            refCliente.hiloCliente.writer.writeUTF("MENSAJE");
-            refCliente.hiloCliente.writer.writeUTF(txfMensaje.getText());
-            txfMensaje.setText("");
-        } catch (IOException ex) {
-            
+        String line = txfMensaje.getText();               
+        if (line.trim().length() != 0) {                     
+            String[] commands = CommandUtil.tokenizerArgs(line);               
+            String commandName = commands[0];               
+            String[] commandArgs = null;               
+
+            if (commands.length > 1) {                   
+                commandArgs = Arrays.copyOfRange(commands, 1, commands.length);   
+            }   
+
+            ICommand command = manager.getCommand(commandName);   
+            command.execute(commandArgs); 
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
