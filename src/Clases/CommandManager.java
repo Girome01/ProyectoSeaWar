@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import Cliente.Cliente;
 import java.util.HashMap;
 
 /**
@@ -12,9 +13,14 @@ import java.util.HashMap;
  * @author Gilberth
  */
 public class CommandManager {
+    Cliente refCliente;
     private static CommandManager commandManager;
     private static final HashMap<String, Class<? extends ICommand>> COMMANDS =          
             new HashMap<String, Class<? extends ICommand>>();  
+
+    public void setRefCliente(Cliente refCliente) {
+        this.refCliente = refCliente;
+    }
     
     private CommandManager() {           
            

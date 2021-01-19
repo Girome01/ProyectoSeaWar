@@ -292,6 +292,7 @@ public class PantallaCliente extends javax.swing.JFrame {
             ICommand command = manager.getCommand(commandName);   
             command.execute(commandArgs); 
         }
+        txfMensaje.setText("");
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void txfMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfMensajeActionPerformed
