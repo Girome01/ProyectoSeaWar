@@ -5,12 +5,19 @@
  */
 package Clases;
 
+import Cliente.Cliente;
+
 /**
  *
  * @author Gilberth
  */
 public abstract class BaseCommand implements ICommand{
+    Cliente refCliente;
 
+    public BaseCommand(Cliente refCliente) {
+        this.refCliente = refCliente;
+    }
+    
     @Override
     public abstract String getCommandName();
 
