@@ -13,11 +13,13 @@ public abstract class Habilidades{
     private String attack1;
     private String attack2;
     private String attack3;
+    Casillas[][] casillas;
 
-    Habilidades(String attack1, String attack2, String attack3) {
+    Habilidades(String attack1, String attack2, String attack3,Casillas[][] casillas) {
         this.attack1 = attack1;
         this.attack2 = attack2;
         this.attack3 = attack3;
+        this.casillas = casillas;
     }
     
     public void seleccionarAttack(String _attack){
