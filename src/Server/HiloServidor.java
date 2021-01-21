@@ -59,6 +59,7 @@ public class HiloServidor extends Thread{
                 nombre = reader.readUTF();
                 enviarTurnoInicial();                    
                 break;
+                
             case MENSAJE: // pasan un mensaje por el chat
                 String mensaje = reader.readUTF();
                 for (int i = 0; i < server.conexiones.size(); i++) {
@@ -68,10 +69,9 @@ public class HiloServidor extends Thread{
                     current.writer.writeUTF(mensaje);
                 }
                 break;
-            case COMMAND: // pasan un mensaje por el chat
-                CommandManager manager = CommandManager.getIntance();
-                break;
+                
             default:
+                break;
         }
     }
     

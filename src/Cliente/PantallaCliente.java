@@ -27,14 +27,13 @@ public class PantallaCliente extends javax.swing.JFrame {
     private String [][]matrix;
     private JButton [][]label = new JButton[20][30]; // lbel[1][4]
     public Casillas[][]casillas;
-    private CommandUtil obtenerCommand = new CommandUtil();
     CommandManager manager = CommandManager.getIntance();  
     /**
      * Creates new form PantallaCliente
      */
     public PantallaCliente() {
         initComponents();
-        generarMatriz();
+        //generarMatriz();
     }
 
     public void setRefCliente(Cliente refCliente) {
@@ -281,7 +280,8 @@ public class PantallaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         String line = txfMensaje.getText();               
         if (line.trim().length() != 0) {                     
-            String[] commands = CommandUtil.tokenizerArgs(line);               
+            String[] commands = CommandUtil.tokenizerArgs(line);
+            txaMensajes.append(commands[0]+commands[1]+"\n");
             String commandName = commands[0];               
             String[] commandArgs = null;               
 
@@ -289,7 +289,9 @@ public class PantallaCliente extends javax.swing.JFrame {
                 commandArgs = Arrays.copyOfRange(commands, 1, commands.length);   
             }   
 
-            ICommand command = manager.getCommand(commandName);   
+            ICommand command = manager.getCommand(commandName);
+            command.setRefCliente(refCliente);
+            txaMensajes.append(command.getCommandName()+"\n");
             command.execute(commandArgs); 
         }
         txfMensaje.setText("");
