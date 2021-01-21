@@ -17,7 +17,8 @@ public class CommandManager {
             new HashMap<String, Class<? extends ICommand>>();  
     
     private CommandManager() {           
-        registCommand(CommandChat.COMMAND_NAME, CommandChat.class); 
+        registCommand(CommandChat.COMMAND_NAME, CommandChat.class);
+        registCommand(CommandChatPriv.COMMAND_NAME, CommandChatPriv.class);
     } 
     
     public static synchronized CommandManager getIntance() {           
@@ -28,7 +29,6 @@ public class CommandManager {
     }
     
     public ICommand getCommand(String commandName) {  
-        System.out.println(commandName.toUpperCase());
         if (COMMANDS.containsKey(commandName.toUpperCase())) {               
             try {                   
                 return COMMANDS.get(commandName.toUpperCase()).newInstance();
