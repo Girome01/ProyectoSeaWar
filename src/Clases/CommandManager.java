@@ -27,18 +27,17 @@ public class CommandManager {
         return commandManager;   
     }
     
-    public ICommand getCommand(String commandName) {           
+    public ICommand getCommand(String commandName) {  
+        System.out.println(commandName.toUpperCase());
         if (COMMANDS.containsKey(commandName.toUpperCase())) {               
             try {                   
                 return COMMANDS.get(commandName.toUpperCase()).newInstance();
             } catch (Exception e) {   e.printStackTrace();      
-                System.out.println("PUTAAAAAAAAAAAAAAAAAAAA");
             //return new ErrorCommand();
             return null;
             }           
         } 
         else {
-            System.out.println("No esta?????????????");
             //return new NotFoundCommand();   
             return null;
         }  

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author Gilberth
  */
 public class CommandChat extends BaseCommand{
-    public static final String COMMAND_NAME = "mensaje";
+    public static final String COMMAND_NAME = "chat";
 
     @Override
     public String getCommandName() {

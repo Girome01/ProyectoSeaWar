@@ -281,7 +281,6 @@ public class PantallaCliente extends javax.swing.JFrame {
         String line = txfMensaje.getText();               
         if (line.trim().length() != 0) {                     
             String[] commands = CommandUtil.tokenizerArgs(line);
-            txaMensajes.append(commands[0]+commands[1]+"\n");
             String commandName = commands[0];               
             String[] commandArgs = null;               
 
@@ -289,9 +288,8 @@ public class PantallaCliente extends javax.swing.JFrame {
                 commandArgs = Arrays.copyOfRange(commands, 1, commands.length);   
             }   
 
-            ICommand command = manager.getCommand(commandName);
+            ICommand command = manager.getCommand(commandName.trim());
             command.setRefCliente(refCliente);
-            txaMensajes.append(command.getCommandName()+"\n");
             command.execute(commandArgs); 
         }
         txfMensaje.setText("");
