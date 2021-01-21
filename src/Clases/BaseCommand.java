@@ -7,16 +7,13 @@ package Clases;
 
 import Cliente.Cliente;
 
+
 /**
  *
  * @author Gilberth
  */
 public abstract class BaseCommand implements ICommand{
     Cliente refCliente;
-
-    public BaseCommand(Cliente refCliente) {
-        this.refCliente = refCliente;
-    }
     
     @Override
     public abstract String getCommandName();
@@ -27,5 +24,11 @@ public abstract class BaseCommand implements ICommand{
     public void write(){
         
     }
+
+    @Override
+    public void setRefCliente(Cliente refCliente){
+        this.refCliente = refCliente;
+    }
+    
     
 }

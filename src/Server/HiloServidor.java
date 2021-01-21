@@ -23,7 +23,7 @@ public class HiloServidor extends Thread{
     private boolean running = true;
     Server server;
     
-    enum instruccion{INICIAR,COMMAND,MENSAJE};
+    enum instruccion{INICIAR,COMMAND,MENSAJE,MENSAJEPRIVADO};
     
     public HiloServidor(Socket socketRef, Server server) throws IOException {
         this.socketRef = socketRef;
@@ -53,25 +53,47 @@ public class HiloServidor extends Thread{
     }
     
     private void instrucciones(String _instruccion) throws IOException{
-        
+        String mensaje;
         switch (instruccion.valueOf(_instruccion.toUpperCase())){
             case INICIAR: // pasan el nombre del usuario
                 nombre = reader.readUTF();
                 enviarTurnoInicial();                    
                 break;
+                
             case MENSAJE: // pasan un mensaje por el chat
-                String mensaje = reader.readUTF();
+                mensaje = reader.readUTF();
                 for (int i = 0; i < server.conexiones.size(); i++) {
                     HiloServidor current = server.conexiones.get(i);
                     current.writer.writeUTF("MENSAJE");
-                    current.writer.writeUTF(nombre);
+                    current.writer.writeUTF("Chat "+nombre);
                     current.writer.writeUTF(mensaje);
                 }
                 break;
-            case COMMAND: // pasan un mensaje por el chat
-                CommandManager manager = CommandManager.getIntance();
+            case MENSAJEPRIVADO:
+                String privado = reader.readUTF();
+                mensaje = reader.readUTF();
+                boolean mandoMsj = false;
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                    if(current.nombre.trim().toUpperCase().equals(privado.trim().toUpperCase())){
+                        current.writer.writeUTF("MENSAJE");
+                        current.writer.writeUTF("Chat privado "+nombre);
+                        current.writer.writeUTF(mensaje);
+                        writer.writeUTF("MENSAJE");
+                        writer.writeUTF("Chat privado "+nombre);
+                        writer.writeUTF(mensaje);
+                        mandoMsj = true;
+                        break;
+                    }
+                }
+                if( !mandoMsj){
+                    writer.writeUTF("MENSAJE");
+                    writer.writeUTF("Chat privado "+"SERVER");
+                    writer.writeUTF(" "+privado+" esta persona no se encuentra en el server vualva a tratar");
+                }
                 break;
             default:
+                break;
         }
     }
     

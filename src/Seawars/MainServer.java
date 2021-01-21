@@ -13,11 +13,12 @@ import Server.Server;
  * @author Gilberth
  */
 public class MainServer {
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         PantallaServidor pantalla = new PantallaServidor();
         Server srv = new Server(pantalla);
         pantalla.setVisible(true);
         srv.runServer();
-        
+
     }
 }

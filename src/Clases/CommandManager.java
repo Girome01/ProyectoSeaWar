@@ -5,7 +5,6 @@
  */
 package Clases;
 
-import Cliente.Cliente;
 import java.util.HashMap;
 
 /**
@@ -13,17 +12,13 @@ import java.util.HashMap;
  * @author Gilberth
  */
 public class CommandManager {
-    Cliente refCliente;
     private static CommandManager commandManager;
     private static final HashMap<String, Class<? extends ICommand>> COMMANDS =          
             new HashMap<String, Class<? extends ICommand>>();  
-
-    public void setRefCliente(Cliente refCliente) {
-        this.refCliente = refCliente;
-    }
     
     private CommandManager() {           
-           
+        registCommand(CommandChat.COMMAND_NAME, CommandChat.class);
+        registCommand(CommandChatPriv.COMMAND_NAME, CommandChatPriv.class);
     } 
     
     public static synchronized CommandManager getIntance() {           
@@ -33,11 +28,11 @@ public class CommandManager {
         return commandManager;   
     }
     
-    public ICommand getCommand(String commandName) {           
+    public ICommand getCommand(String commandName) {  
         if (COMMANDS.containsKey(commandName.toUpperCase())) {               
             try {                   
                 return COMMANDS.get(commandName.toUpperCase()).newInstance();
-            } catch (Exception e) {   e.printStackTrace();                   
+            } catch (Exception e) {   e.printStackTrace();      
             //return new ErrorCommand();
             return null;
             }           
