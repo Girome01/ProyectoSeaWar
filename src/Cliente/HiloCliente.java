@@ -51,6 +51,7 @@ public class HiloCliente  extends Thread{
             case SETNAME: // recibe el turno del jufador 1
                 refPantalla.setNombreTurno(reader.readUTF());
                 break;
+                
             case MENSAJE: // pasan un mensaje por el chat
                 usuario = reader.readUTF();
                 String mensaje = reader.readUTF();

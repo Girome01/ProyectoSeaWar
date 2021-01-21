@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import Cliente.Cliente;
+
 /**
  *
  * @author Gilberth
@@ -12,4 +14,5 @@ package Clases;
 public interface ICommand {
     public String getCommandName();
     public void execute(String[] args); //Agregar parametros si se ocupan
+    public void setRefCliente(Cliente refCliente);
 }
