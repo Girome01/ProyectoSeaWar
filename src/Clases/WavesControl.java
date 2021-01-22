@@ -32,25 +32,41 @@ public class WavesControl extends Habilidades{
             x2 -= 1;
             y1 = y;
             y2 = y;
-            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+            if( x1 > 0|| x1 < 20 && y > 0 || y < 30){
                 casillas[x1][y].danarCasilla(100);
-            if( x2 > 0|| x2 < 20 && y > 0 || y < 30)
+                casillas[x1][y].colocarRemolino();
+            }
+            if( x2 > 0|| x2 < 20 && y > 0 || y < 30){
                 casillas[x2][y].danarCasilla(100);
+                casillas[x2][y].colocarRemolino();
+            }
             for(int j = 1; j <= cant;j++){
                 y1 -= 1;
-                if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
+                if( x > 0|| x < 20 && y1 > 0 || y1 < 30){
                     casillas[x][y1].danarCasilla(100);
-                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                    casillas[x][y1].colocarRemolino();
+                }
+                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30){
                     casillas[x1][y1].danarCasilla(100);
-                if( x2 > 0|| x2 < 20 && y1 > 0 || y1 < 30)
+                    casillas[x1][y1].colocarRemolino();
+                }
+                if( x2 > 0|| x2 < 20 && y1 > 0 || y1 < 30){
                     casillas[x2][y1].danarCasilla(100);
+                    casillas[x2][y1].colocarRemolino();
+                }
                 y2 += 1;
-                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
+                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30){
                     casillas[x1][y2].danarCasilla(100);
-                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
+                    casillas[x1][y2].colocarRemolino();
+                }
+                if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30){
                     casillas[x][y2].danarCasilla(100);
-                if( x2 > 0|| x2 < 20 && y2 > 0 || y2 < 30)
+                    casillas[x][y2].colocarRemolino();
+                }
+                if( x2 > 0|| x2 < 20 && y2 > 0 || y2 < 30){
                     casillas[x2][y2].danarCasilla(100);
+                    casillas[x2][y2].colocarRemolino();
+                }
             }
         }
         remolinos.add(new Point(x,y));

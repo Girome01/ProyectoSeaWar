@@ -39,4 +39,33 @@ public class Cliente {
         }
     
     }
+    
+    private String obtenerPor(){
+        int vivas = 0;
+        for(int r=0; r<20; r++){
+            for(int c=0; c<30;){
+                if(refPantalla.casillas[r][c].estaViva()){
+                    vivas+=1;
+                }
+            }
+        }
+        return ( vivas*100/600 )+" ";
+    }
+    
+    private String casillasMuertas(){
+        int muertas = 0;
+        for(int r=0; r<20; r++){
+            for(int c=0; c<30;){
+                if( !refPantalla.casillas[r][c].estaViva()){
+                    muertas += 1;
+                }
+            }
+        }
+        return muertas+"";
+    }
+    
+    public String obtenerInfo(){
+        return refPantalla.getTitle()+" Porcentaje de casillas vivas: "+obtenerPor()+
+                "Casillas muertas totales: "+casillasMuertas();
+    }
 }
