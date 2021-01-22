@@ -5,6 +5,10 @@
  */
 package Clases;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gilberth
@@ -19,7 +23,12 @@ public class CommandConEnem extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        refCliente.hiloCliente.writer.writeUTF("CONSULTARENEMIGO");
+        try {
+            refCliente.hiloCliente.writer.writeUTF("CONSULTARENEMIGO");
+            refCliente.hiloCliente.writer.writeUTF(args[0]);
+        } catch (IOException ex) {
+            Logger.getLogger(CommandConEnem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
