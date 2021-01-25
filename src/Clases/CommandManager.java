@@ -19,6 +19,10 @@ public class CommandManager {
     private CommandManager() {           
         registCommand(CommandChat.COMMAND_NAME, CommandChat.class);
         registCommand(CommandChatPriv.COMMAND_NAME, CommandChatPriv.class);
+        registCommand(CommandPintarCeldas.COMMAND_NAME, CommandPintarCeldas.class);
+        registCommand(CommandConsulCelda.COMMAND_NAME, CommandConsulCelda.class);
+        registCommand(CommandConCeldOcupada.COMMAND_NAME, CommandConCeldOcupada.class);
+        registCommand(CommandConEnem.COMMAND_NAME, CommandConEnem.class);
     } 
     
     public static synchronized CommandManager getIntance() {           
@@ -33,13 +37,11 @@ public class CommandManager {
             try {                   
                 return COMMANDS.get(commandName.toUpperCase()).newInstance();
             } catch (Exception e) {   e.printStackTrace();      
-            //return new ErrorCommand();
-            return null;
+                return new ErrorCommand();
             }           
         } 
         else {
-            //return new NotFoundCommand();   
-            return null;
+            return new NotFoundCommand();   
         }  
     }
     

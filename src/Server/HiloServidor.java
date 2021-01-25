@@ -23,7 +23,7 @@ public class HiloServidor extends Thread{
     private boolean running = true;
     Server server;
     
-    enum instruccion{INICIAR,COMMAND,MENSAJE,MENSAJEPRIVADO};
+    enum instruccion{INICIAR,MENSAJE,MENSAJEPRIVADO,CONSULTARENEMIGO,PASARINFO};
     
     public HiloServidor(Socket socketRef, Server server) throws IOException {
         this.socketRef = socketRef;
@@ -54,6 +54,7 @@ public class HiloServidor extends Thread{
     
     private void instrucciones(String _instruccion) throws IOException{
         String mensaje;
+        String enemigo;
         switch (instruccion.valueOf(_instruccion.toUpperCase())){
             case INICIAR: // pasan el nombre del usuario
                 nombre = reader.readUTF();
@@ -92,6 +93,32 @@ public class HiloServidor extends Thread{
                     writer.writeUTF(" "+privado+" esta persona no se encuentra en el server vualva a tratar");
                 }
                 break;
+                
+            case CONSULTARENEMIGO:
+                enemigo = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                    if(current.nombre.trim().toUpperCase().equals(enemigo.trim().toUpperCase())){
+                        current.writer.writeUTF("CONSULTAINFO");
+                        current.writer.writeUTF(nombre);
+                        break;
+                    }
+                }
+                break;
+                
+            case PASARINFO:
+                enemigo = reader.readUTF();
+                String info = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                    if(current.nombre.trim().toUpperCase().equals(enemigo.trim().toUpperCase())){
+                        current.writer.writeUTF("PRINTEARINFO");
+                        current.writer.writeUTF(info);
+                        break;
+                    }
+                }
+                break;
+                
             default:
                 break;
         }

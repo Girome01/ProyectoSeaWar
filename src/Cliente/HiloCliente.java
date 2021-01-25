@@ -22,7 +22,7 @@ public class HiloCliente  extends Thread{
     private boolean running = true;
     private PantallaCliente refPantalla;
     
-    enum instruccionCliente{SETNAME,MENSAJE};
+    enum instruccionCliente{SETNAME,MENSAJE,CONSULTAINFO,PRINTEARINFO};
     
     
     public HiloCliente(Socket socketRef, PantallaCliente refPantalla) throws IOException {
@@ -47,6 +47,7 @@ public class HiloCliente  extends Thread{
     
     private void instrucciones(String _instruccion) throws IOException{
         String usuario;
+        String info;
         switch (instruccionCliente.valueOf(_instruccion.toUpperCase())){
             case SETNAME: // recibe el turno del jufador 1
                 refPantalla.setNombreTurno(reader.readUTF());
@@ -58,6 +59,22 @@ public class HiloCliente  extends Thread{
                 //System.out.println("CLIENTE Recibido mensaje: " + mensaje);
                 refPantalla.addMensaje(usuario+">   " + mensaje);
                 break;
+            
+            case CONSULTAINFO:
+                String enem = reader.readUTF();
+                info = refPantalla.refCliente.obtenerInfo();
+                writer.writeUTF("PASARINFO");
+                writer.writeUTF(enem);
+                writer.writeUTF(info);
+                break;
+                
+            case PRINTEARINFO:
+                info = reader.readUTF();
+                refPantalla.addBitacora(info);
+                break;
+            
+            default:
+                
             }
     }
     
