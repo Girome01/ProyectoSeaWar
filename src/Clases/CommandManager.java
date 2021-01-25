@@ -23,6 +23,9 @@ public class CommandManager {
         registCommand(CommandConsulCelda.COMMAND_NAME, CommandConsulCelda.class);
         registCommand(CommandConCeldOcupada.COMMAND_NAME, CommandConCeldOcupada.class);
         registCommand(CommandConEnem.COMMAND_NAME, CommandConEnem.class);
+        registCommand(CommandIniciar.COMMAND_NAME, CommandIniciar.class);
+        registCommand(CommandCrearPer.COMMAND_NAME, CommandCrearPer.class);
+        registCommand(CommandSaltarTurno.COMMAND_NAME, CommandSaltarTurno.class);
     } 
     
     public static synchronized CommandManager getIntance() {           

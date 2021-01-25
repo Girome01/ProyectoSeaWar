@@ -10,6 +10,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,9 +22,10 @@ public class HiloServidor extends Thread{
     private DataOutputStream writer;
     public String nombre;
     private boolean running = true;
+    private int iniciar = 0;
     Server server;
     
-    enum instruccion{INICIAR,MENSAJE,MENSAJEPRIVADO,CONSULTARENEMIGO,PASARINFO};
+    enum instruccion{INICIAR,MENSAJE,MENSAJEPRIVADO,CONSULTARENEMIGO,PASARINFO,INICIARPARTIDA,CREARPERSONAJEAUX,CREARPERSONAJE,SALTARTURNO,RENDIDO};
     
     public HiloServidor(Socket socketRef, Server server) throws IOException {
         this.socketRef = socketRef;
@@ -34,7 +36,7 @@ public class HiloServidor extends Thread{
     
     public void enviarTurnoInicial() throws IOException{
         writer.writeUTF("SETNAME");
-        writer.writeUTF(server.getTurno());
+        writer.writeUTF(server.getTurnoPrimero());
     }
     
     public void run (){
@@ -118,7 +120,77 @@ public class HiloServidor extends Thread{
                     }
                 }
                 break;
+        
+            case INICIARPARTIDA:
+                iniciar ++;
+                if(iniciar == server.conexiones.size()){
+                    server.AcomodarTurnos();
+                    for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                        current.writer.writeUTF("RECIBIRTURNO");
+                        current.writer.writeUTF(server.getTurno());
+                        
+                    }
+                }
+                break;
+            case CREARPERSONAJEAUX:
+                    String nombretmp = reader.readUTF();
+                    String urltmp = reader.readUTF();
+                    String Destinatario = reader.readUTF();
+                    int Porcentajetmp = reader.readInt();
+                    int Podertmp = reader.readInt();
+                    int Resistenciatmp = reader.readInt();
+                    int Sanidadtmp = reader.readInt();
+                   HiloServidor current = server.conexiones.get(0);
+                   current.writer.writeUTF("CREARPERSONAJEAUX");
+                   current.writer.writeUTF(nombretmp);
+                   current.writer.writeUTF(urltmp);
+                   current.writer.writeUTF(Destinatario);
+                   current.writer.writeInt(Porcentajetmp);
+                   current.writer.writeInt(Podertmp);
+                   current.writer.writeInt(Resistenciatmp);
+                   current.writer.writeInt(Sanidadtmp);
+
+                break;
+            case CREARPERSONAJE:
+                    String nombre = reader.readUTF();
+                    String url = reader.readUTF();
+                    int Porcentaje = reader.readInt();
+                    int Poder = reader.readInt();
+                    int Resistencia = reader.readInt();
+                    int Sanidad = reader.readInt();
+                    for (int i = 0; i < server.conexiones.size(); i++) {
+                     HiloServidor current3 = server.conexiones.get(i);
+                        current3.writer.writeUTF("CREARPERSONAJE");
+                        current3.writer.writeUTF(nombre);
+                        current3.writer.writeUTF(url);
+                        current3.writer.writeInt(Porcentaje);
+                        current3.writer.writeInt(Poder);
+                        current3.writer.writeInt(Resistencia);
+                        current3.writer.writeInt(Sanidad);
+                    }
+                    
+
+                break;
+            
+            case SALTARTURNO:
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                     HiloServidor current5 = server.conexiones.get(i);
+                       String nturno = server.getNextTurno();
+                       current5.writer.writeUTF("RECIBIRTURNO");
+                       current5.writer.writeUTF(nturno);
+                    }
+                break;
                 
+            case RENDIDO:
+                String rendido = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                     HiloServidor current5 = server.conexiones.get(i);
+                       current5.writer.writeUTF("RENDIRSE");
+                       current5.writer.writeUTF(rendido);
+                    }
+                
+                break;
             default:
                 break;
         }
