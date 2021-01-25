@@ -23,13 +23,17 @@ public class Luchador {
         
     }
     
-    Luchador(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
+    public Luchador(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
         Nombre = _Nombre;
         UrlImagenes = Url;
         PorcentajePoblacion = _PorcentajePoblacion;
         Poder = _Poder;
         Resistencia = _Resistencia;
         Sanidad = _Sanidad;
+    }
+
+    public String getNombre() {
+        return Nombre;
     }
 
     public Double getPoder() {

@@ -5,7 +5,10 @@
  */
 package Cliente;
 
+import Clases.Luchador;
+import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,10 +19,14 @@ public class Cliente {
     Socket socketRef;
     public PantallaCliente refPantalla;
     public HiloCliente hiloCliente;
+    public String turno;
+    public ArrayList<Luchador> personajes;
+    public boolean rendido = false;
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;
         refPantalla.setRefCliente(this);
+        personajes = new ArrayList<Luchador>();
     }
     
     public void conectar(){
@@ -50,6 +57,37 @@ public class Cliente {
             }
         }
         return ( vivas*100/600 )+" ";
+    }
+    
+    
+    public void CrearPersonajeAux(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad, String destinatario) throws IOException{
+        boolean insertable = true;
+        for (int i = 0; i < personajes.size(); i++) {
+            if(personajes.get(i).getNombre().equals(_Nombre)){
+                insertable = false;
+                break;
+            }
+        }
+        if (insertable == false){
+            hiloCliente.writer.writeUTF("MENSAJEPRIVADO"); 
+            hiloCliente.writer.writeUTF(destinatario); 
+            hiloCliente.writer.writeUTF("Ya existe un personaje con este nombre dijite otro");
+        }
+        else{
+            hiloCliente.writer.writeUTF("CREARPERSONAJE");
+            hiloCliente.writer.writeUTF(_Nombre);
+            hiloCliente.writer.writeUTF(Url);
+            hiloCliente.writer.writeInt(_PorcentajePoblacion);
+            hiloCliente.writer.writeInt(_Poder);
+            hiloCliente.writer.writeInt(_Resistencia);
+            hiloCliente.writer.writeInt(_Sanidad);
+        }
+        
+    }
+    
+    public void CrearPersonaje(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
+        Luchador tmp = new Luchador( _Nombre,  Url,  _PorcentajePoblacion, _Poder,  _Resistencia,  _Sanidad);
+        personajes.add(tmp);
     }
     
     private String casillasMuertas(){
