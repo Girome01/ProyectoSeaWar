@@ -49,6 +49,10 @@ public class PantallaCliente extends javax.swing.JFrame {
         txaMensajes.append(msj + "\n");
     }
     
+    public void addBitacora(String msj){
+        txaBitacora.append(msj + "\n");
+    }
+    
     public void generarMatriz(){
         matrix = new String[20][30];
         casillas = new Casillas[20][30];
@@ -58,7 +62,7 @@ public class PantallaCliente extends javax.swing.JFrame {
                 label[r][c] = new JButton(matrix[r][c]);
                 casillas[r][c] = new Casillas(label[r][c]);
                 label[r][c].setPreferredSize(new Dimension(5, 5));
-                label[r][c].setBackground(Color.GREEN);
+                label[r][c].setBackground(Color.BLUE);
                 //label[r][c].setEnabled(false);
                 label[r][c].setVisible(true);
                 panelJuego.add(label[r][c]);
@@ -83,7 +87,7 @@ public class PantallaCliente extends javax.swing.JFrame {
         lblTurno = new javax.swing.JLabel();
         lblBitacora = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtABitacora = new javax.swing.JTextArea();
+        txaBitacora = new javax.swing.JTextArea();
         lblResultadoDelAtaque = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -123,9 +127,9 @@ public class PantallaCliente extends javax.swing.JFrame {
         lblBitacora.setText("Bitacora");
         lblBitacora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtABitacora.setColumns(20);
-        txtABitacora.setRows(5);
-        jScrollPane2.setViewportView(txtABitacora);
+        txaBitacora.setColumns(20);
+        txaBitacora.setRows(5);
+        jScrollPane2.setViewportView(txaBitacora);
 
         lblResultadoDelAtaque.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblResultadoDelAtaque.setText("Resultado del ataque");
@@ -357,9 +361,9 @@ public class PantallaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblVida;
     private javax.swing.JPanel panelJuego;
     private javax.swing.JPanel panelPersonajes;
+    private javax.swing.JTextArea txaBitacora;
     private javax.swing.JTextArea txaMensajes;
     private javax.swing.JTextField txfMensaje;
-    private javax.swing.JTextArea txtABitacora;
     private javax.swing.JTextField txtInfoAquaman;
     private javax.swing.JTextField txtMantaNegra;
     private javax.swing.JTextField txtPoseidon;
