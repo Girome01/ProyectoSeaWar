@@ -19,7 +19,7 @@ public class NotFoundCommand extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        refCliente.refPantalla.addMensaje("ESE COMANDO NO SE ENCUENTREA REGISTRADO");
+        refCliente.refPantalla.addMensaje("ESE COMANDO NO SE ENCUENTRA REGISTRADO");
     }
     
 }
