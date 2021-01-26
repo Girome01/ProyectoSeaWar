@@ -26,6 +26,9 @@ public class CommandManager {
         registCommand(CommandIniciar.COMMAND_NAME, CommandIniciar.class);
         registCommand(CommandCrearPer.COMMAND_NAME, CommandCrearPer.class);
         registCommand(CommandSaltarTurno.COMMAND_NAME, CommandSaltarTurno.class);
+        registCommand(CommandRendirse.COMMAND_NAME, CommandRendirse.class);
+        registCommand(CommandLog.COMMAND_NAME, CommandLog.class);
+        registCommand(CommandLogresumen.COMMAND_NAME, CommandLogresumen.class);
     } 
     
     public static synchronized CommandManager getIntance() {           
