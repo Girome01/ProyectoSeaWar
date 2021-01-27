@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class PoseidonTrident extends Habilidades{
     Random random = new Random();
 
-    public PoseidonTrident(Cliente refCliente) {
-        super("THREELINES", "THREENUMBRE", "CONTROLTHEKRAKEN",refCliente);
+    public PoseidonTrident(Cliente refCliente,Luchador refPersonaje) {
+        super("THREELINES", "THREENUMBRE", "CONTROLTHEKRAKEN",refCliente,refPersonaje);
     }
 
     @Override

@@ -28,8 +28,6 @@ public class Cliente {
     public String turno;
     public ArrayList<Luchador> personajes;
     public boolean rendido = false;
-    public double multDano = 1.0;
-    public double resistencia = 1.0;
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;
@@ -92,7 +90,7 @@ public class Cliente {
     }
     
     public void recibirdano(int x, int y, double dano, String enemigoE,String ataque) throws IOException{
-        if(refPantalla.casillas[x][y].estaViva() && resistencia == 0.0){
+        if(refPantalla.casillas[x][y].estaViva()){
             refPantalla.casillas[x][y].danarCasilla(dano); //Multiplicarlo por resistencia
             refPantalla.casillas[x][y].recibirDatAtaque("El enemigo"+enemigoE+" ataco con "+
                     ataque+" causando "+ dano+" de dano."); // multiplicarlo por resistencia

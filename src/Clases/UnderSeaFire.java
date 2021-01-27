@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 public class UnderSeaFire extends Habilidades{
 
-    public UnderSeaFire(Cliente refCliente) {
-        super("VOLCANORAISING", "VOLCANOEXPLOSION", "TERMALRUSH",refCliente);
+    public UnderSeaFire(Cliente refCliente,Luchador refpersonaje) {
+        super("VOLCANORAISING", "VOLCANOEXPLOSION", "TERMALRUSH",refCliente, refpersonaje);
     }
 
     @Override

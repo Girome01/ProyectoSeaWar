@@ -18,6 +18,8 @@ public class Luchador {
     int Resistencia;
     int Sanidad;
     int Vida;
+    public double multDano = 1;
+    public double disminuirDano = 1;
     
     Luchador(){
         

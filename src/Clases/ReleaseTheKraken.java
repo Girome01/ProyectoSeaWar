@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class ReleaseTheKraken extends Habilidades{
     Random random = new Random();
 
-    public ReleaseTheKraken(Cliente refCliente) {
-        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",refCliente);
+    public ReleaseTheKraken(Cliente refCliente,Luchador refPersonaje) {
+        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",refCliente,refPersonaje);
     }
 
     @Override
