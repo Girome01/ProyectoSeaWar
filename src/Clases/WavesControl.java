@@ -18,8 +18,8 @@ public class WavesControl extends Habilidades{
     private ArrayList<Point> remolinos;
     private ArrayList<Integer> cantArea;
 
-    public WavesControl(Cliente refCliente) {
-        super("SWIRLRAISING", "SENDHUMANGARBAGE", "RADIOCTIVERUSH",refCliente);
+    public WavesControl(Cliente refCliente,Luchador refPersonaje) {
+        super("SWIRLRAISING", "SENDHUMANGARBAGE", "RADIOCTIVERUSH",refCliente,refPersonaje);
     }
 
     @Override

@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class PoseidonTrident extends Habilidades{
     Random random = new Random();
 
-    public PoseidonTrident(Cliente refCliente) {
-        super("THREELINES", "THREENUMBRE", "CONTROLTHEKRAKEN",refCliente);
+    public PoseidonTrident(Cliente refCliente,Luchador refPersonaje) {
+        super("THREELINES", "THREENUMBRE", "CONTROLTHEKRAKEN",refCliente,refPersonaje);
     }
 
     @Override
@@ -29,16 +29,16 @@ public class PoseidonTrident extends Habilidades{
         int x = -1,y = -1;
         switch(lado){
             case 0: // arriba
-                atArriba(enemigo,100,x,y);
+                atArriba(enemigo,100,x,y,"THREELINES");
                 break;
             case 1: // Abajo
-                atAbajo(enemigo,100,x,y);
+                atAbajo(enemigo,100,x,y,"THREELINES");
                 break;
             case 2: //Derecha
-                atDerecha(enemigo,100,x,y);
+                atDerecha(enemigo,100,x,y,"THREELINES");
                 break;
             case 3://Izquierda
-                atIzquierda(enemigo,100,x,y);
+                atIzquierda(enemigo,100,x,y,"THREELINES");
                 break;
             default:
                 System.out.println("Error en el alioento del kraken");

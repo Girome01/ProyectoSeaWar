@@ -27,7 +27,7 @@ public class HiloServidor extends Thread{
     
     enum instruccion{INICIAR,MENSAJE,MENSAJEPRIVADO,CONSULTARENEMIGO,
     PASARINFO,INICIARPARTIDA,CREARPERSONAJEAUX,CREARPERSONAJE,SALTARTURNO,
-    RENDIDO,ATACAR};
+    RENDIDO,ATACAR,ATAQUEEXITOSO,ATAQUENOEXITOSO};
     
     public HiloServidor(Socket socketRef, Server server) throws IOException {
         this.socketRef = socketRef;
@@ -59,6 +59,7 @@ public class HiloServidor extends Thread{
     private void instrucciones(String _instruccion) throws IOException{
         String mensaje;
         String enemigo;
+        String ataque;
         switch (instruccion.valueOf(_instruccion.toUpperCase())){
             case INICIAR: // pasan el nombre del usuario
                 nombre = reader.readUTF();
@@ -179,16 +180,44 @@ public class HiloServidor extends Thread{
                 enemigo = reader.readUTF();
                 int x = reader.readInt();
                 int y = reader.readInt();
-                int dano = reader.readInt();
+                double dano = reader.readDouble();
                 String atacante = reader.readUTF();
+                String tipoAtaque = reader.readUTF();
                 for (int i = 0; i < server.conexiones.size(); i++) {
                     HiloServidor curr = server.conexiones.get(i);
                     if(curr.nombre.equals(enemigo)){
                         curr.writer.writeUTF("RECIBIRDANO");
                         curr.writer.writeInt(x);
                         curr.writer.writeInt(y);
-                        curr.writer.writeInt(dano);
+                        curr.writer.writeDouble(dano);
                         curr.writer.writeUTF(atacante);
+                        curr.writer.writeUTF(tipoAtaque);
+                    }
+                }
+                break;
+                
+            case ATAQUEEXITOSO:
+                enemigo = reader.readUTF();
+                ataque = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                    if(current.nombre.trim().toUpperCase().equals(enemigo.trim().toUpperCase())){
+                        current.writer.writeUTF("ATAQUEEXITOSO");
+                        current.writer.writeUTF(ataque);
+                        break;
+                    }
+                }
+                break;
+            
+            case ATAQUENOEXITOSO:
+                enemigo = reader.readUTF();
+                ataque = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor current = server.conexiones.get(i);
+                    if(current.nombre.trim().toUpperCase().equals(enemigo.trim().toUpperCase())){
+                        current.writer.writeUTF("ATAQUENOEXITOSO");
+                        current.writer.writeUTF(ataque);
+                        break;
                     }
                 }
                 break;

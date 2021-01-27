@@ -13,7 +13,7 @@ import javax.swing.JButton;
  * @author Gilberth
  */
 public class Casillas {
-    private int vida;
+    private double vida;
     private boolean tieneVolcan;
     private boolean basuraRadioactiva;
     private boolean remolino;
@@ -30,7 +30,7 @@ public class Casillas {
         this.datosAtaque = "";
     }
     
-    public void danarCasilla(int dano){
+    public void danarCasilla(double dano){
         if(vida-dano > 0){
             vida -= dano;
         }else
@@ -73,7 +73,7 @@ public class Casillas {
         return false;
     }
 
-    public int getVida() {
+    public double getVida() {
         return vida;
     }
 
@@ -138,5 +138,13 @@ public class Casillas {
             return true;
         }
         return false;
+    }
+    
+    public void sumarVida(double sumar){
+        if(vida + sumar > 100){
+            vida = 100;
+        }else{
+            vida += sumar;
+        }
     }
 }
