@@ -22,6 +22,7 @@ public class Cliente {
     public String turno;
     public ArrayList<Luchador> personajes;
     public boolean rendido = false;
+    public int multDano = 1;
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;

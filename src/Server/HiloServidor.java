@@ -25,7 +25,9 @@ public class HiloServidor extends Thread{
     private int iniciar = 0;
     Server server;
     
-    enum instruccion{INICIAR,MENSAJE,MENSAJEPRIVADO,CONSULTARENEMIGO,PASARINFO,INICIARPARTIDA,CREARPERSONAJEAUX,CREARPERSONAJE,SALTARTURNO,RENDIDO};
+    enum instruccion{INICIAR,MENSAJE,MENSAJEPRIVADO,CONSULTARENEMIGO,
+    PASARINFO,INICIARPARTIDA,CREARPERSONAJEAUX,CREARPERSONAJE,SALTARTURNO,
+    RENDIDO,ATACAR};
     
     public HiloServidor(Socket socketRef, Server server) throws IOException {
         this.socketRef = socketRef;
@@ -191,6 +193,25 @@ public class HiloServidor extends Thread{
                     }
                 
                 break;
+            
+            case ATACAR:
+                enemigo = reader.readUTF();
+                int x = reader.readInt();
+                int y = reader.readInt();
+                int dano = reader.readInt();
+                String atacante = reader.readUTF();
+                for (int i = 0; i < server.conexiones.size(); i++) {
+                    HiloServidor curr = server.conexiones.get(i);
+                    if(curr.nombre.equals(enemigo)){
+                        curr.writer.writeUTF("RECIBIRDANO");
+                        curr.writer.writeInt(x);
+                        curr.writer.writeInt(y);
+                        curr.writer.writeInt(dano);
+                        curr.writer.writeUTF(atacante);
+                    }
+                }
+                break;
+                
             default:
                 break;
         }

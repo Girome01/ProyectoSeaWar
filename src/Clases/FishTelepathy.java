@@ -5,112 +5,76 @@
  */
 package Clases;
 
+import Cliente.Cliente;
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Gilberth
  */
 public class FishTelepathy extends Habilidades{
+    Random random = new Random();
 
-    public FishTelepathy(Casillas[][] casillas) {
-        super("CARDUMEN", "SHARKATTACK", "PULP",casillas);
+    public FishTelepathy(Cliente refCliente) {
+        super("CARDUMEN", "SHARKATTACK", "PULP",refCliente);
     }
 
 
     @Override
-    void attack1() {
-        Random random = new Random();
+    void attack1(String enemigo) {
         int cant = random.nextInt(200)+100;
         int x, y;
         for(int i = 0; i< cant; i++){
             x = random.nextInt(20);
             y = random.nextInt(30);
-            casillas[x][y].danarCasilla(33);
+            try {
+                //casillas[x][y].danarCasilla(33);
+                atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, 33*refCliente.multDano);
+            } catch (IOException ex) {
+                Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     @Override
-    void attack2() {
-        Random random = new Random();
-        int esquinas = random.nextInt(3);
+    void attack2(String enemigo) {
+        int esquinas = random.nextInt(4);
         for(int i = 0; i<= esquinas;i++){
-            int esquina = random.nextInt(3);
-            int cant = random.nextInt(9)+1;
-            int x = 0,y = 0; //representan una esquina
-            int x1 = x, y1 = y;
+            int esquina = random.nextInt(4);
             switch(esquina){
-                case 0://Esquina 0 superior izquierda
-                    cant = random.nextInt(9)+1;
-                    x = 0;
-                    y = 0; //representan una esquina
-                    x1 = x;
-                    y1 = y;
-                    for(int j = 1; j <=cant;i++){
-                        x1 += 1;
-                        y1 = y;
-                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
-                            casillas[x1][y].danarCasilla(100);
-                        for(int k = 1; k <= cant;j++){
-                            y1 += 1;
-                            if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
-                                casillas[x1][y1].danarCasilla(100);
-                            
-                        }
+                case 0:
+                    try {
+                        //Esquina 0 superior izquierda
+                        atTiburonIzArriba(enemigo);
+                    } catch (IOException ex) {
+                        Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case 1://Esquina inferioir izquierda
-                    cant = random.nextInt(9)+1;
-                    x = 0;
-                    y = 30; //representan una esquina
-                    x1 = x;
-                    y1 = y;
-                    for(int j = 1; j <=cant;i++){
-                        x1 += 1;
-                        y1 = y;
-                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
-                            casillas[x1][y].danarCasilla(100);
-                        for(int k = 1; k <= cant;j++){
-                            y1 -= 1;
-                            if( x1 > 0|| x1 < 20 && y1 > 0|| y1 < 30)
-                                casillas[x1][y1].danarCasilla(100);
-                        }
+                case 1:
+                    try {
+                        //Esquina inferioir izquierda
+                        atTiburonIzAbajo(enemigo);
+                    } catch (IOException ex) {
+                        Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case 2://Esquina inferioir derecha
-                    cant = random.nextInt(9)+1;
-                    x = 100;
-                    y = 100; //representan una esquina
-                    x1 = x;
-                    y1 = y;
-                    for(int j = 1; j <=cant;i++){
-                        x1 -= 10;
-                        y1 = y;
-                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
-                            casillas[x1][y].danarCasilla(100);
-                        for(int k = 1; k <= cant;j++){
-                            y1 -= 10;
-                            if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
-                                casillas[x1][y1].danarCasilla(100);
-                        }
+                case 2:
+                    try {
+                        //Esquina inferioir derecha
+                        atTiburonDerAbajo(enemigo);
+                    } catch (IOException ex) {
+                        Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    break; 
-                case 3://Esquina superior derecha
-                    cant = random.nextInt(9)+1;
-                    x = 100;
-                    y = 0; //representan una esquina
-                    x1 = x;
-                    y1 = y;
-                    for(int j = 1; j <=cant;i++){
-                        x1 -= 10;
-                        y1 = y;
-                        if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
-                            casillas[x1][y].danarCasilla(100);
-                        for(int k = 1; k <= cant;j++){
-                            y1 += 10;
-                            if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
-                                casillas[x1][y1].danarCasilla(100);
-                        }
+                    break;  
+                case 3:
+                    try {
+                        //Esquina superior derecha
+                        atTiburonDerArriba(enemigo);
+                    } catch (IOException ex) {
+                        Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
             }
@@ -118,7 +82,7 @@ public class FishTelepathy extends Habilidades{
     }
 
     @Override
-    void attack3() {
+    void attack3(String enemigo) {
         Random random = new Random();
         int cant = random.nextInt(30)+20;
         int x, y;
@@ -126,7 +90,97 @@ public class FishTelepathy extends Habilidades{
             for (int j = 0; j < 8; j++) {
                 x = random.nextInt(20);
                 y = random.nextInt(30);
-                casillas[x][y].danarCasilla(25);
+                //casillas[x][y].danarCasilla(25);
+                try {
+                    atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, 25*refCliente.multDano);
+                } catch (IOException ex) {
+                    Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    private void atTiburonIzArriba(String enemigo) throws IOException{
+        int cant = random.nextInt(9)+1;
+        int x = 0;
+        int y = 0; //representan una esquina
+        int x1 = x;
+        int y1 = y;
+        for(int i = 1; i <=cant*refCliente.multDano;i++){
+            x1 += 1;
+            y1 = y;
+            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                 //casillas[x1][y].danarCasilla(100);
+                atacarEnemigo(x1, y, refCliente.refPantalla.getTitle(), enemigo, 100);
+            for(int j = 1; j <= cant*refCliente.multDano;j++){
+                y1 += 1;
+                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                    //casillas[x1][y1].danarCasilla(100);
+                    atacarEnemigo(x1, y1, refCliente.refPantalla.getTitle(), enemigo, 100);
+            }
+        }
+    }
+    
+    private void atTiburonIzAbajo(String enemigo) throws IOException{
+        int cant = random.nextInt(9)+1;
+        int x = 0;
+        int y = 30; //representan una esquina
+        int x1 = x;
+        int y1 = y;
+        for(int i = 1; i <= cant*refCliente.multDano;i++){
+            x1 += 1;
+            y1 = y;
+            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                //casillas[x1][y].danarCasilla(100);
+                atacarEnemigo(x1, y, refCliente.refPantalla.getTitle(), enemigo, 100);
+            for(int j = 1; j <= cant*refCliente.multDano;j++){
+                y1 -= 1;
+                if( x1 > 0|| x1 < 20 && y1 > 0|| y1 < 30)
+                    //casillas[x1][y1].danarCasilla(100);
+                    atacarEnemigo(x1, y1, refCliente.refPantalla.getTitle(), enemigo, 100);
+                    
+            }
+        }
+    }
+    
+    private void atTiburonDerAbajo(String enemigo) throws IOException{
+        int cant = random.nextInt(9)+1;
+        int x = 100;
+        int y = 100; //representan una esquina
+        int x1 = x;
+        int y1 = y;
+        for(int i = 1; i <=cant*refCliente.multDano;i++){
+            x1 -= 10;
+            y1 = y;
+            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                //casillas[x1][y].danarCasilla(100);
+                atacarEnemigo(x1, y, refCliente.refPantalla.getTitle(), enemigo, 100);
+            for(int j = 1; j <= cant*refCliente.multDano;j++){
+                y1 -= 10;
+                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                    //casillas[x1][y1].danarCasilla(100);
+                    atacarEnemigo(x1, y1, refCliente.refPantalla.getTitle(), enemigo, 100);
+            }
+        }
+    }
+    
+    private void atTiburonDerArriba(String enemigo) throws IOException{
+        int cant = random.nextInt(9)+1;
+        int x = 100;
+        int y = 0; //representan una esquina
+        int x1 = x;
+        int y1 = y;
+        for(int i = 1; i <=cant*refCliente.multDano;i++){
+            x1 -= 10;
+            y1 = y;
+            if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
+                //casillas[x1][y].danarCasilla(100);
+                atacarEnemigo(x1, y, refCliente.refPantalla.getTitle(), enemigo, 100);
+            for(int j = 1; j <= cant*refCliente.multDano;j++){
+                y1 += 10;
+                if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
+                    //casillas[x1][y1].danarCasilla(100);
+                    atacarEnemigo(x1, y1, refCliente.refPantalla.getTitle(), enemigo, 100);
             }
         }
     }
