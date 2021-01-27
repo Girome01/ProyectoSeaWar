@@ -5,53 +5,40 @@
  */
 package Clases;
 
+import Cliente.Cliente;
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Gilberth
  */
 public class PoseidonTrident extends Habilidades{
+    Random random = new Random();
 
-    public PoseidonTrident(Casillas[][] casillas) {
-        super("THREELINES", "THREENUMBRE", "CONTROLTHEKRAKEN",casillas);
+    public PoseidonTrident(Cliente refCliente) {
+        super("THREELINES", "THREENUMBRE", "CONTROLTHEKRAKEN",refCliente);
     }
 
     @Override
-    void attack1() {
+    void attack1(String enemigo) {
         // Se repite 3 veces pero sigo sin saber si son aleatoprios los lugares
-        Random random = new Random();
         int lado = random.nextInt(3);
-        int cantidad = random.nextInt(3)+1;
         int x = -1,y = -1;
         switch(lado){
             case 0: // arriba
-                for(int i = 0; i < cantidad; i++){
-                    y -= 1;
-                    if( x > 0|| x < 20 && y > 0 || y < 30)
-                        casillas[x][y].danarCasilla(100);
-                }
+                atArriba(enemigo,100,x,y);
                 break;
             case 1: // Abajo
-                for(int i = 0; i < cantidad; i++){
-                    y += 1;
-                    if( x > 0|| x < 20 && y > 0 || y < 30)
-                        casillas[x][y].danarCasilla(100);
-                }
+                atAbajo(enemigo,100,x,y);
                 break;
             case 2: //Derecha
-                for(int i = 0; i < cantidad; i++){
-                    x += 1;
-                    if( x > 0|| x < 20 && y > 0 || y < 30)
-                        casillas[x][y].danarCasilla(100);
-                }
+                atDerecha(enemigo,100,x,y);
                 break;
             case 3://Izquierda
-                for(int i = 0; i < cantidad; i++){
-                    x -= 1;
-                    if( x > 0|| x < 20 && y > 0 || y < 30)
-                        casillas[x][y].danarCasilla(100);
-                }
+                atIzquierda(enemigo,100,x,y);
                 break;
             default:
                 System.out.println("Error en el alioento del kraken");
@@ -60,13 +47,12 @@ public class PoseidonTrident extends Habilidades{
     }
 
     @Override
-    void attack2() {
+    void attack2(String enemigo) {
         //Pensar en la posibilidad ede mejor hacer una nueva clases para ataque
     }
 
     @Override
-    void attack3() {
+    void attack3(String enemigo) {
         // Hablarlo con luis se ocupan mas cosas para hacer
     }
-    
 }

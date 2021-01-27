@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import Cliente.Cliente;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,17 +18,17 @@ public class WavesControl extends Habilidades{
     private ArrayList<Point> remolinos;
     private ArrayList<Integer> cantArea;
 
-    public WavesControl(Casillas[][] casillas) {
-        super("SWIRLRAISING", "SENDHUMANGARBAGE", "RADIOCTIVERUSH",casillas);
+    public WavesControl(Cliente refCliente) {
+        super("SWIRLRAISING", "SENDHUMANGARBAGE", "RADIOCTIVERUSH",refCliente);
     }
 
     @Override
-    void attack1() {
+    void attack1(String enemigo) {
         Random random = new Random();
         int x = -1, y = -1; //Como agregar las posiciones que escoje el usuario
         int cant = random.nextInt(8)+2;
         int x1 = x, x2 = x, y1, y2;
-        for(int i = 1; i <=cant;i++){
+        /*for(int i = 1; i <=cant;i++){
             x1 += 1;
             x2 -= 1;
             y1 = y;
@@ -70,16 +71,16 @@ public class WavesControl extends Habilidades{
             }
         }
         remolinos.add(new Point(x,y));
-        cantArea.add(cant);
+        cantArea.add(cant);*/
     }
 
     @Override
-    void attack2() {
+    void attack2(String enemigo) {
         Random random = new Random();
         int x = 1,y = 1; // Luego ver como se reciben los numeros
         //Hablar con luis para ver los tiempos que son 5 seg
         int rand;
-        for(int j = 0; j < remolinos.size(); j++){
+        /*for(int j = 0; j < remolinos.size(); j++){
             if(remolinos.get(j).x == x && remolinos.get(j).y == y){
                 int cant = this.cantArea.get(j)*10;
                 int veces = random.nextInt(5)+1;
@@ -174,13 +175,13 @@ public class WavesControl extends Habilidades{
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Override
-    void attack3() {
+    void attack3(String enemigo) {
         //Ver el tiempo de dano
-        for(int r = 0; r < 20; r++){
+        /*for(int r = 0; r < 20; r++){
             for(int c = 0; c < 30;){
                 if( casillas[r][c].isBasuraRadioactiva()){
                     if( r > 0|| r < 20 && c > 0 || c < 30)
@@ -188,7 +189,7 @@ public class WavesControl extends Habilidades{
                 }
                 c++;
             }                   
-        }
+        }*/
     }
     
 }
