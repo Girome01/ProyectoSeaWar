@@ -28,7 +28,8 @@ public class Cliente {
     public String turno;
     public ArrayList<Luchador> personajes;
     public boolean rendido = false;
-    public int multDano = 1;
+    public double multDano = 1.0;
+    public double resistencia = 1.0;
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;
@@ -88,5 +89,28 @@ public class Cliente {
     public String obtenerInfo(){
         return refPantalla.getTitle()+" Porcentaje de casillas vivas: "+obtenerPor()+
                 "Casillas muertas totales: "+casillasMuertas();
+    }
+    
+    public void recibirdano(int x, int y, double dano, String enemigoE,String ataque) throws IOException{
+        if(refPantalla.casillas[x][y].estaViva() && resistencia == 0.0){
+            refPantalla.casillas[x][y].danarCasilla(dano); //Multiplicarlo por resistencia
+            refPantalla.casillas[x][y].recibirDatAtaque("El enemigo"+enemigoE+" ataco con "+
+                    ataque+" causando "+ dano+" de dano."); // multiplicarlo por resistencia
+            System.out.println("Jugador: " + refPantalla.getTitle()+
+                    " Casilla: (" +x+", "+y+") con "+dano+" de dano.");
+            hiloCliente.writer.writeUTF("ATAQUEEXITOSO");
+            hiloCliente.writer.writeUTF(enemigoE);
+            hiloCliente.writer.writeUTF("Jugador: " + refPantalla.getTitle()+
+                    " Casilla: (" +x+", "+y+") con "+dano+" de dano.");
+            AtaquesRecibido.add(enemigoE+" me ataco con "+ ataque+
+                    " la casilla ("+x+", "+y+") con "+dano+" de dano.");
+        }else{
+            System.out.println("No se pudo efectuar el ataque a "+
+                    refPantalla.getTitle()+" en la casilla ("+x+", "+y+").");
+            hiloCliente.writer.writeUTF("ATAQUENOEXITOSO");
+            hiloCliente.writer.writeUTF(enemigoE);
+            hiloCliente.writer.writeUTF("No se pudo efectuar el ataque a "+
+                    refPantalla.getTitle()+" en la casilla ("+x+", "+y+").");
+        }
     }
 }

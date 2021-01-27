@@ -25,12 +25,12 @@ public class UnderSeaFire extends Habilidades{
 
     @Override
     void attack1(String enemigo) {
-        int x = random.nextInt(20), y = random.nextInt(30), cant = random.nextInt(9)+1;
+        /*int x = random.nextInt(20), y = random.nextInt(30), cant = random.nextInt(9)+1;
         try {
             ataqueArea(x, y, cant, enemigo, 100);
         } catch (IOException ex) {
             Logger.getLogger(UnderSeaFire.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
     @Override
