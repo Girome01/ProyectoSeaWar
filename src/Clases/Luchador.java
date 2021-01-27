@@ -5,6 +5,9 @@
  */
 package Clases;
 
+import Cliente.Cliente;
+import java.util.ArrayList;
+
 /**
  *
  * @author Luis
@@ -13,7 +16,8 @@ public class Luchador {
     String Nombre;
     String UrlImagenes;
     int PorcentajePoblacion; 
-    //Factory ataques
+    ArrayList<Habilidades> ataques = new ArrayList<Habilidades>();
+    Cliente refCliente;
     int Poder;
     int Resistencia;
     int Sanidad;
@@ -23,13 +27,16 @@ public class Luchador {
         
     }
     
-    public Luchador(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
+    public Luchador(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad, String Ataque, Cliente cliente){
         Nombre = _Nombre;
         UrlImagenes = Url;
         PorcentajePoblacion = _PorcentajePoblacion;
         Poder = _Poder;
         Resistencia = _Resistencia;
         Sanidad = _Sanidad;
+        refCliente = cliente;
+        FabricaHabilidades ataque = new FabricaHabilidades(refCliente);
+        ataques.add(ataque.createHablidad(Ataque));
     }
 
     public String getNombre() {
@@ -68,5 +75,6 @@ public class Luchador {
     public void Sanidad(){
         Vida = Sanidad;
     }
+ 
     
 }

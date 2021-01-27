@@ -29,6 +29,8 @@ public class Cliente {
     public ArrayList<Luchador> personajes;
     public boolean rendido = false;
     public int multDano = 1;
+    private int cantidadPersonajes = 1;
+    public int PorPoblacion = 0;
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;
@@ -68,9 +70,11 @@ public class Cliente {
     
     
     
-    public void CrearPersonaje(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
-        Luchador tmp = new Luchador( _Nombre,  Url,  _PorcentajePoblacion, _Poder,  _Resistencia,  _Sanidad);
+    public void CrearPersonaje(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad,String Ataque){
+        Luchador tmp = new Luchador( _Nombre,  Url,  _PorcentajePoblacion, _Poder,  _Resistencia,  _Sanidad, Ataque,this);
         personajes.add(tmp);
+        refPantalla.SetInfoPersonaje(Url, _Sanidad, _Poder, _Resistencia,cantidadPersonajes);
+        cantidadPersonajes = cantidadPersonajes +1;
     }
     
     private String casillasMuertas(){
