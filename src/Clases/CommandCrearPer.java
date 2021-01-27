@@ -31,7 +31,7 @@ public class CommandCrearPer extends BaseCommand{
     public void execute(String[] args) {
         
         if (args != null){
-            if(args.length == 5 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0])){
+            if(args.length == 6 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0]) && PorcentajePoblacion(Integer.parseInt(args[1]))){
                 
                 JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
                 File url;
@@ -39,20 +39,13 @@ public class CommandCrearPer extends BaseCommand{
                 ulrf.showOpenDialog(null);
                 url = ulrf.getSelectedFile();
                 String casting = "" + url;
-                try {
-                    refCliente.hiloCliente.writer.writeUTF("CREARPERSONAJE");
-                    refCliente.hiloCliente.writer.writeUTF(args[0]);
-                    refCliente.hiloCliente.writer.writeUTF(casting);
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[1]));
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[2]));
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[3]));
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[4]));
-                    
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(CommandChat.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                refCliente.CrearPersonaje(args[0], casting, Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5]);
             }
+        else{
+            refCliente.refPantalla.addMensaje("PARA ESTE COMANDO OCUPA ESCRIBIR El NOMBRE DEL PERSONAJE, EL PORCENTAJE"+
+                    "\n, EL PODER, LA RESISTENCIA, LA SANIDAD Y EL ATAQUE; EN EL ORDEN PRESENTADO ANTERIORMENTE ");
+            }
+            
         }
         
   
@@ -93,7 +86,7 @@ public class CommandCrearPer extends BaseCommand{
             refCliente.Resistencia.add(resistencia);
         }
         else{
-             refCliente.refPantalla.addMensaje("Verifique los datos ingresados");
+             refCliente.refPantalla.addMensaje("Verifique los datos ingresados,porder, sanidad o resistencia");
         }
         return resultado;
     }
@@ -108,4 +101,24 @@ public class CommandCrearPer extends BaseCommand{
        }
         return resultado;
     }
+    
+    private boolean PorcentajePoblacion(int Porcentaje){
+        boolean resultado = true;
+           if (Porcentaje > 98){
+               resultado = false;
+               refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de poblacion");
+           }
+           if(refCliente.PorPoblacion == 2 && Porcentaje > 1){
+               resultado = false;
+               refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de poblacion");
+           }
+           
+           if(refCliente.PorPoblacion + Porcentaje > 100){
+              resultado = false;
+               refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de muy alto"); 
+           }
+
+        return resultado;
+    }
+    
 }

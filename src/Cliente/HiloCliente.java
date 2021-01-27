@@ -23,7 +23,8 @@ public class HiloCliente  extends Thread{
     private PantallaCliente refPantalla;
     
     enum instruccionCliente{SETNAME,MENSAJE,CONSULTAINFO,PRINTEARINFO,
-    RECIBIRTURNO,CREARPERSONAJE,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO};
+    RECIBIRTURNO,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO};
+
     
     
     public HiloCliente(Socket socketRef, PantallaCliente refPantalla) throws IOException {
@@ -79,7 +80,7 @@ public class HiloCliente  extends Thread{
                 String turno = reader.readUTF();
                 refPantalla.refCliente.turno = turno;
                 break;
-                
+
             case RENDIRSE:
                 String rendido = reader.readUTF();
                 if(refPantalla.getTitle().equals(rendido)){
