@@ -135,25 +135,6 @@ public class HiloServidor extends Thread{
                     }
                 }
                 break;
-            case CREARPERSONAJEAUX:
-                    String nombretmp = reader.readUTF();
-                    String urltmp = reader.readUTF();
-                    String Destinatario = reader.readUTF();
-                    int Porcentajetmp = reader.readInt();
-                    int Podertmp = reader.readInt();
-                    int Resistenciatmp = reader.readInt();
-                    int Sanidadtmp = reader.readInt();
-                   HiloServidor current = server.conexiones.get(0);
-                   current.writer.writeUTF("CREARPERSONAJEAUX");
-                   current.writer.writeUTF(nombretmp);
-                   current.writer.writeUTF(urltmp);
-                   current.writer.writeUTF(Destinatario);
-                   current.writer.writeInt(Porcentajetmp);
-                   current.writer.writeInt(Podertmp);
-                   current.writer.writeInt(Resistenciatmp);
-                   current.writer.writeInt(Sanidadtmp);
-
-                break;
             case CREARPERSONAJE:
                     String nombre = reader.readUTF();
                     String url = reader.readUTF();
