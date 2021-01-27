@@ -31,7 +31,7 @@ public class CommandCrearPer extends BaseCommand{
     public void execute(String[] args) {
         
         if (args != null){
-            if(args.length == 6 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0]) && PorcentajePoblacion(Integer.parseInt(args[1]))){
+            if(Finalizo() && args.length == 6 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0]) && PorcentajePoblacion(Integer.parseInt(args[1]))){
                 
                 JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
                 File url;
@@ -104,8 +104,10 @@ public class CommandCrearPer extends BaseCommand{
     
     private boolean PorcentajePoblacion(int Porcentaje){
         boolean resultado = true;
+        System.out.println(refCliente.PorPoblacion);
            if (Porcentaje > 98){
                resultado = false;
+
                refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de poblacion");
            }
            if(refCliente.PorPoblacion == 2 && Porcentaje > 1){
@@ -114,6 +116,7 @@ public class CommandCrearPer extends BaseCommand{
            }
            
            if(refCliente.PorPoblacion + Porcentaje > 100){
+
               resultado = false;
                refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de muy alto"); 
            }
@@ -121,4 +124,12 @@ public class CommandCrearPer extends BaseCommand{
         return resultado;
     }
     
+    private boolean Finalizo(){
+        boolean resultado = true;
+        if(refCliente.cantidadPersonajes >=4){
+            resultado = false;
+            refCliente.refPantalla.addMensaje("Ya no puede crear mas personajes"); 
+        }
+        return resultado;
+    }
 }

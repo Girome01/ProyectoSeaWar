@@ -28,8 +28,7 @@ public class Cliente {
     public String turno;
     public ArrayList<Luchador> personajes;
     public boolean rendido = false;
-    public int multDano = 1;
-    private int cantidadPersonajes = 1;
+    public int cantidadPersonajes = 1;
     public int PorPoblacion = 0;
 
     
@@ -76,6 +75,19 @@ public class Cliente {
         personajes.add(tmp);
         refPantalla.SetInfoPersonaje(Url, _Sanidad, _Poder, _Resistencia,cantidadPersonajes);
         cantidadPersonajes = cantidadPersonajes +1;
+        int porcentaje = (_PorcentajePoblacion*600)/100;
+        
+        if(cantidadPersonajes == 2){
+            refPantalla.setMaximoP1(porcentaje);
+        }
+        else  if(cantidadPersonajes == 3){
+            refPantalla.setMaximoP2(porcentaje);
+        }
+        else  if(cantidadPersonajes == 4){
+            refPantalla.setMaximoP3(porcentaje);
+            refPantalla.RepartirTropas(personajes.get(0), personajes.get(1), personajes.get(2));
+        }
+        
     }
     
     private String casillasMuertas(){
@@ -88,6 +100,19 @@ public class Cliente {
             }
         }
         return muertas+"";
+    }
+    
+    public void ResetPersonaje(){
+        for (int i = 0; i < personajes.size(); i++) {
+            if(personajes.get(i).PoderActivado == true){
+                personajes.get(i).PoderActivado = false;
+            }
+            else{
+                personajes.get(i).setMultilpicador(1);
+            }
+            
+            personajes.get(i).setResetResistencia(0);
+        }
     }
     
     public String obtenerInfo(){
