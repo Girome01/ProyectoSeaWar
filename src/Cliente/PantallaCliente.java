@@ -9,6 +9,7 @@ import Clases.Casillas;
 import Clases.CommandManager;
 import Clases.CommandUtil;
 import Clases.ICommand;
+import Clases.Luchador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,6 +17,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,13 +35,16 @@ public class PantallaCliente extends javax.swing.JFrame {
     private String [][]matrix;
     private JButton [][]label = new JButton[20][30]; // lbel[1][4]
     public Casillas[][]casillas;
+    private int MaximoP1;
+    private int MaximoP2;
+    private int MaximoP3;
     CommandManager manager = CommandManager.getIntance();  
     /**
      * Creates new form PantallaCliente
      */
     public PantallaCliente() {
         initComponents();
-        //generarMatriz();
+        generarMatriz();
     }
 
     public void setRefCliente(Cliente refCliente) {
@@ -76,6 +81,52 @@ public class PantallaCliente extends javax.swing.JFrame {
             }                   
         }
     }
+    
+    public void RepartirTropas(Luchador luchador1, Luchador luchador2, Luchador luchador3){
+        for (int x = 0; x < 20; x++) {
+            for (int y = 0; y < 30; y++) {
+                Random r = new Random();
+                int valorDado = r.nextInt(3)+1;
+                while(valorDado ==0){
+                    valorDado = r.nextInt(3)+1;
+                }
+                
+                if(valorDado == 1 && MaximoP1 != 0){
+                    casillas[x][y].personaje = luchador1;
+                    label[x][y].setBackground(Color.RED);
+                    MaximoP1= MaximoP1 - 1;
+                }
+
+                else if(valorDado == 2 && MaximoP2 != 0){
+
+                    casillas[x][y].personaje = luchador2;
+                    label[x][y].setBackground(Color.YELLOW);
+                     MaximoP2= MaximoP2 - 1;
+                }
+
+                else if(valorDado == 3 && MaximoP3 != 0){
+                    casillas[x][y].personaje= luchador3;
+                    label[x][y].setBackground(Color.GREEN);
+                     MaximoP3 = MaximoP3 - 1;
+                }
+                else{
+                    y = y - 1;
+                }
+            }  
+        }  
+    }
+    
+    public void Sanidad(String nombre){
+        for (int x = 0; x < 20; x++) {
+            for (int y = 0; y < 30; y++) {
+                if(casillas[x][y].personaje.getNombre().equals(nombre)){
+                    casillas[x][y].RecuperarVida();
+                
+                }
+            }
+        }
+    }
+         
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,12 +218,6 @@ public class PantallaCliente extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextArea1);
 
         panelPersonajes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-
-        jLPersonaje1.setText("jLabel1");
-
-        jLPersonaje3.setText("jLabel1");
-
-        jLPersonaje2.setText("jLabel1");
 
         jLSanidad1.setText("Sanidad:");
 
@@ -541,6 +586,18 @@ public class PantallaCliente extends javax.swing.JFrame {
             jSetResistencia3.setVisible(true);
             jSetResistencia3.setText(""+resistencia);
         }
+    }
+
+    public void setMaximoP1(int MaximoP1) {
+        this.MaximoP1 = MaximoP1;
+    }
+
+    public void setMaximoP2(int MaximoP2) {
+        this.MaximoP2 = MaximoP2;
+    }
+
+    public void setMaximoP3(int MaximoP3) {
+        this.MaximoP3 = MaximoP3;
     }
     
 

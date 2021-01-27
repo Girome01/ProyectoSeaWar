@@ -22,6 +22,9 @@ public class Luchador {
     int Resistencia;
     int Sanidad;
     int Vida;
+    int multilpicador = 1;
+    int ResetResistencia = 0;
+    public boolean PoderActivado = false;
     
     Luchador(){
         
@@ -72,9 +75,38 @@ public class Luchador {
         
     }
 
-    public void Sanidad(){
-        Vida = Sanidad;
+    public int getSanidad() {
+        return Sanidad;
     }
+
+
+
+    public void ActivarResistencia(){
+        ResetResistencia = Resistencia;
+    }
+    
+    public void ActivarPoder(){
+        multilpicador = Poder;
+        PoderActivado = true;
+    }
+
+    public int getMultilpicador() {
+        return multilpicador;
+    }
+
+    public int getResetResistencia() {
+        return ResetResistencia;
+    }
+
+    public void setMultilpicador(int multilpicador) {
+        this.multilpicador = multilpicador;
+    }
+
+    public void setResetResistencia(int ResetResistencia) {
+        this.ResetResistencia = ResetResistencia;
+    }
+
+    
  
     
 }
