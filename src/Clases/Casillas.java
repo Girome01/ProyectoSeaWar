@@ -19,6 +19,7 @@ public class Casillas {
     private boolean remolino;
     private JButton btnImagen;
     public String datosAtaque;
+    private boolean celdaFlag = true; 
 
     public Casillas(JButton ref) {
         this.vida = 100;
@@ -94,6 +95,18 @@ public class Casillas {
         }else{
             btnImagen.setBackground(Color.BLACK);
         }
+    }
+    
+    public void porcentajeCasilla(){
+        if(celdaFlag == true){
+            btnImagen.setText(""+vida);
+            celdaFlag = false;
+        }
+        else{
+            btnImagen.setText("");
+        }
+        
+        
     }
     
     public void recibirDatAtaque(String ataque){
