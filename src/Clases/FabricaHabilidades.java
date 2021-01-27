@@ -25,17 +25,17 @@ public class FabricaHabilidades implements MetFabHabilidades{
     public Habilidades createHablidad(String _habilidad) {
         switch(habilidades.valueOf(_habilidad.toUpperCase())){
             case RELEASETHEKRAKEN:
-                return new ReleaseTheKraken(refCliente.refPantalla.casillas);
+                return new ReleaseTheKraken(refCliente);
             case POSEIDONTRIDENT:
-                return new PoseidonTrident(refCliente.refPantalla.casillas);
+                return new PoseidonTrident(refCliente);
             case FISHTELEPATHY:
-                return new FishTelepathy(refCliente.refPantalla.casillas);
+                return new FishTelepathy(refCliente);
             case UNDERSEAFIRE:
-                return new UnderSeaFire(refCliente.refPantalla.casillas);
+                return new UnderSeaFire(refCliente);
             case THUNDERUNDERTHESEA:
-                return new ThunderUnderTheSea(refCliente.refPantalla.casillas);
+                return new ThunderUnderTheSea(refCliente);
             case WAVESCONTROL:
-                return new WavesControl(refCliente.refPantalla.casillas);
+                return new WavesControl(refCliente);
             default:
                 return null;
         }
