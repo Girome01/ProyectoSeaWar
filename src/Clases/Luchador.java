@@ -25,6 +25,7 @@ public class Luchador {
     int multilpicador = 1;
     int ResetResistencia = 0;
     public boolean PoderActivado = false;
+
     
     Luchador(){
         

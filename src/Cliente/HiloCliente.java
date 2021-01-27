@@ -23,7 +23,8 @@ public class HiloCliente  extends Thread{
     private PantallaCliente refPantalla;
     
     enum instruccionCliente{SETNAME,MENSAJE,CONSULTAINFO,PRINTEARINFO,
-    RECIBIRTURNO,RENDIRSE,RECIBIRDANO};
+    RECIBIRTURNO,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO};
+
     
     
     public HiloCliente(Socket socketRef, PantallaCliente refPantalla) throws IOException {
@@ -49,6 +50,7 @@ public class HiloCliente  extends Thread{
     private void instrucciones(String _instruccion) throws IOException{
         String usuario;
         String info;
+        String ataque;
         switch (instruccionCliente.valueOf(_instruccion.toUpperCase())){
             case SETNAME: // recibe el turno del jufador 1
                 refPantalla.setNombreTurno(reader.readUTF());
@@ -79,7 +81,6 @@ public class HiloCliente  extends Thread{
                 refPantalla.refCliente.turno = turno;
                 refPantalla.refCliente.ResetPersonaje();
                 break;
-            
 
             case RENDIRSE:
                 String rendido = reader.readUTF();
@@ -91,10 +92,21 @@ public class HiloCliente  extends Thread{
             case RECIBIRDANO:
                 int x = reader.readInt();
                 int y = reader.readInt();
-                int dano = reader.readInt();
+                double dano = reader.readInt();
                 String nombreE = reader.readUTF();
-                // Incorporar una funcion para recibir dano
+                String tipoAtaque = reader.readUTF();
+                refPantalla.refCliente.recibirdano(x, y, dano, nombre, tipoAtaque);
                 
+                break;
+                
+            case ATAQUEEXITOSO:
+                ataque = reader.readUTF();
+                refPantalla.refCliente.AtaquesExitosos.add(ataque);
+                break;
+                
+            case ATAQUENOEXITOSO:
+                ataque = reader.readUTF();
+                refPantalla.refCliente.AtaquesNoExitosos.add(ataque);
                 break;
                 
             default:

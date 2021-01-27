@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class ThunderUnderTheSea extends Habilidades{
 
-    public ThunderUnderTheSea(Cliente refCliente) {
-        super("THUNDERRAIN", "POSEIDONTHUNDER", "EALATTACK",refCliente);
+    public ThunderUnderTheSea(Cliente refCliente,Luchador refPersonaje) {
+        super("THUNDERRAIN", "POSEIDONTHUNDER", "EALATTACK",refCliente,refPersonaje);
     }
 
     @Override
@@ -31,7 +31,8 @@ public class ThunderUnderTheSea extends Habilidades{
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 try {
                     //casillas[x][y].danarCasilla(dano);
-                    atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, dano*refCliente.multDano);
+                    atacarEnemigo(x, y, refCliente.refPantalla.getTitle(),
+                            enemigo, dano*refPersonaje.multDano,"THUNDERRAIN");
                 } catch (IOException ex) {
                     Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -44,7 +45,7 @@ public class ThunderUnderTheSea extends Habilidades{
         int rayos = random.nextInt(5)+5;
         int cant = random.nextInt(9)+2;
         try {
-            ataqueArea(x, y, cant, enemigo, 100);
+            ataqueArea(x, y, cant, enemigo, 100, "POSEIDONTHUNDER");
         } catch (IOException ex) {
             Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,7 +62,8 @@ public class ThunderUnderTheSea extends Habilidades{
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 try {
                     //casillas[x][y].danarCasilla(dano);
-                    atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, dano*refCliente.multDano);
+                    atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), 
+                            enemigo, dano*refPersonaje.multDano,"EALATTACK");
                     //danar la casilla esa cantidad
                 } catch (IOException ex) {
                     Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);

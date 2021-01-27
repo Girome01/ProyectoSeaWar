@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class ReleaseTheKraken extends Habilidades{
     Random random = new Random();
 
-    public ReleaseTheKraken(Cliente refCliente) {
-        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",refCliente);
+    public ReleaseTheKraken(Cliente refCliente,Luchador refPersonaje) {
+        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",refCliente,refPersonaje);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ReleaseTheKraken extends Habilidades{
             int x = random.nextInt(20); // Saca la posicion x de la casilla del tablero
             int y = random.nextInt(30); // saca la posicion y de la casilla en el tablero
             try {
-                ataqueArea(x, y, 1,enemigo,100);
+                ataqueArea(x, y, 1,enemigo,100,"TENTACULOS");
             } catch (IOException ex) {
                 Logger.getLogger(ReleaseTheKraken.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -43,15 +43,15 @@ public class ReleaseTheKraken extends Habilidades{
        int x = -1,y = -1;
        switch(lado){
            case 0: // arriba
-               atArriba(enemigo,100,x,y);
+               atArriba(enemigo,100,x,y,"KRAKENBREATH");
            case 1: // Abajo
-               atAbajo(enemigo,100,x,y);
+               atAbajo(enemigo,100,x,y,"KRAKENBREATH");
                break;
            case 2: //Derecha
-               atDerecha(enemigo,100,x,y);
+               atDerecha(enemigo,100,x,y,"KRAKENBREATH");
                break;
            case 3://Izquierda
-               atIzquierda(enemigo,100,x,y);
+               atIzquierda(enemigo,100,x,y,"KRAKENBREATH");
                break;
            default:
                System.out.println("Error en el alioento del kraken");
@@ -64,7 +64,7 @@ public class ReleaseTheKraken extends Habilidades{
         int x = -1, y = -1;
         int cant = random.nextInt(7)+1;
         try {
-            ataqueArea(x, y, cant, enemigo,100);
+            ataqueArea(x, y, cant, enemigo,100,"RELEASETHEKRAKEN");
         } catch (IOException ex) {
             Logger.getLogger(ReleaseTheKraken.class.getName()).log(Level.SEVERE, null, ex);
         }
