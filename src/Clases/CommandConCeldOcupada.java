@@ -19,6 +19,7 @@ public class CommandConCeldOcupada extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
+        
         for(int r=0; r<20; r++){
             for(int c=0; c<30;){
                 refCliente.refPantalla.casillas[r][c].ocupoada();

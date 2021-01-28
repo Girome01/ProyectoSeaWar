@@ -93,14 +93,14 @@ public class PantallaCliente extends javax.swing.JFrame {
                 
                 if(valorDado == 1 && MaximoP1 != 0){
                     casillas[x][y].personaje = luchador1;
-                    label[x][y].setBackground(Color.RED);
+                    label[x][y].setBackground(Color.LIGHT_GRAY);
                     MaximoP1= MaximoP1 - 1;
                 }
 
                 else if(valorDado == 2 && MaximoP2 != 0){
 
                     casillas[x][y].personaje = luchador2;
-                    label[x][y].setBackground(Color.YELLOW);
+                    label[x][y].setBackground(Color.MAGENTA);
                      MaximoP2= MaximoP2 - 1;
                 }
 

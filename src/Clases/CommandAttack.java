@@ -19,11 +19,16 @@ public class CommandAttack extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        for(int i = 0; i < refCliente.personajes.size(); i++){
-            if(refCliente.personajes.get(i).Nombre.equals(args[0])){
+        
+        if(args != null){
+           for(int i = 0; i < refCliente.personajes.size(); i++){
+                if(refCliente.personajes.get(i).Nombre.equals(args[0])){
                 
-            }
+                }
+            } 
         }
+        
+        
     }
     
 }

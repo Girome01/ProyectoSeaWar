@@ -57,7 +57,7 @@ public abstract class Habilidades{
     
     public void ataqueArea(int x, int y, int cant, String enemigo,double dano,String tipoAtaque) throws IOException{
         int x1 = x, x2 = x, y1 = y, y2 = y;
-        for(int i = 1; i <= cant*refPersonaje.multDano;i++){
+        for(int i = 1; i <= cant*refPersonaje.multilpicador;i++){
             x1 += 1;
             x2 -= 1;
             y1 = y;
@@ -68,7 +68,7 @@ public abstract class Habilidades{
             if( x2 > 0|| x2 < 20 && y > 0 || y < 30)
                 //casillas[x2][y].danarCasilla(100);
                 atacarEnemigo(x2, y, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
-            for(int j = 1; j <= cant*refPersonaje.multDano;j++){
+            for(int j = 1; j <= cant*refPersonaje.multilpicador;j++){
                 y1 -= 1;
                 if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
                     //casillas[x][y1].danarCasilla(100);
@@ -95,7 +95,7 @@ public abstract class Habilidades{
     
     public void atArriba(String enemigo, double dano,int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
-        for(int i = 0; i < cantidad*refPersonaje.multDano; i++){
+        for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
             y -= 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 try {
@@ -109,7 +109,7 @@ public abstract class Habilidades{
     
     public void atAbajo(String enemigo, double dano, int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
-        for(int i = 0; i < cantidad*refPersonaje.multDano; i++){
+        for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
             y += 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 //casillas[x][y].danarCasilla(100);
@@ -124,7 +124,7 @@ public abstract class Habilidades{
     
     public void atDerecha(String enemigo, double dano, int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
-        for(int i = 0; i < cantidad*refPersonaje.multDano; i++){
+        for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
             x += 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 //casillas[x][y].danarCasilla(100);
@@ -139,7 +139,7 @@ public abstract class Habilidades{
     
     public void atIzquierda(String enemigo, double dano, int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
-        for(int i = 0; i < cantidad*refPersonaje.multDano; i++){
+        for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
             x -= 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 //casillas[x][y].danarCasilla(100);

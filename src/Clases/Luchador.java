@@ -39,7 +39,7 @@ public class Luchador {
         Resistencia = _Resistencia;
         Sanidad = _Sanidad;
         refCliente = cliente;
-        FabricaHabilidades ataque = new FabricaHabilidades(refCliente);
+        FabricaHabilidades ataque = new FabricaHabilidades(refCliente,this);
         ataques.add(ataque.createHablidad(Ataque));
     }
 

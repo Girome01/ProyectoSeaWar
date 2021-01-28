@@ -32,7 +32,8 @@ public class ThunderUnderTheSea extends Habilidades{
                 try {
                     //casillas[x][y].danarCasilla(dano);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(),
-                            enemigo, dano*refPersonaje.multDano,"THUNDERRAIN");
+                            enemigo, dano*refPersonaje.multilpicador,"THUNDERRAIN");
+                            
                 } catch (IOException ex) {
                     Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -63,7 +64,7 @@ public class ThunderUnderTheSea extends Habilidades{
                 try {
                     //casillas[x][y].danarCasilla(dano);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), 
-                            enemigo, dano*refPersonaje.multDano,"EALATTACK");
+                            enemigo, dano*refPersonaje.multilpicador,"EALATTACK");
                     //danar la casilla esa cantidad
                 } catch (IOException ex) {
                     Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
