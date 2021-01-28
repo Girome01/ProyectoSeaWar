@@ -127,6 +127,8 @@ public class Cliente {
                     ataque+" causando "+ dano+" de dano."); // multiplicarlo por resistencia
             System.out.println("Jugador: " + refPantalla.getTitle()+
                     " Casilla: (" +x+", "+y+") con "+dano+" de dano.");
+            AtaquesRecibido.add("El enemigo"+enemigoE+" ataco con "+
+                    ataque+" causando "+ dano+" de dano.");
             hiloCliente.writer.writeUTF("ATAQUEEXITOSO");
             hiloCliente.writer.writeUTF(enemigoE);
             hiloCliente.writer.writeUTF("Jugador: " + refPantalla.getTitle()+
