@@ -20,11 +20,11 @@ import java.util.logging.Logger;
 public class UnderSeaFire extends Habilidades{
 
     public UnderSeaFire(Cliente refCliente,Luchador refpersonaje) {
-        super("VOLCANORAISING", "VOLCANOEXPLOSION", "TERMALRUSH",refCliente, refpersonaje);
+        super("VOLCANORAISING", "VOLCANOEXPLOSION", "TERMALRUSH",refCliente, refpersonaje,"UNDERSEAFIRE");
     }
 
     @Override
-    void attack1(String enemigo) {
+    void attack1(String enemigo,ArrayList<Integer> posiciones) {
         /*int x = random.nextInt(20), y = random.nextInt(30), cant = random.nextInt(9)+1;
         try {
             ataqueArea(x, y, cant, enemigo, 100);
@@ -34,12 +34,12 @@ public class UnderSeaFire extends Habilidades{
     }
 
     @Override
-    void attack2(String enemigo) {
+    void attack2(String enemigo,ArrayList<Integer> posiciones) {
    
     }
 
     @Override
-    void attack3(String enemigo) {
+    void attack3(String enemigo,ArrayList<Integer> posiciones) {
        
     }
     

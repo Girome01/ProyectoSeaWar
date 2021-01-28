@@ -69,7 +69,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblBitacora" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="232" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblResultadoDelAtaque" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -184,7 +184,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="jtxtResulAtaque">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -204,15 +204,221 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="235" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLPersonaje1" min="-2" pref="138" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLResistencia" pref="79" max="32767" attributes="0"/>
+                              <Component id="jLSanidad1" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSetSanidad1" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jLPoder2" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetResistencia1" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetPoder1" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jLPersonaje3" max="32767" attributes="0"/>
+                              <Component id="jLPersonaje2" pref="138" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLSanidad3" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLResistencia1" pref="79" max="32767" attributes="0"/>
+                              <Component id="jLSanidad2" max="32767" attributes="0"/>
+                              <Component id="jLResistencia2" alignment="1" pref="79" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSetResistencia2" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetSanidad3" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetPoder3" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jLPoder1" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetResistencia3" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jLPoder3" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetPoder2" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="jSetSanidad2" min="-2" pref="49" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLPersonaje1" min="-2" pref="166" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLSanidad1" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <Component id="jSetSanidad1" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLPoder2" min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Component id="jSetPoder1" min="-2" pref="20" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLResistencia" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSetResistencia1" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLSanidad3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <Component id="jSetSanidad2" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLPoder3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSetPoder2" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLResistencia1" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSetResistencia2" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jLPersonaje2" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLPersonaje3" min="-2" pref="166" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLSanidad2" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSetSanidad3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLPoder1" min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSetPoder3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLResistencia2" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jSetResistencia3" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLPersonaje1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLPersonaje3">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLPersonaje2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLSanidad1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sanidad:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLSanidad2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sanidad:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLSanidad3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sanidad:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetSanidad3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetSanidad1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetSanidad2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLPoder1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Poder:"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLPoder2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Poder:"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLPoder3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Poder:"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetPoder2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetResistencia1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetPoder3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLResistencia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Resistencia:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetPoder1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLResistencia1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Resistencia:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetResistencia2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLResistencia2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Resistencia:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jSetResistencia3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="       0"/>
+          </Properties>
+        </Component>
+      </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
@@ -238,7 +444,7 @@
                           <Component id="txtMantaNegra" min="-2" pref="161" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                           <Component id="txtPoseidon" min="-2" pref="172" max="-2" attributes="0"/>
-                          <EmptySpace pref="54" max="32767" attributes="0"/>
+                          <EmptySpace pref="46" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
@@ -321,7 +527,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="652" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

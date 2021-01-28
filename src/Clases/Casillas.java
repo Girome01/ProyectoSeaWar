@@ -19,6 +19,7 @@ public class Casillas {
     private boolean remolino;
     private JButton btnImagen;
     public String datosAtaque;
+    public Luchador personaje;
     private boolean celdaFlag = true; 
 
     public Casillas(JButton ref) {
@@ -99,7 +100,7 @@ public class Casillas {
     
     public void porcentajeCasilla(){
         if(celdaFlag == true){
-            btnImagen.setText(""+vida);
+            btnImagen.setText(""+vida/10);
             celdaFlag = false;
         }
         else{
@@ -114,7 +115,7 @@ public class Casillas {
     }
     
     public String datosCasilla(){
-        String datos = "Vida: "+vida+". ";
+        String datos = "Vida: "+ (int)vida+". ";
         if(tieneVolcan){
             datos += "Tiene volcan. ";
         }
@@ -139,12 +140,18 @@ public class Casillas {
         }
         return false;
     }
-    
-    public void sumarVida(double sumar){
-        if(vida + sumar > 100){
-            vida = 100;
-        }else{
-            vida += sumar;
+
+
+    public void RecuperarVida() {
+        if(vida < personaje.getSanidad()){
+            vida = personaje.getSanidad();
         }
     }
+    
+    public int returnVida(){
+        int retornar = (int) vida;
+        return retornar;
+    }
+    
+
 }

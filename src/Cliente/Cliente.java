@@ -28,6 +28,9 @@ public class Cliente {
     public String turno;
     public ArrayList<Luchador> personajes;
     public boolean rendido = false;
+    public int cantidadPersonajes = 1;
+    public int PorPoblacion = 0;
+
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;
@@ -67,9 +70,24 @@ public class Cliente {
     
     
     
-    public void CrearPersonaje(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
-        Luchador tmp = new Luchador( _Nombre,  Url,  _PorcentajePoblacion, _Poder,  _Resistencia,  _Sanidad);
+    public void CrearPersonaje(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad,String Ataque){
+        Luchador tmp = new Luchador( _Nombre,  Url,  _PorcentajePoblacion, _Poder,  _Resistencia,  _Sanidad, Ataque,this);
         personajes.add(tmp);
+        refPantalla.SetInfoPersonaje(Url, _Sanidad, _Poder, _Resistencia,cantidadPersonajes);
+        cantidadPersonajes = cantidadPersonajes +1;
+        int porcentaje = (_PorcentajePoblacion*600)/100;
+        
+        if(cantidadPersonajes == 2){
+            refPantalla.setMaximoP1(porcentaje);
+        }
+        else  if(cantidadPersonajes == 3){
+            refPantalla.setMaximoP2(porcentaje);
+        }
+        else  if(cantidadPersonajes == 4){
+            refPantalla.setMaximoP3(porcentaje);
+            refPantalla.RepartirTropas(personajes.get(0), personajes.get(1), personajes.get(2));
+        }
+        
     }
     
     private String casillasMuertas(){
@@ -84,6 +102,19 @@ public class Cliente {
         return muertas+"";
     }
     
+    public void ResetPersonaje(){
+        for (int i = 0; i < personajes.size(); i++) {
+            if(personajes.get(i).PoderActivado == true){
+                personajes.get(i).PoderActivado = false;
+            }
+            else{
+                personajes.get(i).setMultilpicador(1);
+            }
+            
+            personajes.get(i).setResetResistencia(0);
+        }
+    }
+    
     public String obtenerInfo(){
         return refPantalla.getTitle()+" Porcentaje de casillas vivas: "+obtenerPor()+
                 "Casillas muertas totales: "+casillasMuertas();
@@ -94,8 +125,8 @@ public class Cliente {
             refPantalla.casillas[x][y].danarCasilla(dano); //Multiplicarlo por resistencia
             refPantalla.casillas[x][y].recibirDatAtaque("El enemigo"+enemigoE+" ataco con "+
                     ataque+" causando "+ dano+" de dano."); // multiplicarlo por resistencia
-            System.out.println("Jugador: " + refPantalla.getTitle()+
-                    " Casilla: (" +x+", "+y+") con "+dano+" de dano.");
+            AtaquesRecibido.add("El enemigo"+enemigoE+" ataco con "+
+                    ataque+" causando "+ dano+" de dano.");
             hiloCliente.writer.writeUTF("ATAQUEEXITOSO");
             hiloCliente.writer.writeUTF(enemigoE);
             hiloCliente.writer.writeUTF("Jugador: " + refPantalla.getTitle()+

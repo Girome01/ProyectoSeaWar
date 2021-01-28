@@ -23,17 +23,23 @@ public class CommandChatPriv extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        if(args.length > 1){
-            try {
-                refCliente.hiloCliente.writer.writeUTF("MENSAJEPRIVADO");
-                refCliente.hiloCliente.writer.writeUTF(args[0]);
-                refCliente.hiloCliente.writer.writeUTF(args[1]);
-            } catch (IOException ex) {
-                Logger.getLogger(CommandChat.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else
+        
+        if(args != null){
+            if(args.length > 1){
+                try {
+                    refCliente.hiloCliente.writer.writeUTF("MENSAJEPRIVADO");
+                    refCliente.hiloCliente.writer.writeUTF(args[0]);
+                    refCliente.hiloCliente.writer.writeUTF(args[1]);
+                } catch (IOException ex) {
+                    Logger.getLogger(CommandChat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else
             refCliente.refPantalla.addMensaje("PARA ESTE COMANDO OCUPA ESCRIBIR AL DESTINATARIO Y EL MENSAJE"+
                     "\nCOMO SE MUESTRA A CONTINUACION chatprivado -destinatario -mensaje");
-    }
+        }
+            
+       }
+        
+        
     
 }

@@ -31,28 +31,26 @@ public class CommandCrearPer extends BaseCommand{
     public void execute(String[] args) {
         
         if (args != null){
-            if(args.length == 5 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0])){
-                
-                JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
+            if(Finalizo() && args.length == 6 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0]) && PorcentajePoblacion(Integer.parseInt(args[1]))){
+                       
+
+                refCliente.Sanidad.add(Integer.parseInt(args[3]));
+                refCliente.Poder.add((Integer.parseInt(args[2])));
+                refCliente.Resistencia.add(Integer.parseInt(args[4]));
+     
+               /* JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
                 File url;
                 JFileChooser ulrf = new JFileChooser();
                 ulrf.showOpenDialog(null);
                 url = ulrf.getSelectedFile();
-                String casting = "" + url;
-                try {
-                    refCliente.hiloCliente.writer.writeUTF("CREARPERSONAJE");
-                    refCliente.hiloCliente.writer.writeUTF(args[0]);
-                    refCliente.hiloCliente.writer.writeUTF(casting);
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[1]));
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[2]));
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[3]));
-                    refCliente.hiloCliente.writer.writeInt(Integer.parseInt(args[4]));
-                    
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(CommandChat.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                String casting = "" + url;*/
+                refCliente.CrearPersonaje(args[0], "C:\\Users\\Luis\\Downloads\\0.png", Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5]);
             }
+        else{
+            refCliente.refPantalla.addMensaje("PARA ESTE COMANDO OCUPA ESCRIBIR El NOMBRE DEL PERSONAJE, EL PORCENTAJE"+
+                    "\n, EL PODER, LA RESISTENCIA, LA SANIDAD Y EL ATAQUE; EN EL ORDEN PRESENTADO ANTERIORMENTE ");
+            }
+            
         }
         
   
@@ -62,7 +60,6 @@ public class CommandCrearPer extends BaseCommand{
     private boolean Seleccion(int poder, int sanidad, int resistencia){
         boolean resultado = true;
         if((sanidad == 50 || sanidad == 75 || sanidad == 100) && ( poder == 50 || poder == 75 || poder == 100 ) && ( resistencia == 50 || resistencia == 75 || resistencia == 100)){
-            System.out.println(refCliente.Poder.size());
             for (int i = 0; i < refCliente.Poder.size(); i++) {
                 if (refCliente.Poder.get(i) == poder){
                     resultado = false;
@@ -86,14 +83,8 @@ public class CommandCrearPer extends BaseCommand{
             resultado = false;
         }
         
-        if (resultado == true){
-
-            refCliente.Sanidad.add(sanidad);
-            refCliente.Poder.add(poder);
-            refCliente.Resistencia.add(resistencia);
-        }
-        else{
-             refCliente.refPantalla.addMensaje("Verifique los datos ingresados");
+        if (resultado == false){
+             refCliente.refPantalla.addMensaje("Verifique los datos ingresados,porder, sanidad o resistencia");
         }
         return resultado;
     }
@@ -106,6 +97,37 @@ public class CommandCrearPer extends BaseCommand{
                     break;
             }
        }
+        return resultado;
+    }
+    
+    private boolean PorcentajePoblacion(int Porcentaje){
+        boolean resultado = true;
+        System.out.println(refCliente.PorPoblacion);
+           if (Porcentaje > 98){
+               resultado = false;
+
+               refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de poblacion");
+           }
+           if(refCliente.PorPoblacion == 2 && Porcentaje > 1){
+               resultado = false;
+               refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de poblacion");
+           }
+           
+           if(refCliente.PorPoblacion + Porcentaje > 100){
+
+              resultado = false;
+               refCliente.refPantalla.addMensaje("Verifique los datos ingresados, porcentaje de muy alto"); 
+           }
+
+        return resultado;
+    }
+    
+    private boolean Finalizo(){
+        boolean resultado = true;
+        if(refCliente.cantidadPersonajes >=4){
+            resultado = false;
+            refCliente.refPantalla.addMensaje("Ya no puede crear mas personajes"); 
+        }
         return resultado;
     }
 }

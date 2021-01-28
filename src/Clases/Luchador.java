@@ -5,6 +5,9 @@
  */
 package Clases;
 
+import Cliente.Cliente;
+import java.util.ArrayList;
+
 /**
  *
  * @author Luis
@@ -13,25 +16,31 @@ public class Luchador {
     String Nombre;
     String UrlImagenes;
     int PorcentajePoblacion; 
-    //Factory ataques
+    ArrayList<Habilidades> ataques = new ArrayList<Habilidades>();
+    Cliente refCliente;
     int Poder;
     int Resistencia;
     int Sanidad;
     int Vida;
-    public double multDano = 1;
-    public double disminuirDano = 1;
+    int multilpicador = 1;
+    int ResetResistencia = 0;
+    public boolean PoderActivado = false;
+
     
     Luchador(){
         
     }
     
-    public Luchador(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad){
+    public Luchador(String _Nombre, String Url, int _PorcentajePoblacion, int _Poder, int _Resistencia, int _Sanidad, String Ataque, Cliente cliente){
         Nombre = _Nombre;
         UrlImagenes = Url;
         PorcentajePoblacion = _PorcentajePoblacion;
         Poder = _Poder;
         Resistencia = _Resistencia;
         Sanidad = _Sanidad;
+        refCliente = cliente;
+        FabricaHabilidades ataque = new FabricaHabilidades(refCliente,this);
+        ataques.add(ataque.createHablidad(Ataque));
     }
 
     public String getNombre() {
@@ -67,8 +76,51 @@ public class Luchador {
         
     }
 
-    public void Sanidad(){
-        Vida = Sanidad;
+    public int getSanidad() {
+        return Sanidad;
     }
+
+    public void ActivarResistencia(){
+        ResetResistencia = Resistencia;
+    }
+    
+    public void ActivarPoder(){
+        multilpicador = Poder;
+        PoderActivado = true;
+    }
+
+    public int getMultilpicador() {
+        return multilpicador;
+    }
+
+    public int getResetResistencia() {
+        return ResetResistencia;
+    }
+
+    public void setMultilpicador(int multilpicador) {
+        this.multilpicador = multilpicador;
+    }
+
+    public void setResetResistencia(int ResetResistencia) {
+        this.ResetResistencia = ResetResistencia;
+    }
+
+    public boolean Ataque(String ataque,String SubAtaque, String nombre,ArrayList posiciones){
+        boolean resultado = false;
+        
+        for (int i = 0; i < ataques.size(); i++) {
+            Habilidades refhabilidad = ataques.get(i);
+            if(ataque.equals(refhabilidad.nombre)){
+                refhabilidad.seleccionarAttack(SubAtaque, nombre, posiciones);
+                resultado = true;
+                System.out.println("Ataque: " + ataque);
+                System.out.println("Subataque: " + SubAtaque);
+                System.out.println("nombre: " + nombre);
+            }
+            
+        }
+        return resultado;
+    }
+ 
     
 }

@@ -9,31 +9,42 @@ import Clases.Casillas;
 import Clases.CommandManager;
 import Clases.CommandUtil;
 import Clases.ICommand;
+import Clases.Luchador;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Gilberth
  */
 public class PantallaCliente extends javax.swing.JFrame {
+    private String UrlImagen;
     public Cliente refCliente;
     private String nombreTurno = "";
     private String [][]matrix;
     private JButton [][]label = new JButton[20][30]; // lbel[1][4]
     public Casillas[][]casillas;
+    private int MaximoP1;
+    private int MaximoP2;
+    private int MaximoP3;
     CommandManager manager = CommandManager.getIntance();  
     /**
      * Creates new form PantallaCliente
      */
     public PantallaCliente() {
         initComponents();
-        //generarMatriz();
+        generarMatriz();
     }
 
     public void setRefCliente(Cliente refCliente) {
@@ -71,6 +82,52 @@ public class PantallaCliente extends javax.swing.JFrame {
         }
     }
     
+    public void RepartirTropas(Luchador luchador1, Luchador luchador2, Luchador luchador3){
+        for (int x = 0; x < 20; x++) {
+            for (int y = 0; y < 30; y++) {
+                Random r = new Random();
+                int valorDado = r.nextInt(3)+1;
+                while(valorDado ==0){
+                    valorDado = r.nextInt(3)+1;
+                }
+                
+                if(valorDado == 1 && MaximoP1 != 0){
+                    casillas[x][y].personaje = luchador1;
+                    label[x][y].setBackground(Color.LIGHT_GRAY);
+                    MaximoP1= MaximoP1 - 1;
+                }
+
+                else if(valorDado == 2 && MaximoP2 != 0){
+
+                    casillas[x][y].personaje = luchador2;
+                    label[x][y].setBackground(Color.MAGENTA);
+                     MaximoP2= MaximoP2 - 1;
+                }
+
+                else if(valorDado == 3 && MaximoP3 != 0){
+                    casillas[x][y].personaje= luchador3;
+                    label[x][y].setBackground(Color.GREEN);
+                     MaximoP3 = MaximoP3 - 1;
+                }
+                else{
+                    y = y - 1;
+                }
+            }  
+        }  
+    }
+    
+    public void Sanidad(String nombre){
+        for (int x = 0; x < 20; x++) {
+            for (int y = 0; y < 30; y++) {
+                if(casillas[x][y].personaje.getNombre().equals(nombre)){
+                    casillas[x][y].RecuperarVida();
+                
+                }
+            }
+        }
+    }
+         
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,8 +147,29 @@ public class PantallaCliente extends javax.swing.JFrame {
         txaBitacora = new javax.swing.JTextArea();
         lblResultadoDelAtaque = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtxtResulAtaque = new javax.swing.JTextArea();
         panelPersonajes = new javax.swing.JPanel();
+        jLPersonaje1 = new javax.swing.JLabel();
+        jLPersonaje3 = new javax.swing.JLabel();
+        jLPersonaje2 = new javax.swing.JLabel();
+        jLSanidad1 = new javax.swing.JLabel();
+        jLSanidad2 = new javax.swing.JLabel();
+        jLSanidad3 = new javax.swing.JLabel();
+        jSetSanidad3 = new javax.swing.JLabel();
+        jSetSanidad1 = new javax.swing.JLabel();
+        jSetSanidad2 = new javax.swing.JLabel();
+        jLPoder1 = new javax.swing.JLabel();
+        jLPoder2 = new javax.swing.JLabel();
+        jLPoder3 = new javax.swing.JLabel();
+        jSetPoder2 = new javax.swing.JLabel();
+        jSetResistencia1 = new javax.swing.JLabel();
+        jSetPoder3 = new javax.swing.JLabel();
+        jLResistencia = new javax.swing.JLabel();
+        jSetPoder1 = new javax.swing.JLabel();
+        jLResistencia1 = new javax.swing.JLabel();
+        jSetResistencia2 = new javax.swing.JLabel();
+        jLResistencia2 = new javax.swing.JLabel();
+        jSetResistencia3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblVida = new javax.swing.JLabel();
         txtInfoAquaman = new javax.swing.JTextField();
@@ -135,21 +213,145 @@ public class PantallaCliente extends javax.swing.JFrame {
         lblResultadoDelAtaque.setText("Resultado del ataque");
         lblResultadoDelAtaque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        jtxtResulAtaque.setColumns(20);
+        jtxtResulAtaque.setRows(5);
+        jScrollPane3.setViewportView(jtxtResulAtaque);
 
         panelPersonajes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+
+        jLSanidad1.setText("Sanidad:");
+
+        jLSanidad2.setText("Sanidad:");
+
+        jLSanidad3.setText("Sanidad:");
+
+        jSetSanidad3.setText("       0");
+
+        jSetSanidad1.setText("       0");
+
+        jSetSanidad2.setText("       0");
+
+        jLPoder1.setText("Poder:");
+        jLPoder1.setToolTipText("");
+
+        jLPoder2.setText("Poder:");
+        jLPoder2.setToolTipText("");
+
+        jLPoder3.setText("Poder:");
+        jLPoder3.setToolTipText("");
+
+        jSetPoder2.setText("       0");
+
+        jSetResistencia1.setText("       0");
+
+        jSetPoder3.setText("       0");
+
+        jLResistencia.setText("Resistencia:");
+
+        jSetPoder1.setText("       0");
+
+        jLResistencia1.setText("Resistencia:");
+
+        jSetResistencia2.setText("       0");
+
+        jLResistencia2.setText("Resistencia:");
+
+        jSetResistencia3.setText("       0");
 
         javax.swing.GroupLayout panelPersonajesLayout = new javax.swing.GroupLayout(panelPersonajes);
         panelPersonajes.setLayout(panelPersonajesLayout);
         panelPersonajesLayout.setHorizontalGroup(
             panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+            .addGroup(panelPersonajesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPersonajesLayout.createSequentialGroup()
+                        .addComponent(jLPersonaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLResistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .addComponent(jLSanidad1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelPersonajesLayout.createSequentialGroup()
+                                .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSetSanidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLPoder2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetResistencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetPoder1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(panelPersonajesLayout.createSequentialGroup()
+                        .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLPersonaje3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLPersonaje2, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPersonajesLayout.createSequentialGroup()
+                                .addComponent(jLSanidad3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(9, 9, 9))
+                            .addComponent(jLResistencia1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .addComponent(jLSanidad2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLResistencia2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .addGroup(panelPersonajesLayout.createSequentialGroup()
+                                .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSetResistencia2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetSanidad3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetPoder3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLPoder1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetResistencia3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLPoder3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetPoder2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSetSanidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         panelPersonajesLayout.setVerticalGroup(
             panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelPersonajesLayout.createSequentialGroup()
+                .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLPersonaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelPersonajesLayout.createSequentialGroup()
+                        .addComponent(jLSanidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jSetSanidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLPoder2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jSetPoder1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLResistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSetResistencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPersonajesLayout.createSequentialGroup()
+                        .addComponent(jLSanidad3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(jSetSanidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLPoder3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSetPoder2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLResistencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSetResistencia2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLPersonaje2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(panelPersonajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelPersonajesLayout.createSequentialGroup()
+                        .addComponent(jLPersonaje3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(panelPersonajesLayout.createSequentialGroup()
+                        .addComponent(jLSanidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSetSanidad3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLPoder1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSetPoder3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLResistencia2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSetResistencia3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -183,7 +385,7 @@ public class PantallaCliente extends javax.swing.JFrame {
                         .addComponent(txtMantaNegra, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
                         .addComponent(txtPoseidon, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(54, Short.MAX_VALUE))
+                        .addContainerGap(46, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(177, 177, 177)
                         .addComponent(lblCasillasDestruidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,7 +413,7 @@ public class PantallaCliente extends javax.swing.JFrame {
         panelJuego.setLayout(panelJuegoLayout);
         panelJuegoLayout.setHorizontalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 652, Short.MAX_VALUE)
         );
         panelJuegoLayout.setVerticalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +460,7 @@ public class PantallaCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblBitacora, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblResultadoDelAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -346,14 +548,95 @@ public class PantallaCliente extends javax.swing.JFrame {
         this.nombreTurno = turno;
         lblTurno.setText("Turno de " + turno);
     }
+    
+    public void SetInfoPersonaje(String url, int sanidad, int poder, int resistencia, int personaje){
+        if(personaje == 1){
+            
+            System.out.println(url);
+           
+            ImageIcon imagen = new ImageIcon(url);
+            Icon image = new ImageIcon(imagen.getImage().getScaledInstance(jLPersonaje1.getWidth(), jLPersonaje1.getHeight(), Image.SCALE_DEFAULT));
+            jLPersonaje1.setIcon(image);
+            jSetPoder1.setVisible(true);
+            jSetPoder1.setText(""+poder);
+            jSetSanidad1.setVisible(true);
+            jSetSanidad1.setText(""+sanidad);
+            jSetResistencia1.setVisible(true);
+            jSetResistencia1.setText(""+resistencia);
+        }
+        else if(personaje == 2){
+            ImageIcon imagen = new ImageIcon(url);
+            Icon image = new ImageIcon(imagen.getImage().getScaledInstance(jLPersonaje2.getWidth(), jLPersonaje2.getHeight(), Image.SCALE_DEFAULT));
+            jLPersonaje2.setIcon(image);
+            jSetPoder2.setVisible(true);
+            jSetPoder2.setText(""+poder);
+            jSetSanidad2.setVisible(true);
+            jSetSanidad2.setText(""+sanidad);
+            jSetResistencia2.setVisible(true);
+            jSetResistencia2.setText(""+resistencia);
+        }
+        else if(personaje == 3){
+            ImageIcon imagen = new ImageIcon(url);
+            Icon image = new ImageIcon(imagen.getImage().getScaledInstance(jLPersonaje3.getWidth(), jLPersonaje3.getHeight(), Image.SCALE_DEFAULT));
+            jLPersonaje3.setIcon(image);
+            jSetPoder3.setVisible(true);
+            jSetPoder3.setText(""+poder);
+            jSetSanidad3.setVisible(true);
+            jSetSanidad3.setText(""+sanidad);
+            jSetResistencia3.setVisible(true);
+            jSetResistencia3.setText(""+resistencia);
+        }
+    }
+
+    public void setMaximoP1(int MaximoP1) {
+        this.MaximoP1 = MaximoP1;
+    }
+
+    public void setMaximoP2(int MaximoP2) {
+        this.MaximoP2 = MaximoP2;
+    }
+
+    public void setMaximoP3(int MaximoP3) {
+        this.MaximoP3 = MaximoP3;
+    }
+    
+    public void MensajeAtaque(String ataque){
+        jtxtResulAtaque.append(ataque+"\n");
+    }
+    
+    public void MensajeBitacora(String mensaje){
+        txaBitacora.append(mensaje+"\n");
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JLabel jLPersonaje1;
+    private javax.swing.JLabel jLPersonaje2;
+    private javax.swing.JLabel jLPersonaje3;
+    private javax.swing.JLabel jLPoder1;
+    private javax.swing.JLabel jLPoder2;
+    private javax.swing.JLabel jLPoder3;
+    private javax.swing.JLabel jLResistencia;
+    private javax.swing.JLabel jLResistencia1;
+    private javax.swing.JLabel jLResistencia2;
+    private javax.swing.JLabel jLSanidad1;
+    private javax.swing.JLabel jLSanidad2;
+    private javax.swing.JLabel jLSanidad3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel jSetPoder1;
+    private javax.swing.JLabel jSetPoder2;
+    private javax.swing.JLabel jSetPoder3;
+    private javax.swing.JLabel jSetResistencia1;
+    private javax.swing.JLabel jSetResistencia2;
+    private javax.swing.JLabel jSetResistencia3;
+    private javax.swing.JLabel jSetSanidad1;
+    private javax.swing.JLabel jSetSanidad2;
+    private javax.swing.JLabel jSetSanidad3;
+    private javax.swing.JTextArea jtxtResulAtaque;
     private javax.swing.JLabel lblBitacora;
     private javax.swing.JLabel lblCasillasDestruidas;
     private javax.swing.JLabel lblResultadoDelAtaque;

@@ -19,11 +19,17 @@ public class CommandConsulCelda extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        int x =  Integer.parseInt(args[0].trim());
-        int y = Integer.parseInt(args[1].trim());
-        String datAtaque = "Datos de la casilla "+" ( "+x+", "+y+" )"+"\n";
-        datAtaque += refCliente.refPantalla.casillas[x][y].datosCasilla();
-        refCliente.refPantalla.addBitacora("*******************\n"+datAtaque);
+        
+        if(args != null){
+            int x =  Integer.parseInt(args[0].trim());
+            int y = Integer.parseInt(args[1].trim());
+            String datAtaque = "Datos de la casilla "+" ( "+x+", "+y+" )"+"\n";
+            datAtaque += refCliente.refPantalla.casillas[x][y].datosCasilla();
+            refCliente.refPantalla.addBitacora("*******************\n"+datAtaque); 
+            
+        }
+        
+
     }
     
 }

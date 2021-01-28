@@ -23,7 +23,8 @@ public class HiloCliente  extends Thread{
     private PantallaCliente refPantalla;
     
     enum instruccionCliente{SETNAME,MENSAJE,CONSULTAINFO,PRINTEARINFO,
-    RECIBIRTURNO,CREARPERSONAJE,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO};
+    RECIBIRTURNO,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO};
+
     
     
     public HiloCliente(Socket socketRef, PantallaCliente refPantalla) throws IOException {
@@ -78,8 +79,9 @@ public class HiloCliente  extends Thread{
             case RECIBIRTURNO:
                 String turno = reader.readUTF();
                 refPantalla.refCliente.turno = turno;
+                refPantalla.refCliente.ResetPersonaje();
                 break;
-                
+
             case RENDIRSE:
                 String rendido = reader.readUTF();
                 if(refPantalla.getTitle().equals(rendido)){
@@ -90,21 +92,29 @@ public class HiloCliente  extends Thread{
             case RECIBIRDANO:
                 int x = reader.readInt();
                 int y = reader.readInt();
-                double dano = reader.readInt();
+                double dano = reader.readDouble();
                 String nombreE = reader.readUTF();
                 String tipoAtaque = reader.readUTF();
-                refPantalla.refCliente.recibirdano(x, y, dano, nombre, tipoAtaque);
+                System.out.println("X:" + x);
+                System.out.println("y:" + y);
+                System.out.println("Daño:" + dano);
+                System.out.println("nombreE:" + nombreE);
+                System.out.println("tipoAtaque:" + tipoAtaque);
+                System.out.println("...................................................................................................................... \n");
+                refPantalla.refCliente.recibirdano(x, y, dano, nombreE, tipoAtaque);
                 
                 break;
                 
             case ATAQUEEXITOSO:
                 ataque = reader.readUTF();
                 refPantalla.refCliente.AtaquesExitosos.add(ataque);
+               
                 break;
                 
             case ATAQUENOEXITOSO:
                 ataque = reader.readUTF();
                 refPantalla.refCliente.AtaquesNoExitosos.add(ataque);
+                
                 break;
                 
             default:
