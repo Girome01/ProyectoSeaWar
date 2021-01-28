@@ -7,6 +7,7 @@ package Clases;
 
 import Cliente.Cliente;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,14 +20,15 @@ public class ReleaseTheKraken extends Habilidades{
     Random random = new Random();
 
     public ReleaseTheKraken(Cliente refCliente,Luchador refPersonaje) {
-        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",refCliente,refPersonaje);
+        super("TENTACULOS", "KRAKENBREATH", "RELEASETHEKRAKEN",refCliente,refPersonaje,"RELEASETHEKRAKEN");
     }
 
     @Override
-    void attack1(String enemigo) {
-        for(int i =0; i < 3; i++){
-            int x = random.nextInt(20); // Saca la posicion x de la casilla del tablero
-            int y = random.nextInt(30); // saca la posicion y de la casilla en el tablero
+    void attack1(String enemigo, ArrayList<Integer> posiciones) {
+        int x,y;
+        for(int i =0; i < posiciones.size(); i +=2){
+             x = posiciones.get(i); // Saca la posicion x de la casilla del tablero
+             y = posiciones.get(i+1); // saca la posicion y de la casilla en el tablero
             try {
                 ataqueArea(x, y, 1,enemigo,100,"TENTACULOS");
             } catch (IOException ex) {
@@ -36,11 +38,12 @@ public class ReleaseTheKraken extends Habilidades{
     }
 
     @Override
-    void attack2(String enemigo) {
+    void attack2(String enemigo,ArrayList<Integer> posiciones) {
+        int x = posiciones.get(0);
+        int y = posiciones.get(1);
        Random random = new Random();
        int lado = random.nextInt(3);
-       int cantidad = random.nextInt(7)+1;
-       int x = -1,y = -1;
+       //int cantidad = random.nextInt(7)+1;
        switch(lado){
            case 0: // arriba
                atArriba(enemigo,100,x,y,"KRAKENBREATH");
@@ -60,8 +63,9 @@ public class ReleaseTheKraken extends Habilidades{
     }
 
     @Override
-    void attack3(String enemigo) {
-        int x = -1, y = -1;
+    void attack3(String enemigo,ArrayList<Integer> posiciones) {
+        int x = random.nextInt(20);
+        int y = random.nextInt(30);
         int cant = random.nextInt(7)+1;
         try {
             ataqueArea(x, y, cant, enemigo,100,"RELEASETHEKRAKEN");

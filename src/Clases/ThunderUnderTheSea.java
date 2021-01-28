@@ -7,6 +7,7 @@ package Clases;
 
 import Cliente.Cliente;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +19,12 @@ import java.util.logging.Logger;
 public class ThunderUnderTheSea extends Habilidades{
 
     public ThunderUnderTheSea(Cliente refCliente,Luchador refPersonaje) {
-        super("THUNDERRAIN", "POSEIDONTHUNDER", "EALATTACK",refCliente,refPersonaje);
+        super("THUNDERRAIN", "POSEIDONTHUNDER", "EALATTACK",refCliente,refPersonaje,"THUNDERUNDERTHESEA");
     }
 
     @Override
-    void attack1(String enemigo) {
-        int x, y, dano;
+    void attack1(String enemigo,ArrayList<Integer> posiciones) {
+        int  x,y,dano;
         for(int i = 0; i < 100; i++){
             x = random.nextInt(20);
             y = random.nextInt(30);
@@ -32,7 +33,8 @@ public class ThunderUnderTheSea extends Habilidades{
                 try {
                     //casillas[x][y].danarCasilla(dano);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(),
-                            enemigo, dano*refPersonaje.multDano,"THUNDERRAIN");
+                            enemigo, dano*refPersonaje.multilpicador,"THUNDERRAIN");
+                            
                 } catch (IOException ex) {
                     Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -40,21 +42,28 @@ public class ThunderUnderTheSea extends Habilidades{
     }
 
     @Override
-    void attack2(String enemigo) {
-        int x = -1, y = -1;
+    void attack2(String enemigo,ArrayList<Integer> posiciones) {
+        
+        int x,y;
         int rayos = random.nextInt(5)+5;
-        int cant = random.nextInt(9)+2;
-        try {
-            ataqueArea(x, y, cant, enemigo, 100, "POSEIDONTHUNDER");
-        } catch (IOException ex) {
-            Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < rayos; i++) {
+            int cant = random.nextInt(9)+2;
+            x = random.nextInt(20);
+            y = random.nextInt(30);
+            try {
+                ataqueArea(x, y, cant, enemigo, 100, "POSEIDONTHUNDER");
+            } catch (IOException ex) {
+                Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+ 
     }
 
     @Override
-    void attack3(String enemigo) {
+    void attack3(String enemigo,ArrayList<Integer> posiciones) {
+        int x,y;
         int cant = random.nextInt(76)+25;
-        int x,y,dano;
+        int dano;
         for(int i = 0; i < cant;i++){
             x = random.nextInt(20);
             y = random.nextInt(30);
@@ -63,7 +72,7 @@ public class ThunderUnderTheSea extends Habilidades{
                 try {
                     //casillas[x][y].danarCasilla(dano);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), 
-                            enemigo, dano*refPersonaje.multDano,"EALATTACK");
+                            enemigo, dano*refPersonaje.multilpicador,"EALATTACK");
                     //danar la casilla esa cantidad
                 } catch (IOException ex) {
                     Logger.getLogger(ThunderUnderTheSea.class.getName()).log(Level.SEVERE, null, ex);

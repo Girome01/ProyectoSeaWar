@@ -23,12 +23,17 @@ public class CommandConEnem extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        try {
-            refCliente.hiloCliente.writer.writeUTF("CONSULTARENEMIGO");
-            refCliente.hiloCliente.writer.writeUTF(args[0]);
-        } catch (IOException ex) {
-            Logger.getLogger(CommandConEnem.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if(args != null){
+            try {
+                refCliente.hiloCliente.writer.writeUTF("CONSULTARENEMIGO");
+                refCliente.hiloCliente.writer.writeUTF(args[0]);
+            } catch (IOException ex) {
+                Logger.getLogger(CommandConEnem.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
+
     }
     
 }

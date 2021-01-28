@@ -27,17 +27,18 @@ public class CommandLog extends BaseCommand{
             refCliente.refPantalla.addMensaje("Ataques Ejecutados:");
             for (int i = 0; i < refCliente.AtaquesExitosos.size(); i++) {
                 String exitosos = refCliente.AtaquesExitosos.get(i);
-                refCliente.refPantalla.addMensaje(exitosos);
+                refCliente.refPantalla.MensajeBitacora(exitosos);
             }
             for (int i = 0; i < refCliente.AtaquesNoExitosos.size(); i++) {
                 String noexitosos = refCliente.AtaquesNoExitosos.get(i);
-                refCliente.refPantalla.addMensaje(noexitosos);
+                refCliente.refPantalla.MensajeBitacora(noexitosos);
+                
             }
             refCliente.refPantalla.addMensaje("");
             refCliente.refPantalla.addMensaje("Ataques Recibidos:");
             for (int i = 0; i < refCliente.AtaquesRecibido.size(); i++) {
                 String recibidos = refCliente.AtaquesRecibido.get(i);
-                refCliente.refPantalla.addMensaje(recibidos);
+                refCliente.refPantalla.MensajeBitacora(recibidos);
             }
             
     }

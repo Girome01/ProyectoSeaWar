@@ -24,12 +24,16 @@ public class CommandChat extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        try {
+        
+        if(args != null){
+           try {
             refCliente.hiloCliente.writer.writeUTF("MENSAJE");
             refCliente.hiloCliente.writer.writeUTF(args[0]);
-        } catch (IOException ex) {
+            } catch (IOException ex) {
             Logger.getLogger(CommandChat.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
+        
     }
     
 }

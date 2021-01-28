@@ -92,21 +92,29 @@ public class HiloCliente  extends Thread{
             case RECIBIRDANO:
                 int x = reader.readInt();
                 int y = reader.readInt();
-                double dano = reader.readInt();
+                double dano = reader.readDouble();
                 String nombreE = reader.readUTF();
                 String tipoAtaque = reader.readUTF();
-                refPantalla.refCliente.recibirdano(x, y, dano, nombre, tipoAtaque);
+                System.out.println("X:" + x);
+                System.out.println("y:" + y);
+                System.out.println("Daño:" + dano);
+                System.out.println("nombreE:" + nombreE);
+                System.out.println("tipoAtaque:" + tipoAtaque);
+                System.out.println("...................................................................................................................... \n");
+                refPantalla.refCliente.recibirdano(x, y, dano, nombreE, tipoAtaque);
                 
                 break;
                 
             case ATAQUEEXITOSO:
                 ataque = reader.readUTF();
                 refPantalla.refCliente.AtaquesExitosos.add(ataque);
+               
                 break;
                 
             case ATAQUENOEXITOSO:
                 ataque = reader.readUTF();
                 refPantalla.refCliente.AtaquesNoExitosos.add(ataque);
+                
                 break;
                 
             default:
