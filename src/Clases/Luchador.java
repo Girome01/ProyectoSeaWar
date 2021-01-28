@@ -80,8 +80,6 @@ public class Luchador {
         return Sanidad;
     }
 
-
-
     public void ActivarResistencia(){
         ResetResistencia = Resistencia;
     }
@@ -107,7 +105,22 @@ public class Luchador {
         this.ResetResistencia = ResetResistencia;
     }
 
-    
+    public boolean Ataque(String ataque,String SubAtaque, String nombre,ArrayList posiciones){
+        boolean resultado = false;
+        
+        for (int i = 0; i < ataques.size(); i++) {
+            Habilidades refhabilidad = ataques.get(i);
+            if(ataque.equals(refhabilidad.nombre)){
+                refhabilidad.seleccionarAttack(SubAtaque, nombre, posiciones);
+                resultado = true;
+                System.out.println("Ataque: " + ataque);
+                System.out.println("Subataque: " + SubAtaque);
+                System.out.println("nombre: " + nombre);
+            }
+            
+        }
+        return resultado;
+    }
  
     
 }

@@ -5,6 +5,9 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author Gilberth
@@ -23,7 +26,20 @@ public class CommandAttack extends BaseCommand{
         if(args != null){
            for(int i = 0; i < refCliente.personajes.size(); i++){
                 if(refCliente.personajes.get(i).Nombre.equals(args[0])){
-                
+                    
+                    //3
+                    ArrayList<Integer> Posiciones = new ArrayList<Integer> (); 
+                    for (int j = 4; j < args.length; j++) {
+                        Posiciones.add(Integer.parseInt(args[j].trim()));
+                    }
+                   boolean ataco = refCliente.personajes.get(i).Ataque(args[1],args[2],args[3],Posiciones);
+                   if(ataco == true){
+                       refCliente.refPantalla.MensajeAtaque("EL ATAQUE SE REALIZO CON EXITO");
+                    
+                      }
+                   else{
+                       refCliente.refPantalla.MensajeAtaque("El ATAQUE NO SE REALIZO CON EXITO");
+                   }
                 }
             } 
         }

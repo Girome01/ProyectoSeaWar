@@ -7,6 +7,7 @@ package Clases;
 
 import Cliente.Cliente;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
  * @author Gilberth
  */
 public abstract class Habilidades{
+    public String nombre;
     private String attack1;
     private String attack2;
     private String attack3;
@@ -23,27 +25,32 @@ public abstract class Habilidades{
     Random random = new Random();
     public Luchador refPersonaje;
 
-    Habilidades(String attack1, String attack2, String attack3,Cliente refCliente,Luchador refPersonaje) {
+    Habilidades(String attack1, String attack2, String attack3,Cliente refCliente,Luchador refPersonaje,String nombre) {
         this.attack1 = attack1;
         this.attack2 = attack2;
         this.attack3 = attack3;
         this.refCliente = refCliente;
         this.refPersonaje = refPersonaje;
+        this.nombre = nombre;
     }
     
-    public void seleccionarAttack(String _attack,String enemigo){
-        if(attack1 == _attack.toUpperCase()){
-            attack1( enemigo);
-        }else if(attack2 == _attack.toUpperCase()){
-            attack2( enemigo);
-        }else if(attack3 == _attack.toUpperCase()){
-            attack3( enemigo);
+    public void seleccionarAttack(String _attack,String enemigo, ArrayList<Integer> posiciones){
+   
+        if(attack1.equals(_attack.toUpperCase())){
+            attack1( enemigo,posiciones);
+        }else if(attack2.equals(_attack.toUpperCase())){
+            attack2( enemigo,posiciones);
+        }else if(attack3.equals(_attack.toUpperCase())){
+            attack3( enemigo,posiciones);
+        }
+        else{
+            System.out.println("No encontre ataque");
         }
     }
     
-    abstract void attack1(String enemigo);
-    abstract void attack2(String enemigo);
-    abstract void attack3(String enemigo);
+    abstract void attack1(String enemigo,ArrayList<Integer> posiciones);
+    abstract void attack2(String enemigo,ArrayList<Integer> posiciones);
+    abstract void attack3(String enemigo, ArrayList<Integer> posiciones);
     
     public void atacarEnemigo(int x, int y, String atacante,String enemigo,double dano, String tipoAtaque) throws IOException{
         refCliente.hiloCliente.writer.writeUTF("ATACAR");
@@ -53,6 +60,13 @@ public abstract class Habilidades{
         refCliente.hiloCliente.writer.writeDouble(dano);
         refCliente.hiloCliente.writer.writeUTF(atacante);
         refCliente.hiloCliente.writer.writeUTF(tipoAtaque);
+        System.out.println("Enemigos :" + enemigo);
+        System.out.println("Posicion x:" + x);
+        System.out.println("Posicion y:" + y);
+         System.out.println("Daño :" + dano);
+        System.out.println("Atacante :" + atacante);
+         System.out.println("tipoatacante :" + tipoAtaque);
+        System.out.println(".......................................................................................................................................................\n");
     }
     
     public void ataqueArea(int x, int y, int cant, String enemigo,double dano,String tipoAtaque) throws IOException{

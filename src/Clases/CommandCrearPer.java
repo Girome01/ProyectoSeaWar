@@ -32,14 +32,19 @@ public class CommandCrearPer extends BaseCommand{
         
         if (args != null){
             if(Finalizo() && args.length == 6 && Seleccion(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4])) && VerificarNombre(args[0]) && PorcentajePoblacion(Integer.parseInt(args[1]))){
-                
-                JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
+                       
+
+                refCliente.Sanidad.add(Integer.parseInt(args[3]));
+                refCliente.Poder.add((Integer.parseInt(args[2])));
+                refCliente.Resistencia.add(Integer.parseInt(args[4]));
+     
+               /* JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
                 File url;
                 JFileChooser ulrf = new JFileChooser();
                 ulrf.showOpenDialog(null);
                 url = ulrf.getSelectedFile();
-                String casting = "" + url;
-                refCliente.CrearPersonaje(args[0], casting, Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5]);
+                String casting = "" + url;*/
+                refCliente.CrearPersonaje(args[0], "C:\\Users\\Luis\\Downloads\\0.png", Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5]);
             }
         else{
             refCliente.refPantalla.addMensaje("PARA ESTE COMANDO OCUPA ESCRIBIR El NOMBRE DEL PERSONAJE, EL PORCENTAJE"+
@@ -55,7 +60,6 @@ public class CommandCrearPer extends BaseCommand{
     private boolean Seleccion(int poder, int sanidad, int resistencia){
         boolean resultado = true;
         if((sanidad == 50 || sanidad == 75 || sanidad == 100) && ( poder == 50 || poder == 75 || poder == 100 ) && ( resistencia == 50 || resistencia == 75 || resistencia == 100)){
-            System.out.println(refCliente.Poder.size());
             for (int i = 0; i < refCliente.Poder.size(); i++) {
                 if (refCliente.Poder.get(i) == poder){
                     resultado = false;
@@ -79,13 +83,7 @@ public class CommandCrearPer extends BaseCommand{
             resultado = false;
         }
         
-        if (resultado == true){
-
-            refCliente.Sanidad.add(sanidad);
-            refCliente.Poder.add(poder);
-            refCliente.Resistencia.add(resistencia);
-        }
-        else{
+        if (resultado == false){
              refCliente.refPantalla.addMensaje("Verifique los datos ingresados,porder, sanidad o resistencia");
         }
         return resultado;

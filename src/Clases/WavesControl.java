@@ -19,13 +19,15 @@ public class WavesControl extends Habilidades{
     private ArrayList<Integer> cantArea;
 
     public WavesControl(Cliente refCliente,Luchador refPersonaje) {
-        super("SWIRLRAISING", "SENDHUMANGARBAGE", "RADIOCTIVERUSH",refCliente,refPersonaje);
+        super("SWIRLRAISING", "SENDHUMANGARBAGE", "RADIOCTIVERUSH",refCliente,refPersonaje,"WAVESCONTROL");
     }
 
     @Override
-    void attack1(String enemigo) {
+    void attack1(String enemigo,ArrayList<Integer> posiciones) {
+        int x,y;
         Random random = new Random();
-        int x = -1, y = -1; //Como agregar las posiciones que escoje el usuario
+         x = -1;
+         y = -1; //Como agregar las posiciones que escoje el usuario
         int cant = random.nextInt(8)+2;
         int x1 = x, x2 = x, y1, y2;
         /*for(int i = 1; i <=cant;i++){
@@ -75,9 +77,11 @@ public class WavesControl extends Habilidades{
     }
 
     @Override
-    void attack2(String enemigo) {
+    void attack2(String enemigo,ArrayList<Integer> posiciones) {
+        int x,y;
         Random random = new Random();
-        int x = 1,y = 1; // Luego ver como se reciben los numeros
+         x = 1;
+         y = 1; // Luego ver como se reciben los numeros
         //Hablar con luis para ver los tiempos que son 5 seg
         int rand;
         /*for(int j = 0; j < remolinos.size(); j++){
@@ -179,7 +183,7 @@ public class WavesControl extends Habilidades{
     }
 
     @Override
-    void attack3(String enemigo) {
+    void attack3(String enemigo,ArrayList<Integer> posiciones) {
         //Ver el tiempo de dano
         /*for(int r = 0; r < 20; r++){
             for(int c = 0; c < 30;){

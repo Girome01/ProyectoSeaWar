@@ -100,7 +100,7 @@ public class Casillas {
     
     public void porcentajeCasilla(){
         if(celdaFlag == true){
-            btnImagen.setText(""+vida);
+            btnImagen.setText(""+vida/10);
             celdaFlag = false;
         }
         else{
@@ -115,7 +115,7 @@ public class Casillas {
     }
     
     public String datosCasilla(){
-        String datos = "Vida: "+vida+". ";
+        String datos = "Vida: "+ (int)vida+". ";
         if(tieneVolcan){
             datos += "Tiene volcan. ";
         }
@@ -148,6 +148,10 @@ public class Casillas {
         }
     }
     
+    public int returnVida(){
+        int retornar = (int) vida;
+        return retornar;
+    }
     
 
 }

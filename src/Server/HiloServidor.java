@@ -192,6 +192,13 @@ public class HiloServidor extends Thread{
                         curr.writer.writeDouble(dano);
                         curr.writer.writeUTF(atacante);
                         curr.writer.writeUTF(tipoAtaque);
+                        System.out.println("Enemigos :" + enemigo);
+                        System.out.println("Posicion x:" + x);
+                        System.out.println("Posicion y:" + y);
+                        System.out.println("Daño :" + dano);
+                        System.out.println("Atacante :" + atacante);
+                        System.out.println("tipoatacante :" + tipoAtaque);
+                        System.out.println(".......................................................................................................\n");
                     }
                 }
                 break;

@@ -147,7 +147,7 @@ public class PantallaCliente extends javax.swing.JFrame {
         txaBitacora = new javax.swing.JTextArea();
         lblResultadoDelAtaque = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtxtResulAtaque = new javax.swing.JTextArea();
         panelPersonajes = new javax.swing.JPanel();
         jLPersonaje1 = new javax.swing.JLabel();
         jLPersonaje3 = new javax.swing.JLabel();
@@ -213,9 +213,9 @@ public class PantallaCliente extends javax.swing.JFrame {
         lblResultadoDelAtaque.setText("Resultado del ataque");
         lblResultadoDelAtaque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        jtxtResulAtaque.setColumns(20);
+        jtxtResulAtaque.setRows(5);
+        jScrollPane3.setViewportView(jtxtResulAtaque);
 
         panelPersonajes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
@@ -600,7 +600,13 @@ public class PantallaCliente extends javax.swing.JFrame {
         this.MaximoP3 = MaximoP3;
     }
     
-
+    public void MensajeAtaque(String ataque){
+        jtxtResulAtaque.append(ataque+"\n");
+    }
+    
+    public void MensajeBitacora(String mensaje){
+        txaBitacora.append(mensaje+"\n");
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -630,7 +636,7 @@ public class PantallaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jSetSanidad1;
     private javax.swing.JLabel jSetSanidad2;
     private javax.swing.JLabel jSetSanidad3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jtxtResulAtaque;
     private javax.swing.JLabel lblBitacora;
     private javax.swing.JLabel lblCasillasDestruidas;
     private javax.swing.JLabel lblResultadoDelAtaque;
