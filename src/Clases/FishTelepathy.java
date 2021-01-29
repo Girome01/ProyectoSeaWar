@@ -25,6 +25,11 @@ public class FishTelepathy extends Habilidades{
 
     @Override
     void attack1(String enemigo,ArrayList<Integer> posiciones) {
+        try {
+            refCliente.hiloCliente.writer.writeUTF("NEXTTURNO");
+        } catch (IOException ex) {
+            Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
+        }
         int cant = random.nextInt(200)+100;
         int x,y;
         for(int i = 0; i< cant; i++){
@@ -42,6 +47,11 @@ public class FishTelepathy extends Habilidades{
 
     @Override
     void attack2(String enemigo,ArrayList<Integer> posiciones) {
+        try {
+            refCliente.hiloCliente.writer.writeUTF("NEXTTURNO");
+        } catch (IOException ex) {
+            Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
+        }
         int esquinas = random.nextInt(4);
         for(int i = 0; i<= esquinas;i++){
             int esquina = random.nextInt(4);
@@ -84,6 +94,11 @@ public class FishTelepathy extends Habilidades{
 
     @Override
     void attack3(String enemigo,ArrayList<Integer> posiciones) {
+        try {
+            refCliente.hiloCliente.writer.writeUTF("NEXTTURNO");
+        } catch (IOException ex) {
+            Logger.getLogger(FishTelepathy.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Random random = new Random();
         int x,y;
         int cant = random.nextInt(30)+20;

@@ -86,6 +86,7 @@ public class Cliente {
         else  if(cantidadPersonajes == 4){
             refPantalla.setMaximoP3(porcentaje);
             refPantalla.RepartirTropas(personajes.get(0), personajes.get(1), personajes.get(2));
+            refPantalla.ActualizarDatos();
         }
         
     }
@@ -133,6 +134,7 @@ public class Cliente {
                     " Casilla: (" +x+", "+y+") con "+dano+" de dano.");
             AtaquesRecibido.add(enemigoE+" me ataco con "+ ataque+
                     " la casilla ("+x+", "+y+") con "+dano+" de dano.");
+            refPantalla.ActualizarDatos();
         }else{
             System.out.println("No se pudo efectuar el ataque a "+
                     refPantalla.getTitle()+" en la casilla ("+x+", "+y+").");

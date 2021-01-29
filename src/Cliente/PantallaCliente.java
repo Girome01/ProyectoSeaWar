@@ -678,25 +678,25 @@ public class PantallaCliente extends javax.swing.JFrame {
     
     public void Personaje1(String nombre,int porcentaje, int  casillas1, int casillas2){
         jTextArea1.setText("");
-        jTextArea1.append(nombre+"\n");
-        jTextArea1.append(porcentaje+ "% "+"\n");
-        jTextArea1.append(casillas1 + "de" + casillas2 + "casillas\n");
+        jTextArea1.append("     "+nombre+"\n");
+        jTextArea1.append(porcentaje+ "  %  "+"\n");
+        jTextArea1.append(casillas1 + "  de  " + casillas2 + " casillas\n");
         
     }
     
     public void Personaje2(String nombre,int porcentaje, int  casillas1, int casillas2){
         jTextArea2.setText("");
-        jTextArea2.append(nombre+"\n");
-        jTextArea2.append(porcentaje+ "% "+"\n");
-        jTextArea2.append(casillas1 + "de" + casillas2 + "casillas\n");
+        jTextArea2.append("     "+nombre+"\n");
+        jTextArea2.append(porcentaje+ "  %  "+"\n");
+        jTextArea2.append(casillas1 + "  de  " + casillas2 + " casillas\n");
         
     }
     
     public void Personaje3(String nombre,int porcentaje, int  casillas1, int casillas2){
         jTextArea3.setText("");
-        jTextArea3.append(nombre+"\n");
-        jTextArea3.append(porcentaje+ "% "+"\n");
-        jTextArea3.append(casillas1 + "de" + casillas2 + "casillas\n");
+        jTextArea3.append("     "+nombre+"\n");
+        jTextArea3.append(porcentaje+ "  %  "+"\n");
+        jTextArea3.append(casillas1 + "  de  " + casillas2 + " casillas\n");
         
     }
 

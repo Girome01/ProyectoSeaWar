@@ -116,12 +116,11 @@ public class Luchador {
             if(ataque.equals(refhabilidad.nombre)){
                 refhabilidad.seleccionarAttack(SubAtaque, nombre, posiciones);
                 resultado = true;
-                System.out.println("Ataque: " + ataque);
-                System.out.println("Subataque: " + SubAtaque);
-                System.out.println("nombre: " + nombre);
+
             }
             else{
                 System.out.println("NO encontre el ataque");
+                resultado = false;
             }
             
         }

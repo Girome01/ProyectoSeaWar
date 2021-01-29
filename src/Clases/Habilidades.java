@@ -38,12 +38,16 @@ public abstract class Habilidades{
    
         if(attack1.equals(_attack.toUpperCase())){
             attack1( enemigo,posiciones);
+            refCliente.refPantalla.MensajeAtaque("El ataque se envio con exito");
         }else if(attack2.equals(_attack.toUpperCase())){
+            refCliente.refPantalla.MensajeAtaque("El ataque se envio con exito");
             attack2( enemigo,posiciones);
         }else if(attack3.equals(_attack.toUpperCase())){
+            refCliente.refPantalla.MensajeAtaque("El ataque se envio con exito");
             attack3( enemigo,posiciones);
         }
         else{
+            refCliente.refPantalla.MensajeAtaque("El ataque no se ha enviado ");
             System.out.println("No encontre ataque");
         }
     }

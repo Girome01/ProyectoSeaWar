@@ -61,8 +61,8 @@ public class Server {
     public String getNextTurno(){
         if ( ++turno >= conexiones.size())
             turno = 0;
-        
-        return conexionesturnos.get(turno).nombre;
+
+        return conexiones.get(turno).nombre;
     }
     
     public String getTurnoPrimero(){

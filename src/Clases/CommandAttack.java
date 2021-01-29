@@ -25,7 +25,7 @@ public class CommandAttack extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        
+            
         
         if(args != null){
            for(int i = 0; i < refCliente.personajes.size(); i++){
@@ -36,23 +36,12 @@ public class CommandAttack extends BaseCommand{
                     for (int j = 4; j < args.length; j++) {
                         Posiciones.add(Integer.parseInt(args[j].trim()));
                     }
-                   boolean ataco = refCliente.personajes.get(i).Ataque(args[1],args[2],args[3],Posiciones);
-                   if (ataco == true){
-                       refCliente.refPantalla.MensajeAtaque("EL ataque se realizo con exito");
-                       refCliente.refPantalla.ActualizarDatos();
-                        try {
-                            refCliente.hiloCliente.writer.writeUTF("NEXTTURNO");
-                        } catch (IOException ex) {
-                            Logger.getLogger(CommandAttack.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                   }
-                   else{
-                     refCliente.refPantalla.MensajeAtaque("EL ataque no se realizo con exito");  
-                   }
+                    refCliente.personajes.get(i).Ataque(args[1],args[2],args[3],Posiciones);
                 }
             } 
         }
-        
+      
+
         
     }
     

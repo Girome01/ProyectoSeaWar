@@ -253,9 +253,10 @@ public class HiloServidor extends Thread{
                 break;
              
             case NEXTTURNO:
+                String nturno = server.getNextTurno();
+                System.out.println(nturno);
                  for (int i = 0; i < server.conexiones.size(); i++) {
-                     HiloServidor current5 = server.conexiones.get(i);
-                       String nturno = server.getNextTurno();
+                     HiloServidor current5 = server.conexiones.get(i); 
                        current5.writer.writeUTF("RECIBIRTURNO");
                        current5.writer.writeUTF(nturno);
                     }
