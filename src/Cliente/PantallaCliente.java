@@ -92,7 +92,7 @@ public class PantallaCliente extends javax.swing.JFrame {
                     label[x][y].setBackground(Color.MAGENTA);
                 }
                 else if(casillas[x][y].personaje.getNombre().equals(refCliente.personajes.get(2).getNombre())){
-                    label[x][y].setBackground(Color.GREEN);
+                    label[x][y].setBackground(Color.CYAN);
                 }
             }
          }
@@ -123,7 +123,7 @@ public class PantallaCliente extends javax.swing.JFrame {
 
                 else if(valorDado == 3 && MaximoP3 != 0){
                     casillas[x][y].personaje= luchador3;
-                    label[x][y].setBackground(Color.GREEN);
+                    label[x][y].setBackground(Color.CYAN);
                      MaximoP3 = MaximoP3 - 1;
                 }
                 else{
@@ -143,7 +143,46 @@ public class PantallaCliente extends javax.swing.JFrame {
             }
         }
     }
-         
+     
+    public void ActualizarDatos(){
+        int casillasvivas1 = 0,casillastotales1=0,casillasvivas2=0,casillastotales2=0,casillasvivas3=0,casillastotales3=0;
+        for (int i = 0; i <  20; i++) {
+            for (int j = 0; j < 30; j++) {
+                if(casillas[i][j].personaje.getNombre().equals(refCliente.personajes.get(0).getNombre()) ){
+                    if(casillas[i][j].estaViva()){
+                        casillasvivas1 = casillasvivas1 + 1;
+                    }
+                    casillastotales1 = casillastotales1 +1;
+                }
+                else if(casillas[i][j].personaje.getNombre().equals(refCliente.personajes.get(1).getNombre())){
+                    if(casillas[i][j].estaViva()){
+                        casillasvivas2 = casillasvivas1 + 1;
+                    }
+                    casillastotales2 = casillastotales1 +1;
+                }
+                else if(casillas[i][j].personaje.getNombre().equals(refCliente.personajes.get(2).getNombre())){
+                    if(casillas[i][j].estaViva()){
+                        casillasvivas3 = casillasvivas1 + 1;
+                    }
+                    casillastotales3 = casillastotales1 +1;
+                }
+            }
+            
+        }
+        
+        int vida = (casillastotales3 - casillasvivas3) +  (casillastotales2 - casillasvivas2) + (casillastotales1 - casillasvivas1) ;
+
+        SetVida(100-vida);
+        int muertas = (casillastotales1 - casillasvivas1 + casillastotales2 - casillasvivas2 + casillastotales3 -casillasvivas3);
+        SetCasillasDestruidas(muertas);
+        int porcentaje1 = casillasvivas1 * 100 / casillastotales1;
+        int porcentaje2 = casillasvivas2 * 100 / casillastotales2;
+        int porcentaje3 = casillasvivas3 * 100 / casillastotales3;
+        Personaje1(refCliente.personajes.get(0).getNombre(), porcentaje1,casillasvivas1,casillastotales1);
+        Personaje2(refCliente.personajes.get(1).getNombre(), porcentaje2,casillasvivas2,casillastotales2);
+        Personaje3(refCliente.personajes.get(2).getNombre(), porcentaje2,casillasvivas3,casillastotales3);
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,10 +228,13 @@ public class PantallaCliente extends javax.swing.JFrame {
         jSetResistencia3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblVida = new javax.swing.JLabel();
-        txtInfoAquaman = new javax.swing.JTextField();
-        txtMantaNegra = new javax.swing.JTextField();
-        txtPoseidon = new javax.swing.JTextField();
         lblCasillasDestruidas = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         panelJuego = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -377,15 +419,21 @@ public class PantallaCliente extends javax.swing.JFrame {
         lblVida.setText("Vida: ");
         lblVida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtMantaNegra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMantaNegraActionPerformed(evt);
-            }
-        });
-
         lblCasillasDestruidas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCasillasDestruidas.setText("Casillas destruidas:");
         lblCasillasDestruidas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane4.setViewportView(jTextArea1);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane5.setViewportView(jTextArea2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane6.setViewportView(jTextArea3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -393,20 +441,19 @@ public class PantallaCliente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblVida, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                    .addComponent(txtInfoAquaman))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(txtMantaNegra, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(txtPoseidon, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(46, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblVida, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(177, 177, 177)
-                        .addComponent(lblCasillasDestruidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(lblCasillasDestruidas, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,10 +464,10 @@ public class PantallaCliente extends javax.swing.JFrame {
                     .addComponent(lblCasillasDestruidas, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtInfoAquaman)
-                    .addComponent(txtPoseidon, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMantaNegra))
-                .addContainerGap())
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelJuego.setBackground(new java.awt.Color(153, 153, 153));
@@ -522,10 +569,6 @@ public class PantallaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txfMensajeActionPerformed
 
-    private void txtMantaNegraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMantaNegraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMantaNegraActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -625,7 +668,42 @@ public class PantallaCliente extends javax.swing.JFrame {
         txaBitacora.append(mensaje+"\n");
     }
     
+    public void SetVida(int porcentajevida){
+        lblVida.setText("Vida: " + porcentajevida + "%");
+    }
+    
+    public void SetCasillasDestruidas(int casillas){
+        lblCasillasDestruidas.setText("CASILLAS DESTRUIDAS : " + casillas  + "%");
+    }
+    
+    public void Personaje1(String nombre,int porcentaje, int  casillas1, int casillas2){
+        jTextArea1.setText("");
+        jTextArea1.append(nombre+"\n");
+        jTextArea1.append(porcentaje+ "% "+"\n");
+        jTextArea1.append(casillas1 + "de" + casillas2 + "casillas\n");
+        
+    }
+    
+    public void Personaje2(String nombre,int porcentaje, int  casillas1, int casillas2){
+        jTextArea2.setText("");
+        jTextArea2.append(nombre+"\n");
+        jTextArea2.append(porcentaje+ "% "+"\n");
+        jTextArea2.append(casillas1 + "de" + casillas2 + "casillas\n");
+        
+    }
+    
+    public void Personaje3(String nombre,int porcentaje, int  casillas1, int casillas2){
+        jTextArea3.setText("");
+        jTextArea3.append(nombre+"\n");
+        jTextArea3.append(porcentaje+ "% "+"\n");
+        jTextArea3.append(casillas1 + "de" + casillas2 + "casillas\n");
+        
+    }
 
+    public void setLblTurno(String lblTurno) {
+        this.lblTurno.setText(lblTurno);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
     private javax.swing.JLabel jLPersonaje1;
@@ -644,6 +722,9 @@ public class PantallaCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel jSetPoder1;
     private javax.swing.JLabel jSetPoder2;
     private javax.swing.JLabel jSetPoder3;
@@ -653,6 +734,9 @@ public class PantallaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jSetSanidad1;
     private javax.swing.JLabel jSetSanidad2;
     private javax.swing.JLabel jSetSanidad3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jtxtResulAtaque;
     private javax.swing.JLabel lblBitacora;
     private javax.swing.JLabel lblCasillasDestruidas;
@@ -664,8 +748,5 @@ public class PantallaCliente extends javax.swing.JFrame {
     private javax.swing.JTextArea txaBitacora;
     private javax.swing.JTextArea txaMensajes;
     private javax.swing.JTextField txfMensaje;
-    private javax.swing.JTextField txtInfoAquaman;
-    private javax.swing.JTextField txtMantaNegra;
-    private javax.swing.JTextField txtPoseidon;
     // End of variables declaration//GEN-END:variables
 }

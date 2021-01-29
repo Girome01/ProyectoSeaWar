@@ -79,6 +79,7 @@ public class HiloCliente  extends Thread{
             case RECIBIRTURNO:
                 String turno = reader.readUTF();
                 refPantalla.refCliente.turno = turno;
+                refPantalla.setNombreTurno(turno);
                 refPantalla.refCliente.ResetPersonaje();
                 break;
 
@@ -121,11 +122,11 @@ public class HiloCliente  extends Thread{
                 int y1 = reader.readInt();
                 double dano1 = reader.readDouble();
                 String nombreE1 = reader.readUTF();
-                String tipoAtaque1 = reader.readUTF();
                 int casillas = reader.readInt();
-                refPantalla.refCliente.recibirDanoVolcan(x1, y1, dano1, nombreE1, tipoAtaque1,casillas);
+                refPantalla.refCliente.recibirDanoVolcan(x1, y1, dano1, nombreE1,casillas);
                 break;
-                
+
+            
             default:
                 break;
             }

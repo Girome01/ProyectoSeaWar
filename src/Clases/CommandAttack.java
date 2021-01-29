@@ -5,8 +5,11 @@
  */
 package Clases;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +26,7 @@ public class CommandAttack extends BaseCommand{
     @Override
     public void execute(String[] args) {
         
+        
         if(args != null){
            for(int i = 0; i < refCliente.personajes.size(); i++){
                 if(refCliente.personajes.get(i).Nombre.equals(args[0])){
@@ -35,6 +39,12 @@ public class CommandAttack extends BaseCommand{
                    boolean ataco = refCliente.personajes.get(i).Ataque(args[1],args[2],args[3],Posiciones);
                    if (ataco == true){
                        refCliente.refPantalla.MensajeAtaque("EL ataque se realizo con exito");
+                       refCliente.refPantalla.ActualizarDatos();
+                        try {
+                            refCliente.hiloCliente.writer.writeUTF("NEXTTURNO");
+                        } catch (IOException ex) {
+                            Logger.getLogger(CommandAttack.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                    }
                    else{
                      refCliente.refPantalla.MensajeAtaque("EL ataque no se realizo con exito");  

@@ -38,13 +38,13 @@ public class CommandCrearPer extends BaseCommand{
                 refCliente.Poder.add((Integer.parseInt(args[2])));
                 refCliente.Resistencia.add(Integer.parseInt(args[4]));
      
-               /* JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
+                JOptionPane.showMessageDialog(null, "Seleccione la url de la imagen del personaje");
                 File url;
                 JFileChooser ulrf = new JFileChooser();
                 ulrf.showOpenDialog(null);
                 url = ulrf.getSelectedFile();
-                String casting = "" + url;*/
-                refCliente.CrearPersonaje(args[0], "C:\\Users\\Luis\\Downloads\\0.png", Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5]);
+                String casting = "" + url;
+                refCliente.CrearPersonaje(args[0], casting, Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5]);
             }
         else{
             refCliente.refPantalla.addMensaje("PARA ESTE COMANDO OCUPA ESCRIBIR El NOMBRE DEL PERSONAJE, EL PORCENTAJE"+

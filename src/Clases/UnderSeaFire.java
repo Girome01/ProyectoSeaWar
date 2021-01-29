@@ -35,6 +35,7 @@ public class UnderSeaFire extends Habilidades{
             Logger.getLogger(UnderSeaFire.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         Random random = new Random();
+        System.out.println("LLego ataque 1");
         int x = random.nextInt(20), y = random.nextInt(30), cant = random.nextInt(9)+1;
         try {
             refCliente.hiloCliente.writer.writeUTF("RECIBIRDANOVOLCAN");
@@ -43,7 +44,6 @@ public class UnderSeaFire extends Habilidades{
             refCliente.hiloCliente.writer.writeInt(y); 
             refCliente.hiloCliente.writer.writeDouble(100);
             refCliente.hiloCliente.writer.writeUTF(refCliente.refPantalla.getTitle());
-            refCliente.hiloCliente.writer.writeUTF("VOLCANORAISING");
             refCliente.hiloCliente.writer.writeInt(cant); 
         } catch (IOException ex) {
             Logger.getLogger(UnderSeaFire.class.getName()).log(Level.SEVERE, null, ex);

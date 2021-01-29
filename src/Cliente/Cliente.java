@@ -143,13 +143,23 @@ public class Cliente {
         }
     }
     
-    public void recibirDanoVolcan(int x, int y, double dano,String enemigoE,String ataque,int casillas) throws IOException{
+    public void recibirDanoVolcan(int x, int y, double dano,String enemigoE,int casillas) throws IOException{
+        String ataque = "VOLCANORAISING";
+        System.out.println("RecibirDanoVolcano");
+        System.out.println("X" + x);
+        System.out.println("Y" + y);
+        System.out.println("Dano" + dano);
+        System.out.println("EnemigoE" + enemigoE);
+        System.out.println("Ataque" + ataque);
+        System.out.println("Casillas" + casillas);
+        for (int x1 = x; x1 <x+casillas; x1++) {
+            for (int y1 = y; y1 < y+casillas; y1++) {
 
-        for (int x1 = x; x1 <casillas; x1++) {
-            for (int y1 = y; y1 < casillas; y1++) {
-                
-                if( x < 20 && y < 30){
+                if( x1 < 20 && y1 < 30){
+                    System.out.println("x:" + x1 );
+                    System.out.println("y:" + y1 );
                     if(refPantalla.casillas[x1][y1].estaViva()){
+                        System.out.println("Entre a atacar");
                     refPantalla.casillas[x1][y1].setTieneVolcan(true);
                     refPantalla.casillas[x1][y1].danarCasilla(dano);
                     refPantalla.casillas[x1][y1].recibirDatAtaque("El enemigo"+enemigoE+" ataco con "+
@@ -162,8 +172,6 @@ public class Cliente {
                     " Casilla: (" +x1+", "+y1+") con "+dano+" de dano.");
                     AtaquesRecibido.add(enemigoE+" me ataco con "+ ataque+
                     " la casilla ("+x1+", "+y1+") con "+dano+" de dano.");
-                    }
-                    
                     }else{
                         System.out.println("No se pudo efectuar el ataque a "+
                         refPantalla.getTitle()+" en la casilla ("+x1+", "+y1+").");
@@ -172,6 +180,10 @@ public class Cliente {
                         hiloCliente.writer.writeUTF("No se pudo efectuar el ataque a "+
                         refPantalla.getTitle()+" en la casilla ("+x1+", "+y1+").");
                         }
+                    
+                    }else{
+                    System.out.println("X y Y malo");
+                }
                     
                 }
                 
