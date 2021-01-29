@@ -78,6 +78,7 @@ public class HiloCliente  extends Thread{
             
             case RECIBIRTURNO:
                 String turno = reader.readUTF();
+                System.out.println("Recibir turno, tuno: " + turno);
                 refPantalla.refCliente.turno = turno;
                 refPantalla.setNombreTurno(turno);
                 refPantalla.refCliente.ResetPersonaje();

@@ -34,6 +34,7 @@ public class Cliente {
     
     public Cliente(PantallaCliente refPantalla) {
         this.refPantalla = refPantalla;
+        turno = "";
         refPantalla.setRefCliente(this);
         personajes = new ArrayList<Luchador>();
     }

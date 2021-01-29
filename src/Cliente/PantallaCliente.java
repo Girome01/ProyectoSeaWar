@@ -38,6 +38,7 @@ public class PantallaCliente extends javax.swing.JFrame {
     private int MaximoP1;
     private int MaximoP2;
     private int MaximoP3;
+    public String turno;
     CommandManager manager = CommandManager.getIntance();  
     /**
      * Creates new form PantallaCliente
@@ -54,6 +55,7 @@ public class PantallaCliente extends javax.swing.JFrame {
     public void setNombreTurno(String nombreTurno) {
         this.nombreTurno = nombreTurno;
         lblTurno.setText("Turno: "+nombreTurno);
+        this.turno = nombreTurno;
     }
     
     public void addMensaje(String msj){
@@ -156,15 +158,15 @@ public class PantallaCliente extends javax.swing.JFrame {
                 }
                 else if(casillas[i][j].personaje.getNombre().equals(refCliente.personajes.get(1).getNombre())){
                     if(casillas[i][j].estaViva()){
-                        casillasvivas2 = casillasvivas1 + 1;
+                        casillasvivas2 = casillasvivas2 + 1;
                     }
-                    casillastotales2 = casillastotales1 +1;
+                    casillastotales2 = casillastotales2 +1;
                 }
                 else if(casillas[i][j].personaje.getNombre().equals(refCliente.personajes.get(2).getNombre())){
                     if(casillas[i][j].estaViva()){
-                        casillasvivas3 = casillasvivas1 + 1;
+                        casillasvivas3 = casillasvivas3 + 1;
                     }
-                    casillastotales3 = casillastotales1 +1;
+                    casillastotales3 = casillastotales3 +1;
                 }
             }
             
