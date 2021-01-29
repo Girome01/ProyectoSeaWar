@@ -24,7 +24,6 @@ public class CommandLog extends BaseCommand{
     @Override
     public void execute(String[] args) {
        
-            refCliente.refPantalla.addMensaje("Ataques Ejecutados:");
             for (int i = 0; i < refCliente.AtaquesExitosos.size(); i++) {
                 String exitosos = refCliente.AtaquesExitosos.get(i);
                 refCliente.refPantalla.MensajeBitacora(exitosos);
@@ -34,8 +33,6 @@ public class CommandLog extends BaseCommand{
                 refCliente.refPantalla.MensajeBitacora(noexitosos);
                 
             }
-            refCliente.refPantalla.addMensaje("");
-            refCliente.refPantalla.addMensaje("Ataques Recibidos:");
             for (int i = 0; i < refCliente.AtaquesRecibido.size(); i++) {
                 String recibidos = refCliente.AtaquesRecibido.get(i);
                 refCliente.refPantalla.MensajeBitacora(recibidos);

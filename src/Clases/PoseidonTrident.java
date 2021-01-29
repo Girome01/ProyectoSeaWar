@@ -26,11 +26,13 @@ public class PoseidonTrident extends Habilidades{
     @Override
     void attack1(String enemigo,ArrayList<Integer> posiciones) {
         // Se repite 3 veces pero sigo sin saber si son aleatoprios los lugares
+        System.out.println("Entra al attack1 XD");
             int x, y;
         for (int i = 0; i < posiciones.size(); i += 2) {
              int lado = random.nextInt(3);
              x = posiciones.get(i);
              y = posiciones.get(i+1);
+             System.out.println("Lado:" + lado);
             switch(lado){
             case 0: // arriba
                 atArriba(enemigo,100,x,y,"THREELINES");

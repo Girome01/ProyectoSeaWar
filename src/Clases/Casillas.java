@@ -152,6 +152,10 @@ public class Casillas {
         int retornar = (int) vida;
         return retornar;
     }
-    
 
+    public void setTieneVolcan(boolean tieneVolcan) {
+        this.tieneVolcan = tieneVolcan;
+    }
+    
+    
 }

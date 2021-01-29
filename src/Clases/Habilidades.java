@@ -77,31 +77,31 @@ public abstract class Habilidades{
             y1 = y;
             y2 = y;
             if( x1 > 0|| x1 < 20 && y > 0 || y < 30)
-                //casillas[x1][y].danarCasilla(100);
+                //refCliente.refPantalla.casillas[x1][y].danarCasilla(100);
                 atacarEnemigo(x1, y, refCliente.refPantalla.getTitle(), enemigo, dano,tipoAtaque);
             if( x2 > 0|| x2 < 20 && y > 0 || y < 30)
-                //casillas[x2][y].danarCasilla(100);
+                 //refCliente.refPantalla.casillas[x2][y].danarCasilla(100);
                 atacarEnemigo(x2, y, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
             for(int j = 1; j <= cant*refPersonaje.multilpicador;j++){
                 y1 -= 1;
                 if( x > 0|| x < 20 && y1 > 0 || y1 < 30)
-                    //casillas[x][y1].danarCasilla(100);
+                     //refCliente.refPantalla.casillas[x][y1].danarCasilla(100);
                     atacarEnemigo(x, y1, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 if( x1 > 0|| x1 < 20 && y1 > 0 || y1 < 30)
-                    //casillas[x1][y1].danarCasilla(100);
+                    //refCliente.refPantalla.casillas[x1][y1].danarCasilla(100);
                     atacarEnemigo(x1, y1, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 if( x2 > 0|| x2 < 20 && y1 > 0 || y1 < 30)
-                    //casillas[x2][y1].danarCasilla(100);
+                     //refCliente.refPantalla.casillas[x2][y1].danarCasilla(100);
                     atacarEnemigo(x2, y1, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 y2 += 1;
                 if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
-                    //casillas[x1][y2].danarCasilla(100);
+                     //refCliente.refPantalla.casillas[x1][y2].danarCasilla(100);
                     atacarEnemigo(x1, y2, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 if( x1 > 0|| x1 < 20 && y2 > 0 || y2 < 30)
-                    //casillas[x][y2].danarCasilla(100);
+                     //refCliente.refPantalla.casillas[x][y2].danarCasilla(100);
                     atacarEnemigo(x, y2, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 if( x2 > 0|| x2 < 20 && y2 > 0 || y2 < 30)
-                    //casillas[x2][y2].danarCasilla(100);
+                     //refCliente.refPantalla.casillas[x2][y2].danarCasilla(100);
                     atacarEnemigo(x2, y2, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
             }
         }
@@ -109,11 +109,15 @@ public abstract class Habilidades{
     
     public void atArriba(String enemigo, double dano,int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
+        System.out.println("Enemigo:" + enemigo);
+        System.out.println("Dano:" + dano);
+        System.out.println("X:" + x);
+        System.out.println("Y:" + y);
+        System.out.println("tipoAtaque:" + tipoAtaque);
         for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
-            y -= 1;
-            if( x > 0|| x < 20 && y > 0 || y < 30)
+            if( (x > 0|| x < 20) && (y > 0 || y < 30))
                 try {
-                    //casillas[x][y].danarCasilla(100);
+                    //refCliente.refPantalla.casillas[x][y].danarCasilla(100);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 } catch (IOException ex) {
                     Logger.getLogger(PoseidonTrident.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,12 +127,16 @@ public abstract class Habilidades{
     
     public void atAbajo(String enemigo, double dano, int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
+        System.out.println("Enemigo:" + enemigo);
+        System.out.println("Dano:" + dano);
+        System.out.println("X:" + x);
+        System.out.println("Y:" + y);
+        System.out.println("tipoAtaque:" + tipoAtaque);
         for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
-            y += 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 //casillas[x][y].danarCasilla(100);
                 try {
-                    //casillas[x][y].danarCasilla(100);
+                    //refCliente.refPantalla.casillas[x][y].danarCasilla(100);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 } catch (IOException ex) {
                     Logger.getLogger(PoseidonTrident.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,12 +146,16 @@ public abstract class Habilidades{
     
     public void atDerecha(String enemigo, double dano, int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
+        System.out.println("Enemigo:" + enemigo);
+        System.out.println("Dano:" + dano);
+        System.out.println("X:" + x);
+        System.out.println("Y:" + y);
+        System.out.println("tipoAtaque:" + tipoAtaque);
         for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
-            x += 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 //casillas[x][y].danarCasilla(100);
                 try {
-                    //casillas[x][y].danarCasilla(100);
+                    //refCliente.refPantalla.casillas[x][y].danarCasilla(100);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 } catch (IOException ex) {
                     Logger.getLogger(PoseidonTrident.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,12 +165,16 @@ public abstract class Habilidades{
     
     public void atIzquierda(String enemigo, double dano, int x, int y,String tipoAtaque){
         int cantidad = random.nextInt(3)+1;
+        System.out.println("Enemigo:" + enemigo);
+        System.out.println("Dano:" + dano);
+        System.out.println("X:" + x);
+        System.out.println("Y:" + y);
+        System.out.println("tipoAtaque:" + tipoAtaque);
         for(int i = 0; i < cantidad*refPersonaje.multilpicador; i++){
-            x -= 1;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 //casillas[x][y].danarCasilla(100);
                 try {
-                    //casillas[x][y].danarCasilla(100);
+                    //refCliente.refPantalla.casillas[x][y].danarCasilla(100);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), enemigo, dano, tipoAtaque);
                 } catch (IOException ex) {
                     Logger.getLogger(PoseidonTrident.class.getName()).log(Level.SEVERE, null, ex);

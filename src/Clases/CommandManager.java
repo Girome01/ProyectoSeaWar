@@ -31,6 +31,7 @@ public class CommandManager {
         registCommand(CommandLogresumen.COMMAND_NAME, CommandLogresumen.class);
         registCommand(CommandMostarPorCelda.COMMAND_NAME, CommandMostarPorCelda.class);
         registCommand(CommandAttack.COMMAND_NAME, CommandAttack.class);
+        registCommand(CommandCeldasNormal.COMMAND_NAME, CommandCeldasNormal.class);
     } 
     
     public static synchronized CommandManager getIntance() {           

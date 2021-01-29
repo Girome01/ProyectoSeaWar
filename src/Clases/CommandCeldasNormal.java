@@ -5,15 +5,15 @@
  */
 package Clases;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
  * @author Gilberth
  */
-public class CommandPintarCeldas extends BaseCommand{
-    public static final String COMMAND_NAME = "pintarceldas";
+public class CommandCeldasNormal extends BaseCommand{
+    public static final String COMMAND_NAME = "celdasanormal";
 
     @Override
     public String getCommandName() {
@@ -22,12 +22,9 @@ public class CommandPintarCeldas extends BaseCommand{
 
     @Override
     public void execute(String[] args) {
-        for(int r=0; r<20; r++){
-            for(int c=0; c<30; c++){
-                refCliente.refPantalla.casillas[r][c].pintarCasilla();
-                
-            }
-        }
+        
+        refCliente.refPantalla.VolverCasillas();
+        
         
     }
     

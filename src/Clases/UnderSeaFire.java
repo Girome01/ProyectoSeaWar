@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -31,6 +34,25 @@ public class UnderSeaFire extends Habilidades{
         } catch (IOException ex) {
             Logger.getLogger(UnderSeaFire.class.getName()).log(Level.SEVERE, null, ex);
         }*/
+        Random random = new Random();
+        int x = random.nextInt(20), y = random.nextInt(30), cant = random.nextInt(9)+1;
+        try {
+            refCliente.hiloCliente.writer.writeUTF("RECIBIRDANOVOLCAN");
+            refCliente.hiloCliente.writer.writeUTF(enemigo);
+            refCliente.hiloCliente.writer.writeInt(x);
+            refCliente.hiloCliente.writer.writeInt(y); 
+            refCliente.hiloCliente.writer.writeDouble(100);
+            refCliente.hiloCliente.writer.writeUTF(refCliente.refPantalla.getTitle());
+            refCliente.hiloCliente.writer.writeUTF("VOLCANORAISING");
+            refCliente.hiloCliente.writer.writeInt(cant); 
+        } catch (IOException ex) {
+            Logger.getLogger(UnderSeaFire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+            
+        
+        
     }
 
     @Override

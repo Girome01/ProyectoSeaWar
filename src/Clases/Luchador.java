@@ -108,14 +108,20 @@ public class Luchador {
     public boolean Ataque(String ataque,String SubAtaque, String nombre,ArrayList posiciones){
         boolean resultado = false;
         
+        System.out.println("Entro a Ataque");
         for (int i = 0; i < ataques.size(); i++) {
             Habilidades refhabilidad = ataques.get(i);
+            System.out.println(refhabilidad.nombre);
+            System.out.println(ataque);
             if(ataque.equals(refhabilidad.nombre)){
                 refhabilidad.seleccionarAttack(SubAtaque, nombre, posiciones);
                 resultado = true;
                 System.out.println("Ataque: " + ataque);
                 System.out.println("Subataque: " + SubAtaque);
                 System.out.println("nombre: " + nombre);
+            }
+            else{
+                System.out.println("NO encontre el ataque");
             }
             
         }

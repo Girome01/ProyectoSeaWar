@@ -70,7 +70,7 @@ public class ThunderUnderTheSea extends Habilidades{
             dano = (random.nextInt(9)+1)*10;
             if( x > 0|| x < 20 && y > 0 || y < 30)
                 try {
-                    //casillas[x][y].danarCasilla(dano);
+                    refCliente.refPantalla.casillas[x][y].danarCasilla(dano);
                     atacarEnemigo(x, y, refCliente.refPantalla.getTitle(), 
                             enemigo, dano*refPersonaje.multilpicador,"EALATTACK");
                     //danar la casilla esa cantidad

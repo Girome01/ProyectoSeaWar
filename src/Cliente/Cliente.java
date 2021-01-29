@@ -142,4 +142,43 @@ public class Cliente {
                     refPantalla.getTitle()+" en la casilla ("+x+", "+y+").");
         }
     }
+    
+    public void recibirDanoVolcan(int x, int y, double dano,String enemigoE,String ataque,int casillas) throws IOException{
+
+        for (int x1 = x; x1 <casillas; x1++) {
+            for (int y1 = y; y1 < casillas; y1++) {
+                
+                if( x < 20 && y < 30){
+                    if(refPantalla.casillas[x1][y1].estaViva()){
+                    refPantalla.casillas[x1][y1].setTieneVolcan(true);
+                    refPantalla.casillas[x1][y1].danarCasilla(dano);
+                    refPantalla.casillas[x1][y1].recibirDatAtaque("El enemigo"+enemigoE+" ataco con "+
+                        ataque+" causando "+ dano+" de dano."); // multiplicarlo por resistencia
+                    AtaquesRecibido.add("El enemigo"+enemigoE+" ataco con "+
+                        ataque+" causando "+ dano+" de dano.");
+                    hiloCliente.writer.writeUTF("ATAQUEEXITOSO");
+                    hiloCliente.writer.writeUTF(enemigoE);
+                    hiloCliente.writer.writeUTF("Jugador: " + refPantalla.getTitle()+
+                    " Casilla: (" +x1+", "+y1+") con "+dano+" de dano.");
+                    AtaquesRecibido.add(enemigoE+" me ataco con "+ ataque+
+                    " la casilla ("+x1+", "+y1+") con "+dano+" de dano.");
+                    }
+                    
+                    }else{
+                        System.out.println("No se pudo efectuar el ataque a "+
+                        refPantalla.getTitle()+" en la casilla ("+x1+", "+y1+").");
+                        hiloCliente.writer.writeUTF("ATAQUENOEXITOSO");
+                        hiloCliente.writer.writeUTF(enemigoE);
+                        hiloCliente.writer.writeUTF("No se pudo efectuar el ataque a "+
+                        refPantalla.getTitle()+" en la casilla ("+x1+", "+y1+").");
+                        }
+                    
+                }
+                
+                
+            }
+            
+        }
+        
+    
 }

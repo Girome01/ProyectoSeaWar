@@ -82,6 +82,23 @@ public class PantallaCliente extends javax.swing.JFrame {
         }
     }
     
+    public void VolverCasillas(){
+         for (int x = 0; x < 20; x++) {
+            for (int y = 0; y < 30; y++) {
+                if(casillas[x][y].personaje.getNombre().equals(refCliente.personajes.get(0).getNombre())){
+                    label[x][y].setBackground(Color.LIGHT_GRAY);
+                }
+                else if(casillas[x][y].personaje.getNombre().equals(refCliente.personajes.get(1).getNombre())){
+                    label[x][y].setBackground(Color.MAGENTA);
+                }
+                else if(casillas[x][y].personaje.getNombre().equals(refCliente.personajes.get(2).getNombre())){
+                    label[x][y].setBackground(Color.GREEN);
+                }
+            }
+         }
+    }
+    
+    
     public void RepartirTropas(Luchador luchador1, Luchador luchador2, Luchador luchador3){
         for (int x = 0; x < 20; x++) {
             for (int y = 0; y < 30; y++) {

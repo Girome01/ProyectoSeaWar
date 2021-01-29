@@ -33,12 +33,11 @@ public class CommandAttack extends BaseCommand{
                         Posiciones.add(Integer.parseInt(args[j].trim()));
                     }
                    boolean ataco = refCliente.personajes.get(i).Ataque(args[1],args[2],args[3],Posiciones);
-                   if(ataco == true){
-                       refCliente.refPantalla.MensajeAtaque("EL ATAQUE SE REALIZO CON EXITO");
-                    
-                      }
+                   if (ataco == true){
+                       refCliente.refPantalla.MensajeAtaque("EL ataque se realizo con exito");
+                   }
                    else{
-                       refCliente.refPantalla.MensajeAtaque("El ATAQUE NO SE REALIZO CON EXITO");
+                     refCliente.refPantalla.MensajeAtaque("EL ataque no se realizo con exito");  
                    }
                 }
             } 

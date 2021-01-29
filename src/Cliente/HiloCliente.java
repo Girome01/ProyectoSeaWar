@@ -23,7 +23,7 @@ public class HiloCliente  extends Thread{
     private PantallaCliente refPantalla;
     
     enum instruccionCliente{SETNAME,MENSAJE,CONSULTAINFO,PRINTEARINFO,
-    RECIBIRTURNO,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO};
+    RECIBIRTURNO,RENDIRSE,RECIBIRDANO,ATAQUEEXITOSO,ATAQUENOEXITOSO,RECIBIRDANOVOLCAN};
 
     
     
@@ -115,6 +115,15 @@ public class HiloCliente  extends Thread{
                 ataque = reader.readUTF();
                 refPantalla.refCliente.AtaquesNoExitosos.add(ataque);
                 
+                break;
+            case RECIBIRDANOVOLCAN:
+                int x1 = reader.readInt();
+                int y1 = reader.readInt();
+                double dano1 = reader.readDouble();
+                String nombreE1 = reader.readUTF();
+                String tipoAtaque1 = reader.readUTF();
+                int casillas = reader.readInt();
+                refPantalla.refCliente.recibirDanoVolcan(x1, y1, dano1, nombreE1, tipoAtaque1,casillas);
                 break;
                 
             default:
